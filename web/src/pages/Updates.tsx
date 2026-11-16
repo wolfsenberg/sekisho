@@ -110,7 +110,7 @@ function UpdateSettings({ userID }: { userID: number }) {
               <p className="text-muted-foreground">{t('updateDisabled')}</p>
               <a
                 className="text-foreground underline underline-offset-4"
-                href="https://sekisho.dev/docs/deployment#web-updates"
+                href="https://github.com/wolfsenberg/sekisho#software-updates"
                 target="_blank"
                 rel="noreferrer"
               >

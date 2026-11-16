@@ -2,13 +2,13 @@
 
 ## Current scope
 
-Sekisho provides one local administrator and administrator-created members, first-run account creation, persisted roles, Argon2id password storage, per-user revocable sessions, same-origin JSON mutations, and bounded login attempts. Management APIs default to administrator-only access. Disabling a member revokes all of that member’s sessions in the same transaction. See [the authentication contract](https://sekisho.dev/docs/authentication) for exact behavior and limits.
+Sekisho provides one local administrator and administrator-created members, first-run account creation, persisted roles, Argon2id password storage, per-user revocable sessions, same-origin JSON mutations, and bounded login attempts. Management APIs default to administrator-only access. Disabling a member revokes all of that member’s sessions in the same transaction.
 
 Complete initialization before exposing the instance to other users. The setup page is open while no administrator exists, and closes after the first successful creation.
 
 Personal gateway keys use 256-bit random secrets and SHA-256 digests at rest. Keys are shown once, scoped to their owner, and cannot access session-based management endpoints. Suspended members cannot authenticate gateway requests; explicit key revocation is permanent.
 
-Codex credentials are encrypted with AES-256-GCM using a private instance key. OAuth state is PKCE-protected, session-bound, short-lived, and single-use. Upstream tokens are refreshed and persisted under one owner; model requests and WebSocket history/concurrency are bounded. See [Codex security and verification boundaries](https://sekisho.dev/docs/codex). MFA and password recovery are not implemented. The default service address and Compose host port bind to loopback. Use HTTPS and an explicit public origin for network deployments. This is still an early-development project, not a complete subscription gateway.
+Codex credentials are encrypted with AES-256-GCM using a private instance key. OAuth state is PKCE-protected, session-bound, short-lived, and single-use. Upstream tokens are refreshed and persisted under one owner; model requests and WebSocket history/concurrency are bounded. MFA and password recovery are not implemented. The default service address and Compose host port bind to loopback. Use HTTPS and an explicit public origin for network deployments. This is still an early-development project, not a complete subscription gateway.
 
 Optional workspace content rules check outgoing JSON text locally before model dispatch, including reconstructed WebSocket context. They are disabled by default. Observe mode still forwards matching content; block mode denies matches and incomplete checks. Patterns are encrypted with a workspace-bound vault key, metadata never reveals their plaintext, and sample tests do not retain input. Rules do not decode images, binary attachments, base64 or other deliberate encodings, and cannot guarantee prevention of secret disclosure. Request records contain only rule IDs and policy revision metadata. An enabled check is bounded to 8 MiB of JSON and 64 nesting levels; over-limit requests fail closed in block mode.
 
@@ -25,6 +25,6 @@ No support window or response-time commitment is currently published.
 - Do not log authorization headers, OAuth tokens, or model request/response bodies.
 - Preserve the separation between browser sessions, member gateway keys, and upstream credentials as those features are introduced.
 - Validate forwarded URLs and protect administrator actions before enabling upstream integrations.
-- Review upstream SDK upgrades against the compatibility scenarios in [the architecture guide](https://sekisho.dev/docs/architecture).
+- Review upstream SDK upgrades against the compatibility tests in `internal/upstream`.
 
 Read [LICENSE](LICENSE) and [third-party notices](THIRD_PARTY_NOTICES.md) for licensing information.

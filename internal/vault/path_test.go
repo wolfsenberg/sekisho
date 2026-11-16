@@ -3,6 +3,7 @@ package vault
 import (
 	"os"
 	"path/filepath"
+	"runtime"
 	"testing"
 )
 
@@ -30,6 +31,9 @@ func TestKeyPathSeparationAndCompatibility(t *testing.T) {
 	}
 	alias := filepath.Join(root, "alias")
 	if err := os.Symlink(data, alias); err != nil {
+		if runtime.GOOS == "windows" {
+			t.Skip("creating symlinks on Windows needs Developer Mode or administrator rights")
+		}
 		t.Fatal(err)
 	}
 	if _, err := KeyPath(data, filepath.Join(alias, "nested", "credentials.key")); err == nil {

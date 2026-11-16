@@ -6,6 +6,7 @@ import (
 	"log/slog"
 	"os"
 	"path/filepath"
+	"runtime"
 	"testing"
 	"time"
 
@@ -99,7 +100,8 @@ func TestScheduleRejectsUnsafeConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	schedule := Schedule{Directory: t.TempDir(), PasswordFile: password, Interval: time.Hour, Keep: 7}
-	if _, err := schedule.Run(context.Background(), dir, "synthetic", ""); err == nil {
+	// Windows has no Unix mode bits to reject; access there is governed by ACLs.
+	if _, err := schedule.Run(context.Background(), dir, "synthetic", ""); err == nil && runtime.GOOS != "windows" {
 		t.Fatal("public password file accepted")
 	}
 	if err := os.Chmod(password, 0600); err != nil {
@@ -107,6 +109,9 @@ func TestScheduleRejectsUnsafeConfiguration(t *testing.T) {
 	}
 	link := filepath.Join(dir, "password-link")
 	if err := os.Symlink(password, link); err != nil {
+		if runtime.GOOS == "windows" {
+			t.Skip("creating symlinks on Windows needs Developer Mode or administrator rights")
+		}
 		t.Fatal(err)
 	}
 	schedule.PasswordFile = link

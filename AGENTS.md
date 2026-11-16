@@ -2,13 +2,13 @@
 
 ## Context
 
-Before significant changes, read `PRODUCT.md` for scope and status, `DESIGN.md` for interface rules, and [the architecture guide](https://sekisho.dev/docs/architecture) for module ownership and implementation boundaries.
+Before significant changes, read `PRODUCT.md` for scope and status, `DESIGN.md` for interface rules, and the project layout in `README.md` for module ownership.
 
 Use English for code comments, `PRODUCT.md`, and primary developer documentation. Keep every supported UI dictionary complete against the English keys. English is the default interface language.
 
 ## Work style
 
-Usage, operations, and architecture guides are maintained in [the documentation repository](https://github.com/wolfsenberg/sekisho-website). Update guides there instead of duplicating them here; see [the documentation index](docs/README.md) for references retained locally.
+Usage and operations notes live in `README.md`; see [the documentation index](docs/README.md) for the other references kept in this repository.
 
 - Make the smallest complete, scoped change; reuse existing mechanisms instead of speculative frameworks, packages, or services. Report assumptions and actual verification results concisely; live subscription and desktop compatibility require separate evidence.
 - Do not create commits, publish a repository, or deploy without a user request.
@@ -32,7 +32,7 @@ Usage, operations, and architecture guides are maintained in [the documentation 
 ## Backend
 
 - Use standard Go conventions, explicit dependency injection at test seams, and `net/http`-compatible handlers; domain services must not depend on chi.
-- Default to loopback listening. Protect workspace management routes with administrator authentication; platform settings and backups require the platform owner. Enforce roles on frontend routes and backend requests without bypasses. Browser roles come from active membership; gateway workspace identity comes from the key, never the browser selection header. See [authentication](https://sekisho.dev/docs/authentication).
+- Default to loopback listening. Protect workspace management routes with administrator authentication; platform settings and backups require the platform owner. Enforce roles on frontend routes and backend requests without bypasses. Browser roles come from active membership; gateway workspace identity comes from the key, never the browser selection header. See `SECURITY.md`.
 - Use chi `Route`, method registrations, and router-level `Use` for session/role/gateway authentication, including 404/405 responses. Reserve `With` for endpoint-specific checks. Never dispatch methods or gateway paths inside handlers or serve HTML for API errors.
 - First-run username/password setup atomically creates the initial workspace owner with a single-administrator guard. Password changes atomically revoke browser sessions; session creation rechecks the verified password hash. OAuth attempts remain session-bound, with PKCE where supported.
 - Write application queries in `internal/storage/queries/` and run `make generate`. Never hand-edit `internal/storage/db/`; keep generated code with its SQL changes. Migration bootstrap SQL remains in storage.

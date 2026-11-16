@@ -7,6 +7,7 @@ import (
 	"net/http"
 	"os"
 	"path/filepath"
+	"runtime"
 	"strings"
 	"sync"
 	"testing"
@@ -173,6 +174,9 @@ func TestMailboxRefusesSymlinksAndOversizedStatus(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := os.Symlink(outside, filepath.Join(dir, "heartbeat")); err != nil {
+		if runtime.GOOS == "windows" {
+			t.Skip("creating symlinks on Windows needs Developer Mode or administrator rights")
+		}
 		t.Fatal(err)
 	}
 	s := New("1.2.0", dir, nil)

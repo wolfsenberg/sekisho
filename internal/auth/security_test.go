@@ -15,12 +15,12 @@ import (
 
 func securityFixture(t *testing.T) (*Service, Session) {
 	t.Helper()
-	s, conn := fixture(t)
+	_, conn := fixture(t)
 	cipher, err := vault.Open(filepath.Join(t.TempDir(), "credentials.key"), true)
 	if err != nil {
 		t.Fatal(err)
 	}
-	s, err = NewWithVault(conn, cipher)
+	s, err := NewWithVault(conn, cipher)
 	if err != nil {
 		t.Fatal(err)
 	}

@@ -5,7 +5,7 @@ body:
   - type: markdown
     attributes:
       value: |
-        Please search existing issues and review the [roadmap](https://sekisho.dev/docs/roadmap) before submitting a suggestion.
+        Please search existing issues and review [PRODUCT.md](https://github.com/wolfsenberg/sekisho/blob/main/PRODUCT.md) before submitting a suggestion.
         Describe the use case with synthetic examples and omit credentials, account identifiers, and private request or response content.
 
   - type: textarea

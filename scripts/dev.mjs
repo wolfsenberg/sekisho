@@ -1,4 +1,4 @@
-import { spawn } from 'node:child_process'
+import { spawn, spawnSync } from 'node:child_process'
 import { createServer } from 'node:net'
 
 const address = process.env.SEKISHO_ADDR || '127.0.0.1:8080'
@@ -27,10 +27,16 @@ try {
   process.exit(1)
 }
 const env = { ...process.env, SEKISHO_ADDR: address }
+// Windows ships make and pnpm as .cmd/.exe shims, which only resolve through a shell.
+const windows = process.platform === 'win32'
+const options = { env, stdio: 'inherit', shell: windows, detached: !windows }
+
+const run = (command, args) =>
+  windows ? spawn([command, ...args].join(' '), options) : spawn(command, args, options)
 
 const children = [
-  spawn('make', ['dev-api'], { env, stdio: 'inherit', detached: process.platform !== 'win32' }),
-  spawn('pnpm', ['--dir', 'web', 'dev', ...process.argv.slice(2)], { env, stdio: 'inherit', detached: process.platform !== 'win32' }),
+  run('make', ['dev-api']),
+  run('pnpm', ['--dir', 'web', 'dev', ...process.argv.slice(2)]),
 ]
 let stopping = false
 const stop = (exitCode = 0) => {
@@ -40,7 +46,7 @@ const stop = (exitCode = 0) => {
     if (child.pid) {
       try {
         // Air and Vite spawn descendants; signal the group to avoid orphaned servers.
-        if (process.platform === 'win32') child.kill('SIGTERM')
+        if (windows) spawnSync('taskkill', ['/pid', String(child.pid), '/T', '/F'], { stdio: 'ignore' })
         else process.kill(-child.pid, 'SIGTERM')
       } catch (error) { if (error.code !== 'ESRCH') console.error(error.message) }
     }

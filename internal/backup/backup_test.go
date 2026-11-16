@@ -5,6 +5,7 @@ import (
 	"encoding/base64"
 	"os"
 	"path/filepath"
+	"runtime"
 	"testing"
 	"time"
 
@@ -164,7 +165,8 @@ func TestBackupRoundTripPreservesDataAndRevokesRestoredSessions(t *testing.T) {
 	}
 	for _, path := range []string{output, filepath.Join(target, databaseName), filepath.Join(target, keyName)} {
 		stat, err := os.Stat(path)
-		if err != nil || stat.Mode().Perm()&0077 != 0 {
+		// Windows reports 0666 for every file; access there is governed by ACLs.
+		if err != nil || (runtime.GOOS != "windows" && stat.Mode().Perm()&0077 != 0) {
 			t.Fatal("insecure restored file", err)
 		}
 	}

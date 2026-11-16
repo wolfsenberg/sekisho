@@ -199,9 +199,6 @@ func (f *Flow) Cancel(session, state string) error {
 	return nil
 }
 
-func callbackCode(callback, state string) (string, error) {
-	return callbackCodeFor("codex", callback, state)
-}
 func callbackCodeFor(provider, callback, state string) (string, error) {
 	if len(callback) > 8192 {
 		return "", ErrCallback

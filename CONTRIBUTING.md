@@ -1,6 +1,6 @@
 # Contributing to Sekisho
 
-Sekisho is at the foundation stage. Read [PRODUCT.md](PRODUCT.md) and [the roadmap](https://sekisho.dev/docs/roadmap) before expanding scope. Small improvements to a reliable Codex-first workflow are more useful than broad provider coverage at this stage.
+Sekisho is at the foundation stage. Read [PRODUCT.md](PRODUCT.md) before expanding scope. Small improvements to a reliable Codex-first workflow are more useful than broad provider coverage at this stage.
 
 ## Local workflow
 
@@ -10,7 +10,7 @@ Sekisho is at the foundation stage. Read [PRODUCT.md](PRODUCT.md) and [the roadm
 4. Run `make check` before submitting your work.
 5. Update relevant documentation and every supported UI dictionary when behavior changes.
 
-See [development notes](https://sekisho.dev/docs/development) for commands and troubleshooting.
+See the [Development section of the README](README.md#development) for commands.
 
 ## Change boundaries
 
@@ -33,7 +33,7 @@ No contribution agreement or public support process is configured yet. Contribut
 
 ## Documentation changes
 
-Usage, operations, and architecture guides are maintained in [sekisho-website](https://github.com/wolfsenberg/sekisho-website), under `content/docs/` and the corresponding `content/<locale>/` directories. Update those guides with application behavior changes instead of adding duplicate copies here. Repository policies, the changelog, and references not yet covered by the website stay in this repository. See [the documentation index](docs/README.md).
+Update `README.md` and the other documents listed in [the documentation index](docs/README.md) in the same change as the behavior they describe.
 
 ## Publishing a version
 

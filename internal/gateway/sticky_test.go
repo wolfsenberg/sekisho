@@ -78,7 +78,7 @@ func TestStickySubagentsPreferTheirParent(t *testing.T) {
 		h.Set("X-Codex-Parent-Thread-Id", "synthetic-parent")
 		return h
 	}
-	s, parent, _ := stickyGateway(t, false)
+	s, _, _ := stickyGateway(t, false)
 	seen := map[string]bool{}
 	for _, session := range []string{"synthetic-child-a", "synthetic-child-b", "synthetic-child-c", "synthetic-child-d"} {
 		seen[openSticky(t, s, child(session), stickyOpening)] = true
@@ -87,7 +87,7 @@ func TestStickySubagentsPreferTheirParent(t *testing.T) {
 		t.Fatalf("parent metadata changed default routing: %v", seen)
 	}
 
-	s, parent, _ = stickyGateway(t, true)
+	s, parent, _ := stickyGateway(t, true)
 	for _, session := range []string{"synthetic-child-a", "synthetic-child-b", "synthetic-child-c"} {
 		if got := openSticky(t, s, child(session), stickyOpening); got != parent {
 			t.Fatalf("subagent %s used %s instead of parent %s", session, got, parent)

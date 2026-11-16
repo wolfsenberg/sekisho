@@ -7,6 +7,7 @@ import (
 	"log/slog"
 	"os"
 	"path/filepath"
+	"runtime"
 	"sort"
 	"strings"
 	"time"
@@ -74,7 +75,7 @@ func (s Schedule) Run(ctx context.Context, dataDir, version, keyFile string) (st
 	if err != nil {
 		return "", err
 	}
-	if !info.IsDir() || info.Mode().Perm()&0077 != 0 {
+	if !info.IsDir() || exposed(info) {
 		return "", ErrInvalid
 	}
 	path := filepath.Join(s.Directory, "scheduled-"+time.Now().UTC().Format(scheduledLayout)+scheduledSuffix)
@@ -121,7 +122,7 @@ func (s Schedule) password() (string, error) {
 	if err != nil {
 		return "", err
 	}
-	if !info.Mode().IsRegular() || info.Mode().Perm()&0077 != 0 {
+	if !info.Mode().IsRegular() || exposed(info) {
 		return "", ErrPassword
 	}
 	file, err := os.Open(s.PasswordFile)
@@ -143,4 +144,10 @@ func (s Schedule) password() (string, error) {
 		return "", ErrPassword
 	}
 	return password, nil
+}
+
+// exposed reports whether group or other users can access a file. Windows has
+// no Unix mode bits (Go reports 0666 for every file), so access there is left to ACLs.
+func exposed(info os.FileInfo) bool {
+	return runtime.GOOS != "windows" && info.Mode().Perm()&0077 != 0
 }

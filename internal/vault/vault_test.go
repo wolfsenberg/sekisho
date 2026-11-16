@@ -6,6 +6,7 @@ import (
 	"crypto/cipher"
 	"os"
 	"path/filepath"
+	"runtime"
 	"testing"
 )
 
@@ -63,7 +64,8 @@ func TestEncryptionBindsCredentialsToAccount(t *testing.T) {
 		t.Fatal("tampered ciphertext accepted")
 	}
 	info, err := os.Stat(path)
-	if err != nil || info.Mode().Perm() != 0600 {
+	// Windows reports 0666 for every file; access there is governed by ACLs.
+	if err != nil || (runtime.GOOS != "windows" && info.Mode().Perm() != 0600) {
 		t.Fatal("key permissions", err)
 	}
 }

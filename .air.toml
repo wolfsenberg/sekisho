@@ -3,8 +3,9 @@ tmp_dir = "bin/air"
 env_files = []
 
 [build]
-cmd = "go build -o ./bin/air/sekisho-dev ./cmd/sekisho"
-entrypoint = ["./bin/air/sekisho-dev"]
+# The .exe suffix is required by Air on Windows and harmless on Linux and macOS.
+cmd = "go build -o ./bin/air/sekisho-dev.exe ./cmd/sekisho"
+entrypoint = ["./bin/air/sekisho-dev.exe"]
 include_dir = ["cmd", "internal", "web"]
 include_ext = ["go", "sql"]
 include_file = ["go.mod", "go.sum"]

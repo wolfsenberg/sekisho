@@ -10,15 +10,11 @@
 </p>
 
 <p align="center">
-  <a href="LICENSE"><img src="https://img.shields.io/badge/license-AGPL--3.0--only-171717?style=flat-square&amp;labelColor=555555" alt="License: AGPL-3.0-only" height="20"></a>
-  <a href="go.mod"><img src="https://img.shields.io/badge/Go-1.26%2B-171717?style=flat-square&amp;logo=go&amp;logoColor=white&amp;labelColor=555555" alt="Go 1.26+" height="20"></a>
-  <a href="web/package.json"><img src="https://img.shields.io/badge/React-19-171717?style=flat-square&amp;logo=react&amp;logoColor=white&amp;labelColor=555555" alt="React 19" height="20"></a>
-  <a href="internal/storage/storage.go"><img src="https://img.shields.io/badge/SQLite-embedded-171717?style=flat-square&amp;logo=sqlite&amp;logoColor=white&amp;labelColor=555555" alt="SQLite embedded" height="20"></a>
-  <a href="https://sekisho.dev/docs/roadmap"><img src="https://img.shields.io/badge/stage-internal%20testing-92400E?style=flat-square&amp;labelColor=555555" alt="Stage: internal testing" height="20"></a>
-</p>
-
-<p align="center">
-  <a href="https://demo.sekisho.dev/">Live demo</a> · <a href="https://github.com/wolfsenberg/sekisho">Repository</a> · <a href="brand/README.md">Brand materials</a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/license-AGPL--3.0--only-1A1916?style=flat-square&amp;labelColor=555555" alt="License: AGPL-3.0-only" height="20"></a>
+  <a href="go.mod"><img src="https://img.shields.io/badge/Go-1.26%2B-1A1916?style=flat-square&amp;logo=go&amp;logoColor=white&amp;labelColor=555555" alt="Go 1.26+" height="20"></a>
+  <a href="web/package.json"><img src="https://img.shields.io/badge/React-19-1A1916?style=flat-square&amp;logo=react&amp;logoColor=white&amp;labelColor=555555" alt="React 19" height="20"></a>
+  <a href="internal/storage/storage.go"><img src="https://img.shields.io/badge/SQLite-embedded-1A1916?style=flat-square&amp;logo=sqlite&amp;logoColor=white&amp;labelColor=555555" alt="SQLite embedded" height="20"></a>
+  <a href="PRODUCT.md"><img src="https://img.shields.io/badge/stage-internal%20testing-C2361C?style=flat-square&amp;labelColor=555555" alt="Stage: internal testing" height="20"></a>
 </p>
 
 Sekisho brings AI subscriptions into one gateway with isolated workspaces for different teams. It runs as a single Go service with SQLite and a built-in web dashboard.
@@ -27,69 +23,109 @@ Sekisho brings AI subscriptions into one gateway with isolated workspaces for di
 
 - **API channels:** Connect official OpenAI or third-party Chat Completions-compatible services with an API key and base URL, including encrypted keys, model discovery, connection checks, key rotation, existing pools, and usage accounting.
 - **Subscription accounts:** Connect Codex, Claude, Antigravity and Grok Build through browser OAuth or credential JSON import, with encrypted credentials, connection checks, model discovery and quota snapshots. Grok uses device-code authorization; quota snapshots cover Codex, Claude usage windows, Antigravity per-model allowance and Grok subscription periods.
-- **Client APIs:** OpenAI Responses, Chat Completions and Responses compaction, plus [Claude Messages and Gemini generation formats](https://sekisho.dev/docs/protocols). Requests use HTTP/SSE, with WebSocket support for Responses. Client formats are independent of the selected subscription provider.
+- **Client APIs:** OpenAI Responses, Chat Completions and Responses compaction, plus Claude Messages and Gemini generation formats. Requests use HTTP/SSE, with WebSocket support for Responses. Client formats are independent of the selected subscription provider.
 - **Workspaces and members:** Isolated accounts, pools, keys, usage and audit records; workspace roles, invitation registration and direct member access grants.
-- **Account pools:** Model allowlists, model-aware account selection, conversation affinity, concurrency controls, cooldown recovery and Codex/Claude quota-aware routing and model-specific Antigravity quota admission.
+- **Account pools:** Model allowlists, model-aware account selection, conversation affinity, concurrency controls, cooldown recovery, Codex/Claude quota-aware routing and model-specific Antigravity quota admission.
 - **Network proxies:** Fixed outbound proxy per account, bulk proxy import and manual exit checks.
 - **Personal API keys:** Pool or allowance binding, expiry, pause and revocation controls, owner-only key copying and CC Switch import.
 - **Usage controls:** Per-member request rate and concurrency limits, plus optional token or internal USD allowances, including percentage shares across multiple time-window budgets.
 - **Content rules:** Optional workspace terms and regular expressions, with observe/block modes, encrypted matching content and checks before model dispatch across HTTP and WebSocket.
-- **Operations:** Personal and workspace usage charts, activity heatmaps, request diagnostics, management audit logs, backup creation, verification and restore, and Codex client version settings.
-- **Dashboard:** Embedded web interface in 9 languages, including English, Japanese, Korean, Spanish, French, German, Portuguese, Russian, and Arabic, with light and dark themes.
-
-## Live demo
-
-Open the [online demo](https://demo.sekisho.dev/) and choose **Explore demo** on the login page. Browse sample accounts, pools and usage in read-only mode; live API calls are disabled.
+- **Operations:** Personal and workspace usage charts, activity heatmaps, request diagnostics, management audit logs, backup creation, verification and restore, and client version settings.
+- **Dashboard:** Embedded web interface in 9 languages (English, Japanese, Korean, Spanish, French, German, Portuguese, Russian and Arabic), dark by default with a light theme.
 
 ## Screenshots
 
-Captured from the read-only demo with sample data. Click a preview to view the full image.
+Captured from the local read-only demo with sample data. Click a preview to open the full image.
 
-| Workspace overview | Subscription accounts | Team usage |
-| --- | --- | --- |
-| [<img src="docs/assets/screenshots/overview-en-light.png" alt="Workspace overview with request statistics, usage trends and an activity heatmap" width="220">](docs/assets/screenshots/overview-en-light.png) | [<img src="docs/assets/screenshots/accounts-en-light.png" alt="Subscription accounts with quota snapshots, verification status and concurrency" width="220">](docs/assets/screenshots/accounts-en-light.png) | [<img src="docs/assets/screenshots/usage-en-light.png" alt="Team usage with request statistics, token totals and an activity heatmap" width="220">](docs/assets/screenshots/usage-en-light.png) |
+| Sign in | Workspace overview |
+| --- | --- |
+| [<img src="docs/assets/screenshots/sign-in.png" alt="Sign-in page with the read-only demo entry" width="400">](docs/assets/screenshots/sign-in.png) | [<img src="docs/assets/screenshots/overview.png" alt="Workspace overview with guided setup, request statistics and outcome strip" width="400">](docs/assets/screenshots/overview.png) |
+| **Subscription accounts** | **Team usage** |
+| [<img src="docs/assets/screenshots/accounts.png" alt="Subscription accounts with usage limits, verification status and concurrency" width="400">](docs/assets/screenshots/accounts.png) | [<img src="docs/assets/screenshots/usage.png" alt="Team usage with request totals, outcomes and a daily request chart" width="400">](docs/assets/screenshots/usage.png) |
 
-## Quick start
+## Getting started
 
-Run the guided installer with curl and a checksum utility. Choose Docker Compose or the published Linux binary, then choose no proxy, Caddy, or Nginx:
+### Requirements
 
-```sh
-curl -fsSL https://raw.githubusercontent.com/wolfsenberg/sekisho/main/scripts/install.sh | bash
-```
+- Go 1.26 or newer
+- Node.js 24 (see `.node-version`) and pnpm 9.12.2 (`corepack enable` picks it up from `web/package.json`)
+- GNU Make
+- On Windows: run the commands from Git Bash, with Make installed (for example `choco install make`)
 
-Docker mode requires Docker Compose; binary mode requires Linux and a working systemd user manager. In a non-interactive shell, the installer retains the previous Docker-without-proxy default. Without a public domain, generated proxy configurations listen on local HTTP only. Open the URL printed by the installer, create the administrator, and name your first workspace in the guided setup. Connect a subscription, add it to an account pool, then create a personal key. Follow [First request](https://sekisho.dev/docs/quickstart) to complete the connection; additional workspaces and usage limits can wait until you need them.
-
-The script installs the latest stable release, or the newest prerelease if no stable release exists, in `./sekisho`. Docker mode uses a named volume; binary mode uses a private data directory and systemd user service. For an existing script-managed installation, it offers an update in interactive mode; pass `--update --dir ./sekisho` to update explicitly while preserving settings and data. Export and verify a backup before updating. For options, generated proxy files, HTTPS and upgrades, see the [deployment guide](https://sekisho.dev/docs/deployment).
-
-Add `--enable-updates` on a supported Linux installation to enable **System settings → Software updates** through a separate host worker. See [web updates](https://sekisho.dev/docs/deployment#web-updates) for prerequisites and one-time setup.
-
-## Development
-
-Requires Go 1.26+, Node.js 24 and pnpm 9.12.2.
+### Run from source
 
 ```sh
 git clone https://github.com/wolfsenberg/sekisho.git
-cd Sekisho
+cd sekisho
 make setup
 make dev
 ```
 
-Open http://127.0.0.1:5173. Air rebuilds and restarts the backend when Go code changes; Vite handles frontend HMR. Air runs at a pinned version without a global installation. Run `make check` to test and build the project.
+Open http://127.0.0.1:5173. Create the administrator, name your first workspace, then follow the guided setup to connect a subscription, add it to an account pool and create a personal key.
+
+`make dev` runs the Go backend on `127.0.0.1:8080` under Air, which rebuilds it when Go code changes, and the Vite dev server with hot reload for the dashboard. The first start compiles everything and can take a couple of minutes. To use another backend port, run `SEKISHO_ADDR=127.0.0.1:9090 make dev`.
+
+### Try the demo locally
+
+```sh
+SEKISHO_DEMO=true make dev
+```
+
+Choose **Explore demo** on the login page, or sign in as `demo` / `sekisho-demo`. The demo seeds sample accounts, pools and usage in a disposable, read-only instance; changes, credential actions and live API calls are disabled.
+
+### Production build
+
+```sh
+make build
+./bin/sekisho
+```
+
+This builds the dashboard and embeds it in a single binary. Settings come from environment variables; [.env.example](.env.example) lists the common ones, and [docker.compose.yaml](docker.compose.yaml) shows every option with its default.
+
+### Docker
+
+Build and run the image from source:
+
+```sh
+docker compose -f docker.compose.yaml -f docker.compose.build.yaml up --build -d
+```
+
+The dashboard listens on http://127.0.0.1:8080 and data is kept in the `sekisho-data` volume.
+
+> No release has been published yet. The guided installer (`scripts/install.sh`) and the prebuilt `ghcr.io/wolfsenberg/sekisho` image start working once the first version is tagged; see [CONTRIBUTING.md](CONTRIBUTING.md#publishing-a-version).
+
+### Software updates
+
+On a Linux installation made with `scripts/install.sh`, add `--enable-updates` to let the platform owner install new releases from **System settings → Software updates**. The flag sets up a separate systemd user worker on the host, which performs the update outside the web process.
+
+## Development
+
+| Command | What it does |
+| --- | --- |
+| `make dev` | Backend with live reload plus the Vite dev server |
+| `make lint` | `go vet`, gofmt, TypeScript, ESLint and Prettier checks |
+| `make test` | Script tests, Go tests with the race detector, and frontend tests |
+| `make build` | Production dashboard and binary in `bin/` |
+| `make check` | Generated-code drift check, lint, test and build (what CI runs) |
+
+The Go race detector needs a C compiler. On Windows without one, run `go test ./...` and `pnpm --dir web test` in place of `make test`.
+
+Project layout:
+
+- `cmd/sekisho` — the server and CLI entry point
+- `internal/` — gateway, accounts, storage (SQLite + sqlc), auth and the HTTP server
+- `web/` — React 19 dashboard (Vite, TanStack Router and Query, Tailwind)
+- `scripts/` — dev runner, installer, release and packaging scripts
+- `brand/` and `tools/brand/` — logo, favicons and the generator that produces them
 
 ## Documentation
 
-To preview the interface with sample data, run `SEKISHO_DEMO=true make dev`, then choose **Explore demo** on the login page. This starts a disposable, read-only server demo; see [demo mode](https://sekisho.dev/docs/deployment#demo-mode) for binary and Compose usage.
-
-Follow the [step-by-step tutorial](https://sekisho.dev/docs/guide/installation). Guides are maintained in the [documentation repository](https://github.com/wolfsenberg/sekisho-website).
-
-- [Deployment](https://sekisho.dev/docs/deployment) · [Backup and restore](https://sekisho.dev/docs/backup)
-- [Providers](https://sekisho.dev/docs/providers) · [Codex subscriptions](https://sekisho.dev/docs/codex) · [Client protocols](https://sekisho.dev/docs/protocols) · [Network proxies](https://sekisho.dev/docs/proxies)
-- [Workspaces](https://sekisho.dev/docs/workspaces) · [Members](https://sekisho.dev/docs/members) · [API keys](https://sekisho.dev/docs/api-keys) · [Account pools](https://sekisho.dev/docs/groups)
-- [Model catalogs](https://sekisho.dev/docs/models) · [Resource allowances](https://sekisho.dev/docs/allocations) · [Team controls](https://sekisho.dev/docs/team-controls)
-- [Usage](https://sekisho.dev/docs/usage) · [Request diagnostics](https://sekisho.dev/docs/pool-runtime) · [Management audit](https://sekisho.dev/docs/audit) · [System settings](https://sekisho.dev/docs/settings)
-- [Development](https://sekisho.dev/docs/development) · [Architecture](https://sekisho.dev/docs/architecture)
-- [Releases](https://sekisho.dev/docs/releases) · [Changelog](CHANGELOG.md)
-- [Contributing](CONTRIBUTING.md) · [Security](SECURITY.md)
+- [PRODUCT.md](PRODUCT.md) — scope, users and current status
+- [DESIGN.md](DESIGN.md) — interface and visual system
+- [CONTRIBUTING.md](CONTRIBUTING.md) — workflow, change boundaries and releases
+- [SECURITY.md](SECURITY.md) — security model and reporting
+- [CHANGELOG.md](CHANGELOG.md) — release history
+- [brand/README.md](brand/README.md) — brand materials
 
 ## License
 

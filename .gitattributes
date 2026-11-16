@@ -1,0 +1,9 @@
+# Keep LF everywhere so formatters, shell scripts and Go embeds behave the same on every OS.
+* text=auto eol=lf
+
+*.png binary
+*.ico binary
+*.ttf binary
+*.woff binary
+*.woff2 binary
+*.bundle binary

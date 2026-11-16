@@ -9,6 +9,7 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
+	"runtime"
 )
 
 var ErrDecrypt = errors.New("credential_decryption_failed")
@@ -64,7 +65,7 @@ func loadKey(path string) ([]byte, error) {
 	if err != nil {
 		return nil, err
 	}
-	if !info.Mode().IsRegular() || info.Mode().Perm()&0077 != 0 {
+	if !info.Mode().IsRegular() || exposed(info) {
 		return nil, errors.New("credential encryption key must be a private regular file (0600)")
 	}
 	return os.ReadFile(path)
@@ -141,4 +142,10 @@ func (v *Vault) OpenTOTP(userID int64, encrypted []byte) ([]byte, error) {
 		return nil, ErrDecrypt
 	}
 	return v.open(fmt.Sprintf("sekisho:totp:%d", userID), encrypted)
+}
+
+// exposed reports whether group or other users can access a file. Windows has
+// no Unix mode bits (Go reports 0666 for every file), so access there is left to ACLs.
+func exposed(info os.FileInfo) bool {
+	return runtime.GOOS != "windows" && info.Mode().Perm()&0077 != 0
 }

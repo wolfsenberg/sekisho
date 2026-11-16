@@ -11,7 +11,8 @@ import { join } from 'node:path'
 import { expect, it } from 'vitest'
 import { clientConfiguration } from './client'
 
-it.each(['claude', 'gemini', 'openai'] as const)(
+// Runs the generated snippet in a real POSIX shell, so it needs /bin/sh.
+it.skipIf(!existsSync('/bin/sh')).each(['claude', 'gemini', 'openai'] as const)(
   'copies a safe %s request without executing model text',
   (protocol) => {
     const directory = mkdtempSync(join(tmpdir(), 'sekisho-client-'))

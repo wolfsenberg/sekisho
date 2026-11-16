@@ -1,12 +1,12 @@
 # Documentation
 
-The maintained usage, operations, and architecture guides live on the [Sekisho documentation website](https://sekisho.dev/docs).
+Sekisho's guides live in this repository:
 
-- [Step-by-step tutorial](https://sekisho.dev/docs/guide/installation)
-- [Deployment and upgrades](https://sekisho.dev/docs/deployment)
-- [Backup and restore](https://sekisho.dev/docs/backup)
-- [Development](https://sekisho.dev/docs/development) · [Architecture](https://sekisho.dev/docs/architecture)
+- [README](https://github.com/wolfsenberg/sekisho/blob/main/README.md) — features, running from source, demo mode, Docker and software updates
+- [PRODUCT.md](https://github.com/wolfsenberg/sekisho/blob/main/PRODUCT.md) — scope, users and current status
+- [DESIGN.md](https://github.com/wolfsenberg/sekisho/blob/main/DESIGN.md) — interface and visual system
+- [CONTRIBUTING.md](https://github.com/wolfsenberg/sekisho/blob/main/CONTRIBUTING.md) — workflow, change boundaries and publishing a version
+- [SECURITY.md](https://github.com/wolfsenberg/sekisho/blob/main/SECURITY.md) — security model and reporting
+- [CHANGELOG.md](https://github.com/wolfsenberg/sekisho/blob/main/CHANGELOG.md) — release history
 
-Edit the guides in the [documentation repository](https://github.com/wolfsenberg/sekisho-website). This index is also included in binary release archives; those archives link to the maintained guides instead of shipping duplicate copies.
-
-Repository policies, release history, and canonical brand assets remain with the application.
+This index is also included in binary release archives, so it links to the repository. Brand assets live in [brand/](https://github.com/wolfsenberg/sekisho/tree/main/brand).
