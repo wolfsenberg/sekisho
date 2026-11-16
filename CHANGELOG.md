@@ -2,6 +2,13 @@
 
 All notable changes are documented here in [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) format.
 
+## [0.22.1] - 2026-11-17
+
+### Changed
+
+- Document a one-command Docker run and compare the ways to run Sekisho
+- Refresh the README screenshots for the 0.22 interface
+
 ## [0.22.0] - 2026-11-16
 
 ### Changed
@@ -393,6 +400,7 @@ All notable changes are documented here in [Keep a Changelog](https://keepachang
 - Distinguish remaining quota with status colors
 - Restore version-gated model discovery
 
+[0.22.1]: https://github.com/wolfsenberg/sekisho/compare/v0.22.0...v0.22.1
 [0.22.0]: https://github.com/wolfsenberg/sekisho/compare/v0.21.0...v0.22.0
 [0.21.0]: https://github.com/wolfsenberg/sekisho/releases/tag/v0.21.0
 [0.20.0]: https://github.com/wolfsenberg/sekisho/compare/v0.19.2...v0.20.0
