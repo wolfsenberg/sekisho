@@ -18,7 +18,7 @@ test('exports a complete portable kit without overwriting maintained source docu
   for (const name of ['build.mjs', 'check.mjs', 'package.json', 'pnpm-lock.yaml']) copyFileSync(resolve(tooling, name), resolve(tool, name))
   symlinkSync(resolve(tooling, 'node_modules'), resolve(tool, 'node_modules'), 'dir')
   // The font is a rendering dependency; the mark and documents are synthetic fixtures.
-  for (const name of ['Inter.ttf', 'OFL.txt']) copyFileSync(resolve(project, 'brand/source', name), resolve(source, name))
+  for (const name of ['Geist.ttf', 'OFL.txt']) copyFileSync(resolve(project, 'brand/source', name), resolve(source, name))
   const mark = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><path d="M16 16h80v80H16Z"/><path d="M144 144h80v80h-80Z"/></svg>'
   writeFileSync(resolve(fixture, 'docs/assets/logo.svg'), mark)
   writeFileSync(resolve(fixture, 'LICENSE'), 'Synthetic license fixture')
@@ -31,7 +31,7 @@ test('exports a complete portable kit without overwriting maintained source docu
   assert.equal(readFileSync(resolve(fixture, 'brand/README.md'), 'utf8'), 'Maintained synthetic source guide')
   assert.equal(readFileSync(resolve(fixture, 'docs/assets/logo.svg'), 'utf8'), mark)
   assert.equal(readFileSync(resolve(output, 'README.md'), 'utf8'), 'Synthetic distribution guide')
-  assert.equal(readFileSync(resolve(output, 'source/Inter.ttf')).compare(readFileSync(resolve(source, 'Inter.ttf'))), 0)
+  assert.equal(readFileSync(resolve(output, 'source/Geist.ttf')).compare(readFileSync(resolve(source, 'Geist.ttf'))), 0)
   execFileSync(process.execPath, ['check.mjs'], { cwd: tool, timeout: 60_000 })
 
   const before = JSON.parse(readFileSync(resolve(output, 'manifest.json'), 'utf8')).assets

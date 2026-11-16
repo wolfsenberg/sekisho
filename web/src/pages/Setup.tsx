@@ -3,7 +3,6 @@ import { Link } from '@tanstack/react-router'
 import { ArrowRight } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 import { AuthShell } from '@/components/AuthShell'
-import { Logo } from '@/components/Logo'
 import { Button } from '@/components/ui/Button'
 
 const steps = [
@@ -21,11 +20,10 @@ export function Setup() {
 
   return (
     <AuthShell>
-      <Logo className="mb-7 size-12" />
       <h1
         ref={heading}
         tabIndex={-1}
-        className="text-2xl font-semibold tracking-tight text-balance outline-none"
+        className="pe-16 text-2xl font-semibold tracking-[-0.025em] text-balance outline-none"
       >
         {t('setupWelcome')}
       </h1>
@@ -36,7 +34,7 @@ export function Setup() {
         {steps.map(([title, description], index) => (
           <li key={title} className="flex gap-4">
             <span
-              className="pt-0.5 text-xs leading-5 text-muted-foreground tabular-nums"
+              className="mt-0.5 flex size-5 shrink-0 items-center justify-center rounded-sm border border-hairline font-mono text-[0.6875rem] text-muted-foreground"
               aria-hidden="true"
             >
               {index + 1}

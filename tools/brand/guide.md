@@ -1,6 +1,6 @@
 # Sekisho brand materials
 
-A complete digital asset set based on the approved original mark: two offset lane segments forming an S. The symbol's two vector paths are preserved exactly across the set.
+A complete digital asset set based on the Sekisho seal: a square vermilion hanko with a framed, seal-script S cut through it, like the stamp a checkpoint pressed onto a travel pass. The seal geometry is preserved exactly across the set.
 
 Open `preview.html` locally to browse and filter the artwork. Use `overview.png` for a quick view of the system.
 
@@ -42,7 +42,7 @@ Open `preview.html` locally to browse and filter the artwork. Use `overview.png`
 
 ## Typography
 
-The wordmark uses Inter at weight 650, optical size 32, with restrained tracking. All text in exported artwork is converted to vector paths; another computer does not need the font installed to display it correctly.
+The wordmark uses Geist at weight 620 with -0.03em tracking. All text in exported artwork is converted to vector paths; another computer does not need the font installed to display it correctly.
 
 The variable font and its SIL Open Font License are included in `source/`. The font is unmodified. The application UI continues to use its existing platform sans-serif stack; this asset set does not change the application's typography.
 
@@ -73,7 +73,7 @@ Copy the desired icon files into the application's public directory before addin
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 ```
 
-The adaptive SVG follows `prefers-color-scheme`. The ICO fallback uses a white mark on a dark tile. Opaque square app icons are supplied for platform masking; the rounded app artwork is a separate presentation asset.
+Browser icons use the frameless vermilion seal, which reads on both light and dark browser chrome. Opaque square app icons are supplied for platform masking; the rounded app artwork is a separate presentation asset.
 
 ## GitHub social preview
 
@@ -83,7 +83,7 @@ The export follows [GitHub's documented recommendation](https://docs.github.com/
 
 ## Editing and rebuilding
 
-The project's canonical symbol remains `docs/assets/logo.svg`. A portable copy is included here as `source/mark.svg`. The artwork generator reads the canonical file, shapes text using the included Inter font, and exports pure SVG paths and PNGs using resvg.
+The project's canonical symbol remains `docs/assets/logo.svg`. A portable copy is included here as `source/mark.svg`. The artwork generator reads the canonical file, shapes text using the included Geist font, and exports pure SVG paths and PNGs using resvg.
 
 From the project root:
 
@@ -103,5 +103,5 @@ The downloadable bundle also includes a portable generator in `source/generator/
 
 - Symbol: the user-approved original Sekisho SVG, preserved without geometry changes.
 - Composition, lockups, icons, and exports: deterministic vector construction from that SVG.
-- Font: Inter, from Google Fonts revision `1edf95b4328bc5997ca93d2c0c7205272ec7347f`; see `source/OFL.txt`.
+- Font: Geist, from the `geist` 1.5.1 package; see `source/OFL.txt`.
 - Sekisho artwork and source files follow the repository's AGPL-3.0-only license in `LICENSE`. The included font retains its separate SIL OFL 1.1 license.

@@ -1,9 +1,9 @@
 export const heatmapTones = [
   'bg-muted',
-  'bg-foreground/20',
-  'bg-foreground/40',
-  'bg-foreground/60',
-  'bg-foreground/85',
+  'bg-seal/20',
+  'bg-seal/40',
+  'bg-seal/65',
+  'bg-seal',
 ] as const
 
 export function heatmapTone(value: number | null, maximum: number) {

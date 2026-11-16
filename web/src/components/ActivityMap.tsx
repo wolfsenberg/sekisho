@@ -114,7 +114,7 @@ export function ActivityMap({
           zone: timeZone,
         })}
       </p>
-      <div className="overflow-x-auto px-1 py-1">
+      <div className="overflow-x-auto px-1 py-1 max-md:[mask-image:linear-gradient(to_right,black_calc(100%-16px),transparent)]">
         <div
           role="grid"
           aria-label={t('activityGrid')}

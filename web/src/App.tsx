@@ -17,7 +17,7 @@ export function App({
     <I18nextProvider i18n={i18n}>
       <ThemeProvider
         attribute="class"
-        defaultTheme="system"
+        defaultTheme="dark"
         storageKey="sekisho-theme"
         enableSystem
       >

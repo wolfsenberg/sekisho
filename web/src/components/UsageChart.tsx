@@ -177,7 +177,10 @@ function DailyChart({
     { length: Math.round(top / step) + 1 },
     (_, index) => index * step,
   )
-  const tickCount = Math.min(rows.length, width < 480 ? 3 : 6)
+  const tickCount = Math.min(
+    rows.length,
+    width < 480 ? 3 : width >= 720 && rows.length <= 14 ? rows.length : 6,
+  )
   const datesToShow = new Set(
     Array.from({ length: tickCount }, (_, index) =>
       tickCount === 1
@@ -267,8 +270,9 @@ function DailyChart({
         <path
           d={path}
           fill="none"
-          stroke="var(--foreground)"
+          stroke="var(--seal)"
           strokeWidth={2}
+          strokeLinejoin="round"
           vectorEffect="non-scaling-stroke"
         />
         {amounts.map((amount, index) =>
@@ -278,8 +282,8 @@ function DailyChart({
               cx={x(index)}
               cy={y(amount)}
               r={index === active ? 5 : 3}
-              fill="var(--background)"
-              stroke="var(--foreground)"
+              fill={index === active ? 'var(--seal)' : 'var(--background)'}
+              stroke="var(--seal)"
               strokeWidth={2}
             />
           ) : null,

@@ -216,14 +216,24 @@ export function Auth({ mode }: { mode: 'setup' | 'login' }) {
         </Button>
       )}
       {creating && (
-        <p className="mb-3 text-xs font-medium uppercase tracking-wider text-muted-foreground">
+        <p className="mb-4 flex items-center gap-2.5 text-xs text-muted-foreground">
+          <span aria-hidden="true" className="flex gap-1">
+            <span className="size-2 rounded-[2px] bg-seal" />
+            <span
+              className={
+                setupStep === 'account'
+                  ? 'size-2 rounded-[2px] border border-input'
+                  : 'size-2 rounded-[2px] bg-seal'
+              }
+            />
+          </span>
           {t('setupProgress', { current: setupStep === 'account' ? 1 : 2 })}
         </p>
       )}
       <h1
         ref={heading}
         tabIndex={-1}
-        className="text-2xl font-semibold tracking-tight outline-none"
+        className="pe-16 text-2xl font-semibold tracking-[-0.025em] text-balance outline-none"
       >
         {t(
           creating
@@ -234,7 +244,7 @@ export function Auth({ mode }: { mode: 'setup' | 'login' }) {
         )}
       </h1>
       {demo && (
-        <div className="mt-5 space-y-3 rounded-lg border border-border bg-muted/50 p-4">
+        <div className="mt-6 space-y-3 rounded-lg border border-dashed border-hairline bg-background/60 p-4">
           <p className="text-sm font-medium">{t('demoTitle')}</p>
           <p className="text-sm leading-6 text-muted-foreground">
             {t('demoDescription')}

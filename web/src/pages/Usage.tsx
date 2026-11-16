@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useQuery, useQueryClient } from '@tanstack/react-query'
-import { ChevronDown, RefreshCw } from 'lucide-react'
+import { ChevronDown, CircleCheck, CircleX, RefreshCw } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 import { authOptions } from '@/lib/auth'
 import { useTimeZone } from '@/lib/timezone'
@@ -316,6 +316,7 @@ function UsageReport({ scope, userID }: { scope: UsageScope; userID: number }) {
             </dl>
             {totals.requests > 0 && (
               <>
+                <OutcomeStrip totals={totals} />
                 <p className="text-sm text-muted-foreground">
                   {t('usageOutcomes', {
                     completed: number.format(totals.completed),
@@ -488,5 +489,61 @@ function UsageReport({ scope, userID }: { scope: UsageScope; userID: number }) {
         </section>
       )}
     </section>
+  )
+}
+
+/*
+ * The checkpoint ledger: one strip shows what passed (moss) and what was stopped
+ * (carmine) against the remaining outcomes. The sentence beside it carries the
+ * exact counts for every reader, so the strip itself stays decorative.
+ */
+function OutcomeStrip({
+  totals,
+}: {
+  totals: {
+    requests: number
+    completed: number
+    incomplete: number
+    errors: number
+    canceled: number
+    rejected: number
+  }
+}) {
+  const parts = [
+    {
+      value: totals.completed,
+      className: 'bg-success',
+      Icon: CircleCheck,
+      ink: 'text-success',
+    },
+    {
+      value: totals.errors + totals.rejected,
+      className: 'bg-error',
+      Icon: CircleX,
+      ink: 'text-error',
+    },
+    {
+      value: totals.incomplete + totals.canceled,
+      className: 'bg-input',
+      Icon: null,
+      ink: '',
+    },
+  ].filter((part) => part.value > 0)
+  if (!totals.requests || !parts.length) return null
+  return (
+    <div aria-hidden="true" className="flex w-full gap-0.5">
+      {parts.map(({ className, Icon, ink, value }) => (
+        <span
+          key={className}
+          className="flex min-w-0 flex-col gap-1.5"
+          style={{ flexGrow: value, flexBasis: 0, minWidth: Icon ? 16 : 3 }}
+        >
+          <span className={'flex h-3.5 ' + ink}>
+            {Icon && <Icon className="size-3.5" />}
+          </span>
+          <span className={'h-1.5 rounded-[1px] ' + className} />
+        </span>
+      ))}
+    </div>
   )
 }

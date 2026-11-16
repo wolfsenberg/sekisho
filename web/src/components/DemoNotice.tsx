@@ -18,7 +18,7 @@ export function DemoNotice() {
   return (
     <aside
       aria-label={t('demoTitle')}
-      className="flex items-start gap-3 border-y border-border bg-muted/50 px-5 py-3 md:px-6"
+      className="flex items-start gap-3 border-b border-border bg-card px-5 py-3 md:px-8"
     >
       <FlaskConical
         aria-hidden="true"

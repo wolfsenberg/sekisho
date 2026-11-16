@@ -1,4 +1,4 @@
-import { readFileSync, writeFileSync, mkdirSync, copyFileSync } from 'node:fs'
+import { readFileSync, writeFileSync, mkdirSync, copyFileSync, existsSync } from 'node:fs'
 import { resolve, dirname } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { createHash } from 'node:crypto'
@@ -10,24 +10,31 @@ const standalone = process.argv.includes('--standalone')
 const out = standalone ? root : resolve(root, 'dist/brand')
 const source = resolve(root, standalone ? 'source' : 'brand/source')
 const approved = readFileSync(resolve(root, standalone ? 'source/mark.svg' : 'docs/assets/logo.svg'), 'utf8')
-const paths = [...approved.matchAll(/<path d="([^"]+)"/g)].map((m) => m[1])
-if (paths.length !== 2) throw new Error('The approved mark must contain exactly two paths.')
-const markPaths = paths.map((d) => '<path d="' + d + '"/>').join('')
-const baseFont = fontkit.openSync(resolve(source, 'Inter.ttf'))
+// The seal is one even-odd path: the stamp body, its frame channel, and the S channel.
+const paths = [...approved.matchAll(/<path\b[^>]*\sd="([^"]+)"/g)].map((m) => m[1])
+if (paths.length < 1) throw new Error('The approved mark must contain at least one path.')
+const markPaths = paths.map((d) => '<path fill-rule="evenodd" d="' + d + '"/>').join('')
+const small = existsSync(resolve(root, standalone ? 'source/mark-small.svg' : 'docs/assets/logo-small.svg'))
+  ? readFileSync(resolve(root, standalone ? 'source/mark-small.svg' : 'docs/assets/logo-small.svg'), 'utf8')
+  : approved
+const smallPaths = [...small.matchAll(/<path\b[^>]*\sd="([^"]+)"/g)].map((m) => '<path fill-rule="evenodd" d="' + m[1] + '"/>').join('')
+const baseFont = fontkit.openSync(resolve(source, 'Geist.ttf'))
 const fonts = new Map()
 const assets = []
 const drawings = new Map()
 let textBounds = []
+// Sumi ink, kinari paper and one shu-vermilion seal ink.
 const colors = {
-  ink: '#171717', paper: '#FFFFFF', canvas: '#F7F7F7', night: '#101010',
-  surface: '#191919', gray: '#616161', silver: '#A3A3A3', line: '#E5E5E5',
-  success: '#15803D', warning: '#92400E', error: '#B91C1C', info: '#1D4ED8',
+  ink: '#1A1916', paper: '#F7F5F0', canvas: '#EFECE5', night: '#100F0E',
+  surface: '#1A1917', gray: '#6B665C', silver: '#A39E93', line: '#DDD8CE',
+  seal: '#D9442A', sealDark: '#E5573B',
+  success: '#2F7D4A', warning: '#8A5A0B', error: '#B4233A', info: '#2A5DA8',
 }
 const esc = (s) => String(s).replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('"', '&quot;')
 const num = (n) => Number(n.toFixed(4))
 
 function font(weight) {
-  if (!fonts.has(weight)) fonts.set(weight, baseFont.getVariation({ wght: weight, opsz: 32 }))
+  if (!fonts.has(weight)) fonts.set(weight, baseFont.getVariation({ wght: weight }))
   return fonts.get(weight)
 }
 
@@ -64,12 +71,14 @@ function rect(x, y, w, h, fill, radius = 0) {
   return '<rect x="' + x + '" y="' + y + '" width="' + w + '" height="' + h + '" rx="' + radius + '" fill="' + fill + '"/>'
 }
 
-function mark(x, y, size, fill = colors.ink) {
-  return '<g fill="' + fill + '" transform="translate(' + num(x) + ' ' + num(y) + ') scale(' + num(size / 256) + ')">' + markPaths + '</g>'
+function mark(x, y, size, fill = colors.seal, compact = size < 24) {
+  return '<g fill="' + fill + '" transform="translate(' + num(x) + ' ' + num(y) + ') scale(' + num(size / 256) + ')">' + (compact ? smallPaths : markPaths) + '</g>'
 }
 
+// The seal keeps its vermilion on every ground; only the wordmark follows the theme.
 function lockup(x, y, size, fill = colors.ink) {
-  return mark(x, y, size, fill) + text('Sekisho', x + size * 1.19, y + size * 0.773, size * 0.80, 650, fill, 'left', -0.025)
+  const seal = fill === colors.ink ? colors.seal : colors.sealDark
+  return mark(x, y, size, seal) + text('Sekisho', x + size * 1.22, y + size * 0.76, size * 0.74, 620, fill, 'left', -0.03)
 }
 
 function document(w, h, body, title) {
@@ -98,18 +107,20 @@ function asset(name, w, h, body, options = {}) {
 // Every logo appearance reuses the canonical paths, including tiny raster exports.
 for (const [theme, fg] of [['black', colors.ink], ['white', colors.paper]]) {
   asset('logos/mark-' + theme, 1024, 1024, mark(0, 0, 1024, fg), { transparent: true })
+  asset('logos/seal-' + theme, 1024, 1024, mark(0, 0, 1024, fg === colors.ink ? colors.seal : colors.sealDark), { transparent: true })
   asset('logos/lockup-' + theme, 720, 176, lockup(16, 16, 144, fg), { transparent: true })
-  asset('logos/stacked-' + theme, 640, 600, mark(176, 44, 288, fg) + text('Sekisho', 320, 476, 118, 650, fg, 'center', -0.025), { transparent: true })
-  asset('logos/wordmark-' + theme, 960, 240, text('Sekisho', 480, 183, 206, 650, fg, 'center', -0.025), { transparent: true, hasMark: false })
+  asset('logos/stacked-' + theme, 640, 600, mark(176, 44, 288, fg === colors.ink ? colors.seal : colors.sealDark) + text('Sekisho', 320, 476, 118, 620, fg, 'center', -0.03), { transparent: true })
+  asset('logos/wordmark-' + theme, 960, 240, text('Sekisho', 480, 183, 206, 620, fg, 'center', -0.03), { transparent: true, hasMark: false })
 }
 
 for (const dark of [false, true]) {
   const theme = dark ? 'dark' : 'light'
   const bg = dark ? colors.night : colors.paper
+  const seal = dark ? colors.sealDark : colors.seal
   const fg = dark ? colors.paper : colors.ink
   const muted = dark ? colors.silver : colors.gray
-  asset('icons/avatar-' + theme, 1024, 1024, rect(0, 0, 1024, 1024, bg) + mark(192, 192, 640, fg))
-  asset('icons/app-' + theme, 1024, 1024, rect(0, 0, 1024, 1024, bg, 224) + mark(192, 192, 640, fg), { transparent: true })
+  asset('icons/avatar-' + theme, 1024, 1024, rect(0, 0, 1024, 1024, bg) + mark(192, 192, 640, seal))
+  asset('icons/app-' + theme, 1024, 1024, rect(0, 0, 1024, 1024, bg, 224) + mark(192, 192, 640, seal), { transparent: true })
 
   asset('banners/readme-' + theme, 1600, 420,
     rect(0, 0, 1600, 420, bg) + lockup(64, 56, 216, fg) +
@@ -147,17 +158,18 @@ for (const dark of [false, true]) {
     text('Project overview', 1770, 985, 30, 450, muted, 'right'))
 
   asset('wallpapers/desktop-' + theme, 3840, 2160,
-    rect(0, 0, 3840, 2160, bg) + mark(1656, 648, 528, fg) +
-    text('Sekisho', 1920, 1390, 216, 650, fg, 'center', -0.025) +
+    rect(0, 0, 3840, 2160, bg) + mark(1656, 648, 528, seal) +
+    text('Sekisho', 1920, 1390, 216, 620, fg, 'center', -0.03) +
     text('github.com/wolfsenberg/sekisho', 1920, 2056, 32, 450, muted, 'center'))
 
   asset('stickers/round-' + theme, 1024, 1024,
     '<circle cx="512" cy="512" r="488" fill="' + bg + '"/>' +
-    mark(272, 176, 480, fg) + text('Sekisho', 512, 790, 108, 650, fg, 'center', -0.025),
+    mark(272, 176, 480, seal) + text('Sekisho', 512, 790, 108, 620, fg, 'center', -0.03),
     { transparent: true })
 }
 
-const tile = rect(0, 0, 256, 256, colors.ink, 48) + mark(16, 16, 224, colors.paper)
+// Browser icons use the frameless seal: the frame channel closes up below 24px.
+const tile = mark(0, 0, 256, colors.seal, true)
 const icoFrames = []
 for (const size of [16, 32, 48, 64, 128, 256]) {
   const png = new Resvg(document(256, 256, tile, 'Sekisho'), { fitTo: { mode: 'width', value: size } }).render().asPng()
@@ -165,13 +177,13 @@ for (const size of [16, 32, 48, 64, 128, 256]) {
   if (size <= 64) icoFrames.push({ size, png })
 }
 for (const size of [180, 192, 512]) {
-  const body = rect(0, 0, size, size, colors.ink) + mark(size * 0.18, size * 0.18, size * 0.64, colors.paper)
+  const body = rect(0, 0, size, size, colors.night) + mark(size * 0.16, size * 0.16, size * 0.68, colors.sealDark)
   const name = size === 180 ? 'icons/apple-touch-icon' : 'icons/android-' + size
   record(name + '.png', new Resvg(document(size, size, body, 'Sekisho')).render().asPng(), { format: 'png', width: size, height: size, transparent: false })
 }
 asset('icons/favicon', 256, 256,
-  '<style>:root{color:#171717}@media(prefers-color-scheme:dark){:root{color:#FFFFFF}}</style>' + mark(0, 0, 256, 'currentColor'),
-  { transparent: true, png: false })
+  mark(0, 0, 256, colors.seal, true),
+  { transparent: true, png: false, hasMark: false })
 
 const icoHeader = Buffer.alloc(6 + 16 * icoFrames.length)
 icoHeader.writeUInt16LE(1, 2)
@@ -213,13 +225,13 @@ board += text('Light / dark · Circle-safe avatars included', 76, 1030, 21, 450,
 board += inset('social/github-dark', 820, 612, 960, 466)
 board += rect(1800, 612, 560, 466, colors.paper) + text('Wordmark', 1840, 668, 27, 500)
 board += text('Sekisho', 1840, 825, 106, 650, colors.ink, 'left', -0.025)
-board += text('Inter 650 · Outlined for portability', 1840, 1019, 21, 450, colors.gray)
+board += text('Geist 620 · Outlined for portability', 1840, 1019, 21, 450, colors.gray)
 board += rect(40, 1098, 1510, 300, colors.paper) + inset('banners/readme-light', 64, 1120, 1462, 250)
 board += rect(1570, 1098, 790, 300, colors.night)
-board += text('Monochrome by default.', 1614, 1160, 32, 550, colors.paper)
-board += text('Color only when it carries meaning.', 1614, 1210, 25, 450, colors.silver)
-for (const [i, value] of ['#FFFFFF', '#A3A3A3', '#616161', '#171717'].entries()) board += rect(1614 + i * 175, 1252, 151, 62, value, 4)
-for (const [i, [label, fill]] of [['Success', '#86EFAC'], ['Warning', '#FCD34D'], ['Error', '#FCA5A5'], ['Info', '#93C5FD']].entries()) {
+board += text('Sumi, kinari, one seal ink.', 1614, 1160, 32, 550, colors.paper)
+board += text('Vermilion marks approval and action.', 1614, 1210, 25, 450, colors.silver)
+for (const [i, value] of [colors.paper, colors.silver, colors.surface, colors.sealDark].entries()) board += rect(1614 + i * 175, 1252, 151, 62, value, 4)
+for (const [i, [label, fill]] of [['Success', '#8CC69B'], ['Warning', '#E7B95E'], ['Error', '#F1899A'], ['Info', '#94B6EA']].entries()) {
   board += rect(1614 + i * 175, 1338, 16, 16, fill, 3) + text(label, 1640 + i * 175, 1355, 22, 450, colors.silver)
 }
 board += rect(40, 1418, 760, 278, colors.night) + text('Browser-ready', 76, 1474, 27, 500, colors.paper)
@@ -242,16 +254,17 @@ const manifest = {
   markSource: 'source/mark.svg',
   projectMarkSource: 'docs/assets/logo.svg',
   markSha256: createHash('sha256').update(paths.join('\n')).digest('hex'),
-  font: { name: 'Inter', weights: [450, 500, 550, 600, 650], opticalSize: 32, source: 'source/Inter.ttf', license: 'source/OFL.txt', revision: '1edf95b4328bc5997ca93d2c0c7205272ec7347f' },
+  font: { name: 'Geist', weights: [450, 500, 550, 600, 620], source: 'source/Geist.ttf', license: 'source/OFL.txt', package: 'geist@1.5.1 dist/fonts/geist-sans/Geist-Variable.ttf' },
   assets,
 }
 writeFileSync(resolve(out, 'manifest.json'), JSON.stringify(manifest, null, 2) + '\n')
-writeFileSync(resolve(out, 'tokens.json'), JSON.stringify({ brand: 'Sekisho', colors, semantic: { light: { success: '#15803D', warning: '#92400E', error: '#B91C1C', info: '#1D4ED8' }, dark: { success: '#86EFAC', warning: '#FCD34D', error: '#FCA5A5', info: '#93C5FD' } }, logo: { clearSpace: '0.25 × canvas', minimumDigitalSize: 24, faviconException: 16 }, typography: { wordmark: 'Inter 650', opticalSize: 32, tracking: '-0.025em', exportedAs: 'paths' } }, null, 2) + '\n')
+writeFileSync(resolve(out, 'tokens.json'), JSON.stringify({ brand: 'Sekisho', colors, semantic: { light: { success: '#2F7D4A', warning: '#8A5A0B', error: '#B4233A', info: '#2A5DA8' }, dark: { success: '#8CC69B', warning: '#E7B95E', error: '#F1899A', info: '#94B6EA' } }, logo: { clearSpace: '0.25 × canvas', minimumDigitalSize: 24, below24px: 'frameless seal (docs/assets/logo-small.svg)' }, typography: { wordmark: 'Geist 620', tracking: '-0.03em', exportedAs: 'paths' } }, null, 2) + '\n')
 if (!standalone) {
   mkdirSync(resolve(out, 'source'), { recursive: true })
   copyFileSync(resolve(root, 'docs/assets/logo.svg'), resolve(out, 'source/mark.svg'))
+  if (existsSync(resolve(root, 'docs/assets/logo-small.svg'))) copyFileSync(resolve(root, 'docs/assets/logo-small.svg'), resolve(out, 'source/mark-small.svg'))
   copyFileSync(resolve(root, 'LICENSE'), resolve(out, 'LICENSE'))
-  for (const name of ['Inter.ttf', 'OFL.txt']) copyFileSync(resolve(source, name), resolve(out, 'source', name))
+  for (const name of ['Geist.ttf', 'OFL.txt']) copyFileSync(resolve(source, name), resolve(out, 'source', name))
   copyFileSync(resolve(root, 'tools/brand/guide.md'), resolve(out, 'README.md'))
   mkdirSync(resolve(out, 'source/generator'), { recursive: true })
   for (const name of ['build.mjs', 'check.mjs', 'pnpm-lock.yaml']) {
@@ -282,4 +295,4 @@ if (!standalone) {
     copyFileSync(resolve(out, name), target)
   }
 }
-console.log('Built ' + assets.length + ' assets from the two approved logo paths. Wordmarks and graphic text are outlined.')
+console.log('Built ' + assets.length + ' assets from the approved seal. Wordmarks and graphic text are outlined.')

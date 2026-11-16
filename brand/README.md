@@ -6,22 +6,22 @@ This directory keeps the assets used by repository documentation, color values, 
 
 | Files | Purpose |
 | --- | --- |
-| `logos/lockup-black.svg`, `logos/lockup-white.svg` | The horizontal logo used in both READMEs |
+| `logos/lockup-black.svg`, `logos/lockup-white.svg` | The horizontal logo used in the README |
 | `social/github-dark.svg`, `social/github-dark.png` | The selected GitHub social preview |
-| `source/Inter.ttf`, `source/OFL.txt` | The original font and its license for reproducible exports |
+| `source/Geist.ttf`, `source/OFL.txt` | The wordmark font and its license for reproducible exports |
 | `tokens.json` | Brand colors, typography, and spacing rules |
 
-The canonical symbol remains [`docs/assets/logo.svg`](../docs/assets/logo.svg), with a light-fill counterpart beside it. Its two paths must stay unchanged. The sole maintained generator lives in `tools/brand/`.
+The canonical symbol is the Sekisho seal, [`docs/assets/logo.svg`](../docs/assets/logo.svg): a square vermilion hanko with a framed, seal-script S cut through it, drawn as one even-odd path. [`logo-dark.svg`](../docs/assets/logo-dark.svg) uses the brighter dark-ground vermilion, and [`logo-small.svg`](../docs/assets/logo-small.svg) is the frameless version for sizes below 24px. Keep the geometry unchanged. The sole maintained generator lives in `tools/brand/`.
 
 ## Usage
 
 - Use the black lockup on light backgrounds and the white lockup on dark backgrounds.
 - Preserve proportions and keep at least one quarter of the mark canvas clear in ordinary layouts.
-- Use the symbol at 24px or larger in ordinary interfaces. Export the dedicated favicon files for smaller browser sizes.
-- The wordmark uses outlined Inter 650, optical size 32. The application retains its platform sans-serif font.
-- Keep primary branding monochrome; use semantic colors only for status.
+- Use the framed seal at 24px or larger; below that, use the frameless seal. The favicon files already do.
+- The seal stays vermilion (`#D9442A` on light grounds, `#E5573B` on dark). Monochrome seal exports exist for single-colour printing.
+- The wordmark uses outlined Geist 620 with -0.03em tracking, matching the application typeface.
 
-Sekisho assets follow the repository's [AGPL-3.0-only license](../LICENSE). The included Inter font retains its separate [SIL OFL 1.1 license](source/OFL.txt).
+Sekisho assets follow the repository's [AGPL-3.0-only license](../LICENSE). The included Geist font retains its separate [SIL OFL 1.1 license](source/OFL.txt).
 
 ## Generate the full kit
 

@@ -11,8 +11,8 @@ const pack = standalone ? root : resolve(root, 'dist/brand')
 assert.ok(existsSync(resolve(pack, 'manifest.json')), 'Build the brand assets before checking them.')
 const manifest = JSON.parse(readFileSync(resolve(pack, 'manifest.json'), 'utf8'))
 const source = readFileSync(resolve(root, standalone ? 'source/mark.svg' : 'docs/assets/logo.svg'), 'utf8')
-const approved = [...source.matchAll(/<path d="([^"]+)"/g)].map((m) => m[1])
-assert.equal(approved.length, 2)
+const approved = [...source.matchAll(/<path\b[^>]*\sd="([^"]+)"/g)].map((m) => m[1])
+assert.ok(approved.length >= 1)
 assert.equal(manifest.markSha256, createHash('sha256').update(approved.join('\n')).digest('hex'))
 
 for (const item of manifest.assets) {

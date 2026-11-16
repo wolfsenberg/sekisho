@@ -155,7 +155,7 @@ function NavigationItem({
           </SidebarMenuSub>
         </>
       ) : (
-        <SidebarMenuButton asChild isActive={active} className="h-10">
+        <SidebarMenuButton asChild isActive={active} className="h-9">
           <Link
             to={item.to}
             onClick={() => setOpenMobile(false)}
@@ -182,21 +182,24 @@ function Navigation() {
       data?.user?.id === 1 && selectedWorkspace() === 1,
     )
   return (
-    <Sidebar className="border-e border-border">
-      <SidebarHeader className="px-3 py-4">
-        <div className="flex min-w-0 items-center gap-2">
+    <Sidebar className="border-e border-sidebar-border">
+      <SidebarHeader className="px-3 pt-3 pb-2">
+        <div className="flex min-w-0 flex-col gap-2">
           <Link
             to="/"
-            className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-foreground text-background focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring [@media(pointer:coarse)]:size-11"
+            className="flex h-9 w-fit shrink-0 items-center gap-2.5 rounded-md px-1 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring [@media(pointer:coarse)]:h-11 [&>svg]:transition-transform [&>svg]:duration-150 [&>svg]:ease-(--ease-out) hover:[&>svg]:-rotate-6"
             aria-label="Sekisho"
             onClick={() => setOpenMobile(false)}
           >
-            <Logo className="size-6" />
+            <Logo className="size-7" />
+            <span className="text-[0.9375rem] font-semibold tracking-[-0.02em] text-sidebar-foreground group-data-[collapsible=icon]:hidden">
+              Sekisho
+            </span>
           </Link>
           <WorkspaceSelect />
         </div>
       </SidebarHeader>
-      <SidebarContent className="gap-5">
+      <SidebarContent className="gap-3 [mask-image:linear-gradient(to_bottom,black_calc(100%-24px),transparent)] pb-4">
         {navigation.map((group) => {
           const items = group.items.filter((item) =>
             'children' in item
@@ -273,9 +276,16 @@ export function Layout({ children }: { children?: ReactNode }) {
         <SidebarInset
           className={cn('min-w-0 bg-background', tablePage && 'h-dvh')}
         >
-          <header className="flex min-h-16 shrink-0 items-center justify-between gap-3 px-4 md:px-6">
+          <header className="flex min-h-14 shrink-0 items-center justify-between gap-3 border-b border-border px-4 md:px-6">
             <div className="flex items-center gap-3">
               <SidebarTrigger className="size-7 text-muted-foreground [@media(pointer:coarse)]:size-11" />
+              <Link
+                to="/"
+                aria-label="Sekisho"
+                className="rounded-md focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring md:hidden"
+              >
+                <Logo className="size-7" />
+              </Link>
             </div>
             <div className="flex items-center gap-1">
               <LanguageSelect compact />
@@ -301,7 +311,7 @@ export function Layout({ children }: { children?: ReactNode }) {
           <main
             id="main-content"
             className={cn(
-              'mx-auto w-full px-5 py-6 md:px-6',
+              'mx-auto w-full px-5 py-7 md:px-8',
               // Tables need a bounded parent to keep scrollbars and pagination in the viewport.
               tablePage
                 ? 'flex min-h-0 flex-1 flex-col overflow-y-auto'

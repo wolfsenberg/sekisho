@@ -1,14 +1,21 @@
-import {
-  CircleAlert,
-  CircleCheck,
-  CirclePause,
-  Info,
-  TriangleAlert,
-} from 'lucide-react'
+import { CircleAlert, CirclePause, Info, TriangleAlert } from 'lucide-react'
 import { cn } from '@/lib/cn'
 
+// A passed check is stamped: the success badge carries a small vermilion seal.
+function Seal({ className }: { className?: string }) {
+  return (
+    <span
+      className={cn(
+        'inline-block size-[7px] shrink-0 -rotate-6 rounded-[1.5px] bg-seal',
+        className,
+      )}
+    />
+  )
+}
+
 const variants = {
-  success: { icon: CircleCheck, color: 'bg-success-muted text-success' },
+  // The seal alone carries approval, so the stamped chip itself stays neutral ink.
+  success: { icon: Seal, color: 'text-foreground ring-hairline!' },
   warning: { icon: TriangleAlert, color: 'bg-warning-muted text-warning' },
   error: { icon: CircleAlert, color: 'bg-error-muted text-error' },
   info: { icon: Info, color: 'bg-info-muted text-info' },
@@ -26,11 +33,14 @@ export function Status({
   return (
     <span
       className={cn(
-        'inline-flex w-fit items-center gap-1.5 whitespace-nowrap rounded-md px-2 py-1 text-xs font-medium',
+        'inline-flex w-fit items-center gap-1.5 whitespace-nowrap rounded-sm px-2 py-0.5 text-xs leading-5 font-medium ring-1 ring-current/15 ring-inset',
         color,
       )}
     >
-      <Icon className="size-3.5" aria-hidden="true" />
+      <Icon
+        className={kind === 'success' ? 'mx-[3px]' : 'size-3.5'}
+        aria-hidden="true"
+      />
       {children}
     </span>
   )
