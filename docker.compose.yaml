@@ -1,0 +1,60 @@
+services:
+  sekisho:
+    image: ${SEKISHO_IMAGE:-ghcr.io/wolfsenberg/sekisho:latest}
+    ports:
+      - "${SEKISHO_BIND_ADDRESS:-127.0.0.1}:${SEKISHO_PORT:-8080}:8080"
+    environment:
+      SEKISHO_ADDR: 0.0.0.0:8080
+      SEKISHO_DATA_DIR: /data
+      # Mount the configured key outside /data using a local Compose override.
+      SEKISHO_CREDENTIALS_KEY_FILE: ${SEKISHO_CREDENTIALS_KEY_FILE:-}
+      # Mount the backup destination and private password file with a local Compose override.
+      SEKISHO_BACKUP_DIR: ${SEKISHO_BACKUP_DIR:-}
+      SEKISHO_BACKUP_PASSWORD_FILE: ${SEKISHO_BACKUP_PASSWORD_FILE:-}
+      SEKISHO_BACKUP_INTERVAL: ${SEKISHO_BACKUP_INTERVAL:-}
+      SEKISHO_BACKUP_KEEP: ${SEKISHO_BACKUP_KEEP:-}
+      SEKISHO_BACKUP_WEBHOOK_URL: ${SEKISHO_BACKUP_WEBHOOK_URL:-}
+      SEKISHO_DEMO: ${SEKISHO_DEMO:-false}
+      SEKISHO_PUBLIC_URL: ${SEKISHO_PUBLIC_URL:-}
+      SEKISHO_TRUSTED_PROXIES: ${SEKISHO_TRUSTED_PROXIES:-}
+      SEKISHO_LOG_LEVEL: ${SEKISHO_LOG_LEVEL:-info}
+      SEKISHO_MAX_REQUEST_BODY_MB: ${SEKISHO_MAX_REQUEST_BODY_MB:-128}
+      SEKISHO_GATEWAY_CAPACITY: ${SEKISHO_GATEWAY_CAPACITY:-128}
+      SEKISHO_GATEWAY_QUOTA_WEIGHTED: ${SEKISHO_GATEWAY_QUOTA_WEIGHTED:-false}
+      SEKISHO_GATEWAY_QUEUE_LIMIT: ${SEKISHO_GATEWAY_QUEUE_LIMIT:-100}
+      SEKISHO_GATEWAY_QUEUE_TIMEOUT: ${SEKISHO_GATEWAY_QUEUE_TIMEOUT:-30s}
+      SEKISHO_GATEWAY_REQUEST_TIMEOUT: ${SEKISHO_GATEWAY_REQUEST_TIMEOUT:-30m}
+      SEKISHO_GATEWAY_STREAM_IDLE_TIMEOUT: ${SEKISHO_GATEWAY_STREAM_IDLE_TIMEOUT:-0s}
+      SEKISHO_GATEWAY_KEEPALIVE_INTERVAL: ${SEKISHO_GATEWAY_KEEPALIVE_INTERVAL:-10s}
+      SEKISHO_GATEWAY_RETRIES: ${SEKISHO_GATEWAY_RETRIES:-2}
+      SEKISHO_GATEWAY_RETRY_DELAY: ${SEKISHO_GATEWAY_RETRY_DELAY:-500ms}
+      SEKISHO_GATEWAY_TRANSIENT_THRESHOLD: ${SEKISHO_GATEWAY_TRANSIENT_THRESHOLD:-3}
+      SEKISHO_GATEWAY_TRANSIENT_WINDOW: ${SEKISHO_GATEWAY_TRANSIENT_WINDOW:-2m}
+      SEKISHO_GATEWAY_TRANSIENT_COOLDOWN: ${SEKISHO_GATEWAY_TRANSIENT_COOLDOWN:-10s}
+      SEKISHO_GATEWAY_RATE_LIMIT_COOLDOWN: ${SEKISHO_GATEWAY_RATE_LIMIT_COOLDOWN:-5s}
+      SEKISHO_INFERENCE_HEADER_TIMEOUT: ${SEKISHO_INFERENCE_HEADER_TIMEOUT:-5m}
+      # Must stay below stop_grace_period so draining finishes before Docker kills the process.
+      SEKISHO_SHUTDOWN_TIMEOUT: ${SEKISHO_SHUTDOWN_TIMEOUT:-20s}
+      SEKISHO_METRICS_TOKEN: ${SEKISHO_METRICS_TOKEN:-}
+      # Optional Go soft memory limit, e.g. 400MiB under a 512 MiB container limit.
+      GOMEMLIMIT: ${GOMEMLIMIT:-}
+    volumes:
+      - sekisho-data:/data
+    read_only: true
+    tmpfs:
+      - /tmp:rw,noexec,nosuid,size=64m,mode=1777
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    restart: unless-stopped
+    stop_grace_period: 30s
+    init: true
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+volumes:
+  sekisho-data:

@@ -1,0 +1,154 @@
+package config
+
+import (
+	"net/netip"
+	"path/filepath"
+	"testing"
+)
+
+func TestDemoOptIn(t *testing.T) {
+	for _, value := range []string{"", "false", "true", "invalid"} {
+		cfg, err := Load(func(k string) string {
+			if k == "SEKISHO_DEMO" {
+				return value
+			}
+			return ""
+		})
+		if value == "invalid" {
+			if err == nil {
+				t.Fatal("invalid demo setting accepted")
+			}
+		} else if err != nil || cfg.Demo != (value == "true") {
+			t.Fatalf("demo %q: %+v %v", value, cfg, err)
+		}
+	}
+}
+
+func TestTrustedProxyCIDRs(t *testing.T) {
+	cfg, err := Load(func(k string) string {
+		if k == "SEKISHO_TRUSTED_PROXIES" {
+			return "127.0.0.0/8, ::1/128"
+		}
+		return ""
+	})
+	if err != nil || len(cfg.TrustedProxies) != 2 || !cfg.TrustedProxies[0].Contains(netip.MustParseAddr("127.0.0.1")) {
+		t.Fatalf("trusted proxies: %+v %v", cfg.TrustedProxies, err)
+	}
+	if _, err := Load(func(k string) string {
+		if k == "SEKISHO_TRUSTED_PROXIES" {
+			return "0.0.0.0/0,invalid"
+		}
+		return ""
+	}); err == nil {
+		t.Fatal("invalid trusted proxy was accepted")
+	}
+}
+
+func TestDefaultsAndOverrides(t *testing.T) {
+	cfg, err := Load(func(string) string { return "" })
+	if err != nil || cfg.Addr != "127.0.0.1:8080" || cfg.DataDir != "./data" || cfg.LogLevel.String() != "INFO" {
+		t.Fatalf("unexpected defaults: %+v, %v", cfg, err)
+	}
+	env := map[string]string{"SEKISHO_ADDR": "[::1]:9000", "SEKISHO_DATA_DIR": "/tmp/synthetic-data", "SEKISHO_LOG_LEVEL": "debug"}
+	cfg, err = Load(func(k string) string { return env[k] })
+	if err != nil || cfg.Addr != "[::1]:9000" || cfg.LogLevel.String() != "DEBUG" || cfg.DataDir != env["SEKISHO_DATA_DIR"] {
+		t.Fatalf("overrides not applied: %+v, %v", cfg, err)
+	}
+}
+
+func TestRequestBodyLimit(t *testing.T) {
+	for _, tc := range []struct {
+		value string
+		want  int64
+	}{
+		{"", 128 << 20}, {"1", 1 << 20}, {"256", 256 << 20},
+	} {
+		t.Run(tc.value, func(t *testing.T) {
+			cfg, err := Load(func(k string) string {
+				if k == "SEKISHO_MAX_REQUEST_BODY_MB" {
+					return tc.value
+				}
+				return ""
+			})
+			if err != nil || cfg.MaxRequestBody != tc.want {
+				t.Fatalf("request limit: %d, want %d; %v", cfg.MaxRequestBody, tc.want, err)
+			}
+		})
+	}
+	for _, value := range []string{"0", "-1", "1.5", "invalid", "8796093022208", "9223372036854775808"} {
+		if _, err := Load(func(k string) string {
+			if k == "SEKISHO_MAX_REQUEST_BODY_MB" {
+				return value
+			}
+			return ""
+		}); err == nil {
+			t.Fatalf("invalid request limit accepted: %s", value)
+		}
+	}
+}
+
+func TestRejectsInvalidConfig(t *testing.T) {
+	for _, env := range []map[string]string{
+		{"SEKISHO_ADDR": "localhost"}, {"SEKISHO_ADDR": "127.0.0.1:0"},
+		{"SEKISHO_ADDR": "127.0.0.1:70000"}, {"SEKISHO_LOG_LEVEL": "quiet"},
+	} {
+		if _, err := Load(func(k string) string { return env[k] }); err == nil {
+			t.Fatalf("accepted invalid config: %v", env)
+		}
+	}
+}
+
+func TestPublicOrigin(t *testing.T) {
+	for _, value := range []string{"ftp://example.test", "https://user@example.test", "https://example.test/path", "https://example.test?x=1", "https://example.test/#x", "not-a-url", "https://example.test:99999"} {
+		if _, err := Load(func(k string) string {
+			if k == "SEKISHO_PUBLIC_URL" {
+				return value
+			}
+			return ""
+		}); err == nil {
+			t.Fatalf("invalid origin accepted: %s", value)
+		}
+	}
+	cfg, err := Load(func(k string) string {
+		if k == "SEKISHO_PUBLIC_URL" {
+			return "https://GATEWAY.example.test:443/"
+		}
+		return ""
+	})
+	if err != nil || cfg.PublicURL != "https://gateway.example.test" {
+		t.Fatalf("origin normalization: %+v %v", cfg, err)
+	}
+}
+
+func TestCredentialsKeyFileIsOptionalAndSeparated(t *testing.T) {
+	root := t.TempDir()
+	directory := filepath.Join(root, "data")
+	outside := filepath.Join(root, "secrets", "credentials.key")
+	cfg, err := Load(func(key string) string {
+		switch key {
+		case "SEKISHO_DATA_DIR":
+			return directory
+		case "SEKISHO_CREDENTIALS_KEY_FILE":
+			return outside
+		}
+		return ""
+	})
+	if err != nil || cfg.CredentialsKeyFile != outside {
+		t.Fatalf("external key: %+v %v", cfg, err)
+	}
+	if _, err := Load(func(key string) string {
+		switch key {
+		case "SEKISHO_DATA_DIR":
+			return directory
+		case "SEKISHO_CREDENTIALS_KEY_FILE":
+			return filepath.Join(directory, "credentials.key")
+		}
+		return ""
+	}); err == nil {
+		t.Fatal("explicit key inside data directory was accepted")
+	}
+	defaults, err := Load(func(string) string { return "" })
+	if err != nil || defaults.CredentialsKeyFile != "" {
+		t.Fatalf("legacy default changed: %+v %v", defaults, err)
+	}
+}

@@ -1,0 +1,117 @@
+#!/usr/bin/env bash
+set -euo pipefail
+image=${1:?Usage: scripts/container-smoke.sh IMAGE EXPECTED_VERSION}
+version=${2:?Expected version is required}
+name="sekisho-smoke-${RANDOM}-$$"
+volume="${name}-data"
+migration_dir=''
+script_dir=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)
+migration_compose() {
+  docker compose --project-directory "$migration_dir" --env-file "$migration_dir/.env" \
+    -f "$migration_dir/docker.compose.yaml" "$@"
+}
+migration_root() {
+  if ((EUID == 0)); then "$@"; else sudo "$@"; fi
+}
+cleanup() {
+  status=$?
+  if [[ $status -ne 0 ]]; then docker logs "$name" >&2 || true; fi
+  docker rm --force --volumes "$name" >/dev/null 2>&1 || true
+  docker volume rm "$volume" >/dev/null 2>&1 || true
+  if [[ -n $migration_dir ]]; then
+    if [[ $status -ne 0 ]]; then migration_compose logs --tail 100 >&2 || true; fi
+    migration_compose down --volumes >/dev/null 2>&1 || true
+    migration_root rm -rf -- "$migration_dir"
+  fi
+  exit "$status"
+}
+trap cleanup EXIT
+trap 'exit 130' INT TERM
+wait_healthy() {
+  for ((attempt=0; attempt<60; attempt++)); do
+    if [[ $(docker inspect --format '{{.State.Health.Status}}' "$name") == healthy ]]; then return; fi
+    if [[ $(docker inspect --format '{{.State.Running}}' "$name") != true ]]; then break; fi
+    sleep 1
+  done
+  echo 'Container did not become healthy' >&2
+  return 1
+}
+read_state() {
+  docker exec "$name" wget -q -T 2 -O - http://127.0.0.1:8080/api/auth/state
+}
+docker volume create "$volume" >/dev/null
+# All credentials/data are synthetic, and the container cannot contact providers or GitHub.
+docker run --detach --name "$name" --network none \
+  --read-only --tmpfs /tmp:rw,noexec,nosuid,size=64m,mode=1777 \
+  --cap-drop ALL --security-opt no-new-privileges:true \
+  --health-interval 1s --health-start-period 10s \
+  --mount "type=volume,source=$volume,target=/data" "$image" >/dev/null
+wait_healthy
+[[ $(docker exec "$name" sekisho --version) == "$version" ]]
+[[ $(docker exec "$name" id -u) != 0 ]]
+read_state | jq -e '.initialized == false' >/dev/null
+docker exec "$name" wget -q -T 5 -O - \
+  --header='Content-Type: application/json' --header='Origin: http://127.0.0.1:8080' \
+  --post-data='{"username":"container-admin","password":"synthetic-password","workspace_name":"Synthetic workspace"}' \
+  http://127.0.0.1:8080/api/auth/setup | jq -e '.initialized == true' >/dev/null
+[[ $(docker exec "$name" stat -c %a /data/credentials.key) == 600 ]]
+# Root owns /app: probe as root so ordinary Unix permissions cannot mask a writable rootfs.
+if docker exec --user 0 "$name" sh -c 'touch /app/readonly-test' >/dev/null 2>&1; then
+  echo 'Runtime filesystem unexpectedly writable' >&2
+  exit 1
+fi
+printf '%s\n' 'synthetic backup passphrase' | docker exec -i "$name" sekisho backup --password-stdin --output /data/smoke.sekisho-backup.tar.gz.age >/dev/null
+printf '%s\n' 'synthetic backup passphrase' | docker exec -i "$name" sekisho backup verify --password-stdin --input /data/smoke.sekisho-backup.tar.gz.age >/dev/null
+printf '%s\n' 'synthetic backup passphrase' | docker exec -i "$name" sekisho restore --password-stdin --input /data/smoke.sekisho-backup.tar.gz.age --data-dir /data/restored >/dev/null
+docker restart --time 20 "$name" >/dev/null
+wait_healthy
+read_state | jq -e '.initialized == true' >/dev/null
+docker exec "$name" test -f /data/restored/credentials.key
+printf 'Container smoke passed: %s (%s)\n' "$image" "$version"
+
+# This separate synthetic Compose project exercises real UID ownership, file binds and recovery.
+if [[ $(uname -s) != Linux ]]; then
+  printf 'Compose key migration smoke requires a Linux Docker host.\n'
+  exit 0
+fi
+migration_dir=$(mktemp -d)
+printf 'COMPOSE_PROJECT_NAME=%s-key-migration\nSEKISHO_IMAGE=%s\n' "$name" "$image" > "$migration_dir/.env"
+cat > "$migration_dir/docker.compose.yaml" <<'COMPOSE'
+services:
+  sekisho:
+    image: ${SEKISHO_IMAGE}
+    environment:
+      SEKISHO_DATA_DIR: /data
+    volumes:
+      - data:/data
+    network_mode: none
+    read_only: true
+    tmpfs:
+      - /tmp:rw,noexec,nosuid,size=64m,mode=1777
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    healthcheck:
+      interval: 1s
+      start_period: 10s
+volumes:
+  data:
+COMPOSE
+migration_compose up --detach --wait --wait-timeout 90 >/dev/null
+migration_compose exec -T sekisho wget -q -T 5 -O - \
+  --header='Content-Type: application/json' --header='Origin: http://127.0.0.1:8080' \
+  --post-data='{"username":"migration-owner","password":"synthetic-password","workspace_name":"Synthetic migration"}' \
+  http://127.0.0.1:8080/api/auth/setup | jq -e '.initialized == true' >/dev/null
+original_key=$(migration_compose exec -T sekisho sha256sum /data/credentials.key)
+migration_root bash "$script_dir/separate-key.sh" --dir "$migration_dir" --key-dir "$migration_dir/keys"
+migration_compose exec -T sekisho test ! -e /data/credentials.key
+separated_key=$(migration_compose exec -T sekisho sha256sum /run/sekisho-keys/credentials.key)
+[[ ${original_key%% *} == "${separated_key%% *}" ]]
+[[ $(migration_root stat -c %u "$migration_dir/keys") == 0 ]]
+[[ $(migration_root stat -c %a "$migration_dir/keys") == 700 ]]
+[[ $(migration_root stat -c %a "$migration_dir/keys/credentials.key") == 600 ]]
+migration_root bash "$script_dir/separate-key.sh" --dir "$migration_dir" --rollback
+restored_key=$(migration_compose exec -T sekisho sha256sum /data/credentials.key)
+[[ ${original_key%% *} == "${restored_key%% *}" ]]
+migration_compose exec -T sekisho wget -q -T 2 -O - http://127.0.0.1:8080/api/auth/state \
+  | jq -e '.initialized == true' >/dev/null
+printf 'Compose key migration and rollback smoke passed: %s\n' "$image"

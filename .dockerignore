@@ -1,0 +1,25 @@
+# Only send build inputs; local instances, backups and worktrees never enter the context.
+**
+!Dockerfile
+!go.mod
+!go.sum
+!cmd/
+!cmd/**
+!internal/
+!internal/**
+!web/
+!web/**
+!LICENSE
+!THIRD_PARTY_NOTICES.md
+!licenses/
+!licenses/**
+web/node_modules
+web/dist
+**/.env*
+**/*.db*
+**/credentials.key
+**/setup.key
+**/.setup-*
+**/*.sekisho-backup.tar.gz
+**/.sekisho-backup-*
+**/restore-ready

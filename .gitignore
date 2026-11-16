@@ -1,0 +1,30 @@
+/bin/
+/dist/
+/data/
+**/node_modules/
+/web/dist/
+*.tsbuildinfo
+.DS_Store
+.env
+.env.*
+!.env.example
+coverage/
+*.db
+*.db-shm
+*.db-wal
+# Ignore leftover bootstrap files from earlier development builds.
+setup.key
+.setup-*
+/.worktree/
+/docs/plans/
+/docs/specs/
+/.impeccable/review/
+
+# Instance-local credential and API-key encryption key.
+credentials.key
+
+# Private backup archives and interrupted staging directories.
+/backups/
+*.sekisho-backup.tar.gz
+.sekisho-backup-*/
+restore-ready/

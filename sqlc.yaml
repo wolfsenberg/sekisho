@@ -1,0 +1,30 @@
+version: "2"
+sql:
+  - engine: "sqlite"
+    schema: "internal/storage/migrations"
+    queries: "internal/storage/queries"
+    gen:
+      go:
+        package: "db"
+        out: "internal/storage/db"
+        sql_package: "database/sql"
+        emit_empty_slices: true
+        emit_pointers_for_null_types: true
+        omit_unused_structs: true
+        overrides:
+          - column: "account_affinity.rebound"
+            go_type: "bool"
+          - column: "account_affinity.derived"
+            go_type: "bool"
+          - column: "users.enabled"
+            go_type: "bool"
+          - column: "accounts.enabled"
+            go_type: "bool"
+          - column: "account_groups.enabled"
+            go_type: "bool"
+          - column: "api_keys.enabled"
+            go_type: "bool"
+          - column: "account_groups.restricted_models"
+            go_type: "bool"
+          - column: "account_groups.session_sticky"
+            go_type: "bool"

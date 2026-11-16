@@ -1,0 +1,111 @@
+package server
+
+import (
+	"context"
+	"encoding/json"
+	"io"
+	"net/http"
+	"net/http/httptest"
+	"strings"
+	"testing"
+
+	"github.com/wolfsenberg/sekisho/internal/accounts"
+	"github.com/wolfsenberg/sekisho/internal/allocations"
+	"github.com/wolfsenberg/sekisho/internal/gateway"
+	"github.com/wolfsenberg/sekisho/internal/upstream"
+)
+
+func TestUpstreamForbiddenDoesNotRequestReauthorization(t *testing.T) {
+	w := httptest.NewRecorder()
+	gatewayError(w, &upstream.UpstreamError{Status: 403})
+	if w.Code != 403 || !strings.Contains(w.Body.String(), "upstream_forbidden") || strings.Contains(w.Body.String(), "reauthorization") {
+		t.Fatal("permission denial misclassified as credential failure", w.Code, w.Body.String())
+	}
+}
+
+func TestModelLimitErrorsExposeOnlySafeScopeAndRetry(t *testing.T) {
+	for _, test := range []struct {
+		err  error
+		code string
+	}{
+		{&upstream.UpstreamError{Status: 429, RetryAfter: "120", LimitedModel: "synthetic-model"}, "model_rate_limited"},
+		{&gateway.CoolingError{RetryAfter: 120, Model: "synthetic-model"}, "model_cooling"},
+	} {
+		w := httptest.NewRecorder()
+		gatewayError(w, test.err)
+		if w.Code != 429 || w.Header().Get("Retry-After") != "120" || !strings.Contains(w.Body.String(), test.code) || strings.Contains(w.Body.String(), "synthetic-model") {
+			t.Fatal("model limit lost safe diagnostic or retry", w.Code, w.Header(), w.Body.String())
+		}
+	}
+}
+
+func TestCredentialRefreshFailureHasTemporaryStatusAndRetry(t *testing.T) {
+	w := httptest.NewRecorder()
+	gatewayError(w, &accounts.RefreshError{RetryAfter: 30})
+	if w.Code != http.StatusServiceUnavailable || w.Header().Get("Retry-After") != "30" || !strings.Contains(w.Body.String(), "account_refresh_failed") {
+		t.Fatalf("temporary refresh failure lost retry semantics: %d %s %s", w.Code, w.Header().Get("Retry-After"), w.Body.String())
+	}
+}
+
+func TestAccountQueueFailureIncludesSpecificReasonAndRetry(t *testing.T) {
+	for _, err := range []error{gateway.ErrAccountQueueFull, gateway.ErrAccountWaitTimeout} {
+		w := httptest.NewRecorder()
+		gatewayError(w, err)
+		if w.Code != http.StatusTooManyRequests || w.Header().Get("Retry-After") != "1" || !strings.Contains(w.Body.String(), err.Error()) {
+			t.Fatal("queue failure lost its safe diagnostic or retry", w.Code, w.Header(), w.Body.String())
+		}
+	}
+}
+
+func TestGatewayDiagnosticIDIgnoresCallerAndMatchesRecord(t *testing.T) {
+	f := newForwardFixture(t, func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Content-Type", "text/event-stream")
+		io.WriteString(w, "data: {\"type\":\"response.completed\",\"response\":{\"id\":\"synthetic\",\"output\":[]}}\n\n")
+	})
+	for _, model := range []string{"synthetic-model", "not-available"} {
+		req := httptest.NewRequest("POST", "/v1/responses", strings.NewReader(`{"model":"`+model+`","input":"synthetic"}`))
+		req.Header.Set("Content-Type", "application/json")
+		req.Header.Set("Authorization", "Bearer "+f.secret)
+		req.Header.Set("X-Request-ID", "untrusted-correlation")
+		w := httptest.NewRecorder()
+		f.server.Config.Handler.ServeHTTP(w, req)
+		id := w.Header().Get("X-Request-ID")
+		if id == "" || id == "untrusted-correlation" {
+			t.Fatal("invalid correlation header", id)
+		}
+		page, err := f.forwarding.UserRequests(context.Background(), f.userID, gateway.RequestFilter{RequestID: id})
+		if err != nil || len(page.Requests) != 1 || page.Requests[0].Model != model {
+			t.Fatal("response cannot be correlated", err)
+		}
+	}
+}
+
+func TestQuotaErrorHasBoundedRetryAndSafeReason(t *testing.T) {
+	w := httptest.NewRecorder()
+	gatewayError(w, &gateway.QuotaError{RetryAfter: 90})
+	if w.Code != 403 || !strings.Contains(w.Body.String(), "quota_exhausted") {
+		t.Fatal(w.Code, w.Body.String())
+	}
+}
+
+func TestAllocationRiskLimitExplainsTemporaryAdmissionPause(t *testing.T) {
+	w := httptest.NewRecorder()
+	gatewayError(w, allocations.ErrRisk)
+	if w.Code != 429 || !strings.Contains(w.Body.String(), "allocation_risk_limit") || w.Header().Get("Retry-After") != "" {
+		t.Fatal(w.Code, w.Body.String(), w.Header())
+	}
+}
+
+func TestWebSocketCorrelationPreservesResponsePayload(t *testing.T) {
+	original := []byte(`{"type":"response.created","response":{"id":"synthetic-response"}}`)
+	raw := correlateEvent(original, "req_synthetic")
+	var value struct {
+		RequestID string `json:"request_id"`
+		Response  struct {
+			ID string `json:"id"`
+		} `json:"response"`
+	}
+	if json.Unmarshal(raw, &value) != nil || value.RequestID != "req_synthetic" || value.Response.ID != "synthetic-response" {
+		t.Fatal("invalid correlated event", string(raw))
+	}
+}
