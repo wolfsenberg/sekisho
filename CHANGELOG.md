@@ -2,6 +2,17 @@
 
 All notable changes are documented here in [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) format.
 
+## [0.22.0] - 2026-11-16
+
+### Changed
+
+- Refine the dashboard with filled controls, softer corners, a translucent toolbar and IBM Plex Mono for data and labels
+- Smooth menus, dialogs and side sheets with trigger-aware motion and accessible focus rings
+
+### Fixed
+
+- Make timing-sensitive app, auth and access tests deterministic
+
 ## [0.21.0] - 2026-11-16
 
 ### Added
@@ -382,6 +393,7 @@ All notable changes are documented here in [Keep a Changelog](https://keepachang
 - Distinguish remaining quota with status colors
 - Restore version-gated model discovery
 
+[0.22.0]: https://github.com/wolfsenberg/sekisho/compare/v0.21.0...v0.22.0
 [0.21.0]: https://github.com/wolfsenberg/sekisho/releases/tag/v0.21.0
 [0.20.0]: https://github.com/wolfsenberg/sekisho/compare/v0.19.2...v0.20.0
 [0.19.2]: https://github.com/wolfsenberg/sekisho/compare/v0.19.1...v0.19.2
