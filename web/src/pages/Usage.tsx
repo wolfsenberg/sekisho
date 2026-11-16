@@ -300,7 +300,7 @@ function UsageReport({ scope, userID }: { scope: UsageScope; userID: number }) {
                     {t(item.label)}
                   </dt>
                   <dd
-                    className="mt-2 break-words text-2xl font-semibold tracking-tight tabular-nums"
+                    className="mt-2 break-words font-mono text-2xl font-medium tabular-nums"
                     title={
                       item.label === 'requestTokens'
                         ? tokens(totals.input_tokens, totals.input_reported) +

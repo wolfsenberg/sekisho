@@ -158,7 +158,7 @@ export function Auth({ mode }: { mode: 'setup' | 'login' }) {
     hint?: 'usernameHint' | 'passwordHint',
   ) => (
     <div className="space-y-2">
-      <label htmlFor={'auth-' + name} className="text-sm font-medium">
+      <label htmlFor={'auth-' + name} className="field-label">
         {t(label)}
       </label>
       <Input
@@ -244,7 +244,7 @@ export function Auth({ mode }: { mode: 'setup' | 'login' }) {
         )}
       </h1>
       {demo && (
-        <div className="mt-6 space-y-3 rounded-lg border border-dashed border-hairline bg-background/60 p-4">
+        <div className="mt-6 space-y-3 border-b border-hairline pb-6">
           <p className="text-sm font-medium">{t('demoTitle')}</p>
           <p className="text-sm leading-6 text-muted-foreground">
             {t('demoDescription')}
@@ -295,10 +295,7 @@ export function Auth({ mode }: { mode: 'setup' | 'login' }) {
         </div>
         {creating && (
           <div hidden={setupStep !== 'workspace'} className="space-y-2">
-            <label
-              htmlFor="auth-workspace-name"
-              className="text-sm font-medium"
-            >
+            <label htmlFor="auth-workspace-name" className="field-label">
               {t('workspaceName')}
             </label>
             <Input
@@ -324,7 +321,7 @@ export function Auth({ mode }: { mode: 'setup' | 'login' }) {
         )}
         {!creating && secondFactor && (
           <div className="space-y-2">
-            <label htmlFor="auth-code" className="text-sm font-medium">
+            <label htmlFor="auth-code" className="field-label">
               {t('factorCode')}
             </label>
             <Input

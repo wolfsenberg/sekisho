@@ -398,7 +398,9 @@ function RequestTable({
                       )}
                   </td>
                   <td className="whitespace-nowrap px-4 py-4 tabular-nums">
-                    {numbers.format(item.duration_ms)} ms
+                    <span className="font-mono">
+                      {numbers.format(item.duration_ms)} ms
+                    </span>
                     <p
                       className="mt-1 text-xs text-muted-foreground"
                       title={t('requestFirstTokenHint')}
@@ -412,7 +414,9 @@ function RequestTable({
                     </p>
                   </td>
                   <td className="whitespace-nowrap px-4 py-4 text-xs tabular-nums">
-                    {count(item.input_tokens)} / {count(item.output_tokens)}
+                    <span className="font-mono">
+                      {count(item.input_tokens)} / {count(item.output_tokens)}
+                    </span>
                     <p className="mt-1 text-muted-foreground">
                       {item.cached_tokens !== null && (
                         <>
@@ -432,7 +436,7 @@ function RequestTable({
                     </p>
                   </td>
                   <td
-                    className="whitespace-nowrap px-4 py-4 text-right tabular-nums"
+                    className="whitespace-nowrap px-4 py-4 text-right font-mono tabular-nums"
                     title={t('requestEstimatedCostHint')}
                   >
                     {formatRequestCost(

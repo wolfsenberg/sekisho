@@ -321,7 +321,7 @@ function SecurityDialog({
                   className="mx-auto max-w-full rounded-md"
                 />
                 <div className="space-y-2">
-                  <label htmlFor="totp-secret" className="text-sm font-medium">
+                  <label htmlFor="totp-secret" className="field-label">
                     {t('totpSecret')}
                   </label>
                   <Input
@@ -333,7 +333,7 @@ function SecurityDialog({
                   />
                 </div>
                 <div className="space-y-2">
-                  <label htmlFor="totp-code" className="text-sm font-medium">
+                  <label htmlFor="totp-code" className="field-label">
                     {t('totpCode')}
                   </label>
                   <Input
@@ -356,10 +356,7 @@ function SecurityDialog({
                 )}
                 {action.type === 'add' && (
                   <div className="space-y-2">
-                    <label
-                      htmlFor="passkey-name"
-                      className="text-sm font-medium"
-                    >
+                    <label htmlFor="passkey-name" className="field-label">
                       {t('passkeyName')}
                     </label>
                     <Input
@@ -373,10 +370,7 @@ function SecurityDialog({
                   </div>
                 )}
                 <div className="space-y-2">
-                  <label
-                    htmlFor="security-password"
-                    className="text-sm font-medium"
-                  >
+                  <label htmlFor="security-password" className="field-label">
                     {t('currentPassword')}
                   </label>
                   <Input
@@ -391,10 +385,7 @@ function SecurityDialog({
                 </div>
                 {totpEnabled && (
                   <div className="space-y-2">
-                    <label
-                      htmlFor="security-factor"
-                      className="text-sm font-medium"
-                    >
+                    <label htmlFor="security-factor" className="field-label">
                       {t('factorCode')}
                     </label>
                     <Input

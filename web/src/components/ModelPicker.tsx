@@ -32,7 +32,7 @@ export function ModelPicker({
   const activeIndex = active >= 0 && active < choices.length ? active : -1
   return (
     <div className="space-y-2">
-      <label htmlFor={id} className="text-sm font-medium">
+      <label htmlFor={id} className="field-label">
         {t('clientModel')}
       </label>
       <div

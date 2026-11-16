@@ -71,7 +71,7 @@ export function ProxyEditor({
         </DialogHeader>
         <form onSubmit={submit} className="space-y-5" noValidate>
           <div className="space-y-2">
-            <label htmlFor="proxy-name" className="text-sm font-medium">
+            <label htmlFor="proxy-name" className="field-label">
               {t('proxyName')}
             </label>
             <Input
@@ -83,7 +83,7 @@ export function ProxyEditor({
             />
           </div>
           <div className="space-y-2">
-            <label htmlFor="proxy-url" className="text-sm font-medium">
+            <label htmlFor="proxy-url" className="field-label">
               {t('proxyURL')}
             </label>
             <Input

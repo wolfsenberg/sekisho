@@ -27,14 +27,21 @@ The Radix dropdown menu is pinned to 2.1.16 alongside Dialog 1.1.15 so they shar
 - chi: https://github.com/go-chi/chi, version `v5.3.2`, MIT; full text in `licenses/chi.txt`. Used for HTTP routing over `net/http`.
 - sqlc: https://github.com/sqlc-dev/sqlc, version `v1.31.1`, MIT. Used during development to generate Go from SQL; the generator itself is not shipped in the runtime binary.
 
-## Geist and Geist Mono
+## Geist
 
 - Project: https://github.com/vercel/geist-font
 - Copyright: (c) 2024 The Geist Project Authors
 - License: SIL Open Font License 1.1; full text in `brand/source/OFL.txt`.
-- Web interface: bundled from `@fontsource-variable/geist` 5.2.8 and `@fontsource-variable/geist-mono` 5.2.7 and served by the application itself; no external font service is contacted.
+- Web interface: bundled from `@fontsource-variable/geist` 5.2.8 and served by the application itself; no external font service is contacted.
 - Brand source: the unmodified variable font from `geist` 1.5.1 (`dist/fonts/geist-sans/Geist-Variable.ttf`) is included as `brand/source/Geist.ttf`. Brand graphics use outlined glyphs generated at the documented weights.
 - Brand export tooling is isolated in `tools/brand`; it does not add a font or graphics renderer to the application runtime.
+
+## IBM Plex Mono
+
+- Project: https://github.com/IBM/plex
+- Copyright: Copyright 2017 IBM Corp.
+- License: SIL Open Font License 1.1; full text in `licenses/ibm-plex-mono.txt`.
+- Web interface: the regular, medium and semibold weights are bundled from `@fontsource/ibm-plex-mono` 5.3.0 and served by the application itself; no external font service is contacted.
 
 ## CLIProxyAPI
 

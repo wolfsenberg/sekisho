@@ -214,7 +214,7 @@ function AlertForm({
           />
           {t('alertsModelEnable')}
         </label>
-        <label htmlFor="quota-alert-threshold" className="text-sm font-medium">
+        <label htmlFor="quota-alert-threshold" className="field-label">
           {t('alertsQuotaThreshold')}
         </label>
         <Input
@@ -234,7 +234,7 @@ function AlertForm({
         >
           {t('alertsQuotaHint')}
         </p>
-        <label htmlFor="webhook-url" className="text-sm font-medium">
+        <label htmlFor="webhook-url" className="field-label">
           {t('alertsURL')}
         </label>
         <Input

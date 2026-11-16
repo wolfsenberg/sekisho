@@ -87,7 +87,7 @@ export function CreateMember({
         <form noValidate onSubmit={submit} className="space-y-5 px-4 pb-6">
           {fields.map(({ name, label, hint, autoComplete }) => (
             <div key={name} className="space-y-2">
-              <label htmlFor={'member-' + name} className="text-sm font-medium">
+              <label htmlFor={'member-' + name} className="field-label">
                 {t(label)}
               </label>
               <Input

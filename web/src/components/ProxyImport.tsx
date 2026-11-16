@@ -70,7 +70,7 @@ export function ProxyImport({
         </DialogHeader>
         <form onSubmit={submit} className="space-y-5" noValidate>
           <div className="space-y-2">
-            <label htmlFor="proxy-list" className="text-sm font-medium">
+            <label htmlFor="proxy-list" className="field-label">
               {t('proxyList')}
             </label>
             <Textarea

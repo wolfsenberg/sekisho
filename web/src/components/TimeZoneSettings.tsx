@@ -75,7 +75,7 @@ export function TimeZoneSettings({ userID }: { userID: number }) {
       </p>
       <form className="mt-6 max-w-md space-y-4" onSubmit={submit} noValidate>
         <div className="space-y-2">
-          <label htmlFor="instance-timezone" className="text-sm font-medium">
+          <label htmlFor="instance-timezone" className="field-label">
             {t('timeZoneLabel')}
           </label>
           <Input

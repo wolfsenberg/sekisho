@@ -35,7 +35,7 @@ export function KeyExpiry({
       : ['keep', 'never', '7', '30', '90']
   return (
     <div className="space-y-2">
-      <p className="text-sm font-medium">{t('keyExpiry')}</p>
+      <p className="field-label">{t('keyExpiry')}</p>
       <DropdownMenu modal={false}>
         <DropdownMenuTrigger asChild>
           <Button

@@ -112,7 +112,7 @@ function KeyManager({ userID }: { userID: number }) {
           />
           <span
             aria-hidden="true"
-            className="relative h-5 w-9 shrink-0 rounded-full bg-muted-foreground/30 transition-colors after:absolute after:left-0.5 after:top-0.5 after:size-4 after:rounded-full after:bg-background after:transition-transform peer-checked:bg-primary peer-checked:after:translate-x-4 peer-checked:after:bg-primary-foreground peer-focus-visible:ring-2 peer-focus-visible:ring-ring peer-focus-visible:ring-offset-2 peer-focus-visible:ring-offset-background motion-reduce:transition-none motion-reduce:after:transition-none"
+            className="relative h-5 w-9 shrink-0 rounded-full bg-muted-foreground/30 transition-colors duration-200 after:absolute after:left-0.5 after:top-0.5 after:size-4 after:rounded-full after:bg-white after:shadow-[0_1px_3px_rgb(0_0_0/0.35)] after:transition-transform after:duration-200 after:ease-(--ease-drawer) peer-checked:bg-primary peer-checked:after:translate-x-4 peer-focus-visible:ring-2 peer-focus-visible:ring-ring peer-focus-visible:ring-offset-2 peer-focus-visible:ring-offset-background motion-reduce:transition-none motion-reduce:after:transition-none"
           />
           <span>{t('showRevokedKeys')}</span>
         </label>

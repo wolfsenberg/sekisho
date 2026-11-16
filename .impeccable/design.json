@@ -1,55 +1,282 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-11-16T00:00:00Z",
+  "generatedAt": "2026-11-16T12:00:00Z",
   "title": "Design System: Sekisho",
   "extensions": {
     "colorMeta": {
-      "primary": { "role": "primary", "displayName": "Shu Seal Vermilion", "canonical": "#C2361C", "tonalRamp": ["#3A0F07", "#5E1A0D", "#8A2614", "#C2361C", "#D9442A", "#E5573B", "#F0A08F", "#FBE3DC"] },
-      "dark-seal": { "role": "primary", "displayName": "Shu Seal Vermilion (dark ground)", "canonical": "#E5573B" },
-      "brand-seal": { "role": "primary", "displayName": "Brand Seal Vermilion", "canonical": "#D9442A" },
-      "background": { "role": "neutral", "displayName": "Washi Paper", "canonical": "#F6F4EF" },
-      "dark-background": { "role": "neutral", "displayName": "Sumi Night", "canonical": "#121110", "tonalRamp": ["#0D0C0B", "#121110", "#181715", "#1C1B19", "#24221F", "#2B2925", "#34322D", "#67625A"] },
-      "dark-sidebar": { "role": "neutral", "displayName": "Sidebar Sumi", "canonical": "#0D0C0B" },
-      "surface": { "role": "neutral", "displayName": "Raised Paper", "canonical": "#FCFBF8", "tonalRamp": ["#8C867B", "#B3AC9E", "#CFC9BD", "#D6D0C4", "#E2DDD3", "#EBE6DC", "#F6F4EF", "#FCFBF8"] },
-      "foreground": { "role": "neutral", "displayName": "Sumi Ink", "canonical": "#1A1916" },
-      "dark-foreground": { "role": "neutral", "displayName": "Kinari Ink", "canonical": "#ECE8DF" },
-      "muted-foreground": { "role": "neutral", "displayName": "Faded Ink", "canonical": "#5F5A50" },
-      "border": { "role": "neutral", "displayName": "Structural Hairline", "canonical": "#E2DDD3" },
-      "hairline": { "role": "neutral", "displayName": "Ruled Hairline", "canonical": "#D6D0C4" },
-      "input": { "role": "neutral", "displayName": "Control Hairline", "canonical": "#8C867B" },
-      "success": { "role": "semantic", "displayName": "Moss", "canonical": "#2A7343" },
-      "warning": { "role": "semantic", "displayName": "Yamabuki", "canonical": "#8A5A0B" },
-      "error": { "role": "semantic", "displayName": "Carmine-Pink", "canonical": "#B4233A" },
-      "info": { "role": "semantic", "displayName": "Ai-Blue", "canonical": "#2A5DA8" }
+      "primary": {
+        "role": "primary",
+        "displayName": "Shu Seal Vermilion",
+        "canonical": "#C2361C",
+        "tonalRamp": [
+          "#3A0F07",
+          "#5E1A0D",
+          "#8A2614",
+          "#C2361C",
+          "#D9442A",
+          "#E5573B",
+          "#F0A08F",
+          "#FBE3DC"
+        ]
+      },
+      "dark-seal": {
+        "role": "primary",
+        "displayName": "Shu Seal Vermilion (dark ground)",
+        "canonical": "#E5573B"
+      },
+      "brand-seal": {
+        "role": "primary",
+        "displayName": "Brand Seal Vermilion",
+        "canonical": "#D9442A"
+      },
+      "background": {
+        "role": "neutral",
+        "displayName": "Washi Paper",
+        "canonical": "#F6F4EF"
+      },
+      "dark-background": {
+        "role": "neutral",
+        "displayName": "Sumi Night",
+        "canonical": "#121110",
+        "tonalRamp": [
+          "#0D0C0B",
+          "#121110",
+          "#181715",
+          "#1C1B19",
+          "#24221F",
+          "#2B2925",
+          "#34322D",
+          "#67625A"
+        ]
+      },
+      "dark-sidebar": {
+        "role": "neutral",
+        "displayName": "Sidebar Sumi",
+        "canonical": "#0D0C0B"
+      },
+      "surface": {
+        "role": "neutral",
+        "displayName": "Raised Paper",
+        "canonical": "#FCFBF8",
+        "tonalRamp": [
+          "#8C867B",
+          "#B3AC9E",
+          "#CFC9BD",
+          "#D6D0C4",
+          "#E2DDD3",
+          "#EBE6DC",
+          "#F6F4EF",
+          "#FCFBF8"
+        ]
+      },
+      "foreground": {
+        "role": "neutral",
+        "displayName": "Sumi Ink",
+        "canonical": "#1A1916"
+      },
+      "dark-foreground": {
+        "role": "neutral",
+        "displayName": "Kinari Ink",
+        "canonical": "#ECE8DF"
+      },
+      "muted-foreground": {
+        "role": "neutral",
+        "displayName": "Faded Ink",
+        "canonical": "#5F5A50"
+      },
+      "border": {
+        "role": "neutral",
+        "displayName": "Structural Hairline",
+        "canonical": "#E2DDD3"
+      },
+      "hairline": {
+        "role": "neutral",
+        "displayName": "Ruled Hairline",
+        "canonical": "#D6D0C4"
+      },
+      "input": {
+        "role": "neutral",
+        "displayName": "Control Hairline",
+        "canonical": "#8C867B"
+      },
+      "success": {
+        "role": "semantic",
+        "displayName": "Moss",
+        "canonical": "#2A7343"
+      },
+      "warning": {
+        "role": "semantic",
+        "displayName": "Yamabuki",
+        "canonical": "#8A5A0B"
+      },
+      "error": {
+        "role": "semantic",
+        "displayName": "Carmine-Pink",
+        "canonical": "#B4233A"
+      },
+      "info": {
+        "role": "semantic",
+        "displayName": "Ai-Blue",
+        "canonical": "#2A5DA8"
+      },
+      "control": {
+        "role": "neutral",
+        "displayName": "Control Tone",
+        "canonical": "#EBE7DF"
+      },
+      "dark-control": {
+        "role": "neutral",
+        "displayName": "Control Tone (dark)",
+        "canonical": "#22201D"
+      }
     },
     "typographyMeta": {
-      "title": { "displayName": "Page title", "purpose": "Page titles, balanced wrap." },
-      "auth-title": { "displayName": "Pass title", "purpose": "Setup and sign-in headings on the tegata pass." },
-      "body": { "displayName": "Body", "purpose": "Descriptions and controls; ss01 and cv11 enabled." },
-      "label": { "displayName": "Label", "purpose": "Status chips, group labels, secondary metadata." },
-      "wordmark": { "displayName": "In-app wordmark", "purpose": "Live Geist wordmark beside the 28px seal; exported brand wordmark is outlined Geist 620 at -0.03em." },
-      "mono": { "displayName": "Mono", "purpose": "Keys, request IDs, device codes, patterns only. Self-hosted via @fontsource-variable/geist-mono." }
+      "title": {
+        "displayName": "Page title",
+        "purpose": "Page titles, 26px, balanced wrap."
+      },
+      "auth-title": {
+        "displayName": "Pass title",
+        "purpose": "Setup and sign-in headings on the tegata pass."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Descriptions and controls; ss01 and cv11 enabled."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Secondary metadata in Geist."
+      },
+      "wordmark": {
+        "displayName": "In-app wordmark",
+        "purpose": "Live Geist wordmark beside the 28px seal; exported brand wordmark is outlined Geist 620 at -0.03em."
+      },
+      "mono": {
+        "displayName": "Mono",
+        "purpose": "Keys, request IDs, device codes, patterns, timestamps and metric figures that opt in. Self-hosted via @fontsource/ibm-plex-mono."
+      },
+      "mono-label": {
+        "displayName": "Mono label",
+        "purpose": "Column heads (th), definition labels (dt) and field labels (.field-label); muted ink, sentence case."
+      },
+      "mono-chip": {
+        "displayName": "Mono chip",
+        "purpose": "Status chips and sidebar group labels (55% ink, +0.01em)."
+      }
     },
     "shadows": [
-      { "name": "ink-press", "value": "0 1px 0 0 rgb(255 255 255 / 0.12) inset, 0 1px 2px 0 rgb(0 0 0 / 0.25)", "purpose": "Primary button at rest; removed when disabled." },
-      { "name": "menu", "value": "0 12px 32px -8px rgb(0 0 0 / 0.45), 0 2px 6px -2px rgb(0 0 0 / 0.3)", "purpose": "Dropdown and submenu popovers." },
-      { "name": "dialog", "value": "0 24px 64px -16px rgb(0 0 0 / 0.6), 0 4px 12px -4px rgb(0 0 0 / 0.35)", "purpose": "Modal dialogs over a 60% black scrim." },
-      { "name": "sheet", "value": "0 0 48px -12px rgb(0 0 0 / 0.6)", "purpose": "Side sheets and the mobile navigation sheet." },
-      { "name": "tegata-light", "value": "0 24px 60px -28px rgb(60 40 20 / 0.28), 0 1px 3px 0 rgb(60 40 20 / 0.08)", "purpose": "The sign-in pass on washi paper." },
-      { "name": "tegata-dark", "value": "0 30px 80px -30px rgb(0 0 0 / 0.55), 0 2px 8px -2px rgb(0 0 0 / 0.25)", "purpose": "The sign-in pass on sumi night." }
+      {
+        "name": "ink-press",
+        "value": "0 1px 0 0 rgb(255 255 255 / 0.14) inset, 0 1px 2px 0 rgb(0 0 0 / 0.2)",
+        "purpose": "Primary button at rest; removed when disabled."
+      },
+      {
+        "name": "float-light",
+        "value": "0 0 0 1px rgb(26 25 22 / 0.06), 0 12px 32px -8px rgb(26 25 22 / 0.18), 0 2px 6px -2px rgb(26 25 22 / 0.08)",
+        "purpose": "--float-shadow on washi: menus, submenus, dialogs, sheets. The 1px ring replaces a drawn border."
+      },
+      {
+        "name": "float-dark",
+        "value": "0 0 0 1px rgb(255 255 255 / 0.06), 0 16px 40px -12px rgb(0 0 0 / 0.6), 0 2px 8px -2px rgb(0 0 0 / 0.4)",
+        "purpose": "--float-shadow on sumi night."
+      },
+      {
+        "name": "tegata-light",
+        "value": "0 24px 60px -28px rgb(60 40 20 / 0.28), 0 1px 3px 0 rgb(60 40 20 / 0.08)",
+        "purpose": "The sign-in pass on washi paper."
+      },
+      {
+        "name": "tegata-dark",
+        "value": "0 30px 80px -30px rgb(0 0 0 / 0.55), 0 2px 8px -2px rgb(0 0 0 / 0.25)",
+        "purpose": "The sign-in pass on sumi night."
+      },
+      {
+        "name": "scrim",
+        "value": "rgb(0 0 0 / 0.55); backdrop-filter: blur(2px)",
+        "purpose": "Dialog and sheet overlays."
+      },
+      {
+        "name": "toolbar",
+        "value": "background: color-mix(in oklab, var(--background) 80%, transparent); backdrop-filter: blur(24px) saturate(1.5)",
+        "purpose": "The sticky translucent header."
+      }
     ],
     "motion": [
-      { "name": "ease-out", "value": "cubic-bezier(0.23, 1, 0.32, 1)", "purpose": "The system curve for stamps, presses and overlays." },
-      { "name": "seal-stamp", "value": "220ms ease-out; scale(1.9) rotate(-14deg) to scale(1) rotate(-6deg), fade in", "purpose": "Active-route seal marker in the sidebar." },
-      { "name": "seal-stamp-large", "value": "420ms ease-out, 120ms delay; translateY(-6px) scale(1.18) rotate(-12deg) blur(2px) to scale(0.98) rotate(-5deg) at 70% to scale(1) rotate(-6deg)", "purpose": "The 48px seal stamping onto the tegata pass on sign-in and setup." },
-      { "name": "press", "value": "scale(0.97), 150ms ease-out", "purpose": "Button active feedback." },
-      { "name": "overlay", "value": "150ms menus and tooltips, 200ms dialogs, sheets 300ms open / 200ms close; fade plus zoom from 95%", "purpose": "Overlay enter and exit." },
-      { "name": "sidebar", "value": "200ms linear", "purpose": "Sidebar width and off-canvas transitions." },
-      { "name": "reduced-motion", "value": "all animation and transition durations 0.01ms", "purpose": "prefers-reduced-motion: reduce." }
+      {
+        "name": "ease-out",
+        "value": "cubic-bezier(0.23, 1, 0.32, 1)",
+        "purpose": "--ease-out: stamps, presses, menus, tooltips, dialogs."
+      },
+      {
+        "name": "ease-drawer",
+        "value": "cubic-bezier(0.32, 0.72, 0, 1)",
+        "purpose": "--ease-drawer (iOS drawer): sheets, sidebar collapse, toggle thumbs."
+      },
+      {
+        "name": "seal-stamp",
+        "value": "220ms ease-out; scale(1.9) rotate(-14deg) to scale(1) rotate(-6deg), fade in",
+        "purpose": "Active-route seal marker in the sidebar."
+      },
+      {
+        "name": "seal-stamp-large",
+        "value": "420ms ease-out, 120ms delay; translateY(-6px) scale(1.18) rotate(-12deg) blur(2px) to scale(0.98) rotate(-5deg) at 70% to scale(1) rotate(-6deg)",
+        "purpose": "The 48px seal stamping onto the tegata pass."
+      },
+      {
+        "name": "press",
+        "value": "scale(0.97), 150ms ease-out",
+        "purpose": "Button active feedback."
+      },
+      {
+        "name": "menu",
+        "value": "open 150ms fade + scale from 0.96; close 100ms fade + scale to 0.97; origin at the trigger",
+        "purpose": "Dropdown menus and submenus."
+      },
+      {
+        "name": "tooltip",
+        "value": "open 125ms from 0.97; close 100ms",
+        "purpose": "Tooltips."
+      },
+      {
+        "name": "dialog",
+        "value": "open 200ms fade + scale from 0.96; close 150ms",
+        "purpose": "Modal dialogs and their scrim."
+      },
+      {
+        "name": "sheet",
+        "value": "300ms in / 200ms out, ease-drawer, slide from edge",
+        "purpose": "Side sheets and mobile navigation."
+      },
+      {
+        "name": "sidebar",
+        "value": "250ms ease-drawer",
+        "purpose": "Sidebar width, inset and group-label fade."
+      },
+      {
+        "name": "toggle",
+        "value": "200ms ease-drawer",
+        "purpose": "Switch thumb travel."
+      },
+      {
+        "name": "row-hover",
+        "value": "120ms ease, 2.5% ink tint, fine pointer only",
+        "purpose": "Table row hover."
+      },
+      {
+        "name": "reduced-motion",
+        "value": "all animation and transition durations 0.01ms",
+        "purpose": "prefers-reduced-motion: reduce."
+      }
     ],
     "breakpoints": [
-      { "name": "sm", "value": "640px" },
-      { "name": "md", "value": "768px" }
+      {
+        "name": "sm",
+        "value": "640px"
+      },
+      {
+        "name": "md",
+        "value": "768px"
+      }
     ]
   },
   "components": [
@@ -57,25 +284,17 @@
       "name": "Primary button",
       "kind": "button",
       "refersTo": "button-primary",
-      "description": "The approval act: vermilion seal ink, press feedback, neutral when disabled.",
+      "description": "The approval act: vermilion seal ink, press feedback, dimmed vermilion when disabled.",
       "html": "<button class=\"ds-btn-primary\">Create key</button> <button class=\"ds-btn-primary\" disabled>Create key</button>",
-      "css": ".ds-btn-primary{background:var(--primary);color:var(--primary-foreground);border:0;border-radius:4px;height:36px;padding:0 16px;font:500 14px/20px 'Geist Variable',sans-serif;box-shadow:0 1px 0 0 rgb(255 255 255/.12) inset,0 1px 2px 0 rgb(0 0 0/.25);transition:transform 150ms cubic-bezier(.23,1,.32,1),background-color 150ms cubic-bezier(.23,1,.32,1)}.ds-btn-primary:hover{background:color-mix(in oklab,var(--primary) 88%,transparent)}.ds-btn-primary:active{transform:scale(.97)}.ds-btn-primary:focus-visible{outline:none;box-shadow:0 0 0 2px var(--background),0 0 0 4px var(--ring)}.ds-btn-primary:disabled{background:var(--muted);color:var(--muted-foreground);box-shadow:none;cursor:not-allowed}"
-    },
-    {
-      "name": "Outline button",
-      "kind": "button",
-      "refersTo": "button-outline",
-      "description": "Secondary actions on raised paper with a hairline edge.",
-      "html": "<button class=\"ds-btn-outline\">Setup guide</button>",
-      "css": ".ds-btn-outline{background:var(--card);color:var(--foreground);border:1px solid var(--hairline);border-radius:4px;height:36px;padding:0 16px;font:500 14px/20px 'Geist Variable',sans-serif;transition:transform 150ms cubic-bezier(.23,1,.32,1),border-color 150ms,background-color 150ms}.ds-btn-outline:hover{border-color:var(--input);background:var(--accent)}.ds-btn-outline:active{transform:scale(.97)}.ds-btn-outline:focus-visible{outline:none;box-shadow:0 0 0 2px var(--background),0 0 0 4px var(--ring)}"
+      "css": ".ds-btn-primary{background:var(--primary);color:var(--primary-foreground);border:0;border-radius:8px;height:36px;padding:0 16px;font:500 14px/20px 'Geist Variable',sans-serif;box-shadow:0 1px 0 0 rgb(255 255 255/.14) inset,0 1px 2px 0 rgb(0 0 0/.2);transition:transform 150ms cubic-bezier(.23,1,.32,1),background-color 150ms cubic-bezier(.23,1,.32,1)}.ds-btn-primary:hover{background:color-mix(in oklab,var(--primary) 90%,transparent)}.ds-btn-primary:active{transform:scale(.97)}.ds-btn-primary:focus-visible{outline:none;box-shadow:0 0 0 2px var(--background),0 0 0 4px var(--ring)}.ds-btn-primary:disabled{background:color-mix(in oklab,var(--primary) 35%,transparent);color:color-mix(in oklab,var(--primary-foreground) 60%,transparent);box-shadow:none;cursor:not-allowed}"
     },
     {
       "name": "Input",
       "kind": "input",
       "refersTo": "input",
-      "description": "Boxed field with a control hairline; focus inks the edge with the seal.",
-      "html": "<input class=\"ds-input\" placeholder=\"Key name\" aria-label=\"Key name\">",
-      "css": ".ds-input{background:var(--card);color:var(--foreground);border:1px solid var(--input);border-radius:4px;height:36px;padding:4px 12px;font:400 14px/20px 'Geist Variable',sans-serif;outline:none;transition:border-color 150ms,box-shadow 150ms}.ds-input::placeholder{color:var(--muted-foreground)}.ds-input:focus-visible{border-color:var(--ring);box-shadow:0 0 0 3px color-mix(in oklab,var(--ring) 25%,transparent)}"
+      "description": "Filled field with a mono field label; focus inks the edge with the seal and a soft halo.",
+      "html": "<label class=\"ds-field-label\" for=\"ds-k\">Key name</label><input id=\"ds-k\" class=\"ds-input\" placeholder=\"Production gateway\">",
+      "css": ".ds-field-label{display:block;margin-bottom:6px;font:400 12px/20px 'IBM Plex Mono',monospace;color:var(--muted-foreground)}.ds-input{background:var(--control);color:var(--foreground);border:1px solid transparent;border-radius:8px;height:36px;padding:4px 12px;font:400 14px/20px 'Geist Variable',sans-serif;outline:none;transition:border-color 150ms,box-shadow 150ms,background-color 150ms}.ds-input::placeholder{color:var(--muted-foreground)}.ds-input:hover{background:var(--control-hover)}.ds-input:focus-visible{background:var(--control);border-color:var(--ring);box-shadow:0 0 0 3px color-mix(in oklab,var(--ring) 25%,transparent)}"
     },
     {
       "name": "Tegata ruled field",
@@ -89,16 +308,16 @@
       "kind": "nav",
       "refersTo": "nav-item-active",
       "description": "The active route takes the accent surface and a 7px vermilion seal that stamps in.",
-      "html": "<nav class=\"ds-nav\"><a href=\"#\">Overview</a><a href=\"#\" aria-current=\"page\">API keys</a><a href=\"#\">Requests</a></nav>",
-      "css": ".ds-nav{display:grid;gap:2px;width:240px;background:var(--sidebar);padding:8px;font:400 14px/20px 'Geist Variable',sans-serif}.ds-nav a{position:relative;display:flex;align-items:center;height:36px;padding:0 28px 0 8px;border-radius:4px;color:color-mix(in oklab,var(--foreground) 72%,transparent);text-decoration:none;transition:background-color 150ms,color 150ms}.ds-nav a:hover{background:var(--sidebar-accent);color:var(--foreground)}.ds-nav a:focus-visible{outline:2px solid var(--ring);outline-offset:-2px}.ds-nav a[aria-current=page]{background:var(--sidebar-accent);color:var(--foreground);font-weight:500}.ds-nav a[aria-current=page]::after{content:'';position:absolute;inset-inline-end:12px;top:50%;margin-top:-3.5px;width:7px;height:7px;border-radius:1.5px;background:var(--seal);animation:ds-stamp 220ms cubic-bezier(.23,1,.32,1) both}@keyframes ds-stamp{from{opacity:0;transform:scale(1.9) rotate(-14deg)}to{opacity:1;transform:scale(1) rotate(-6deg)}}@media(prefers-reduced-motion:reduce){.ds-nav a[aria-current=page]::after{animation:none;transform:rotate(-6deg)}}"
+      "html": "<nav class=\"ds-nav\"><span class=\"ds-nav-label\">General</span><a href=\"#\">Overview</a><a href=\"#\" aria-current=\"page\">API keys</a><a href=\"#\">Requests</a></nav>",
+      "css": ".ds-nav{display:grid;gap:2px;width:240px;background:var(--sidebar);padding:8px;font:400 14px/20px 'Geist Variable',sans-serif}.ds-nav a{position:relative;display:flex;align-items:center;height:36px;padding:0 28px 0 8px;border-radius:8px;color:color-mix(in oklab,var(--foreground) 72%,transparent);text-decoration:none;transition:background-color 150ms,color 150ms}.ds-nav a:hover{background:var(--sidebar-accent);color:var(--foreground)}.ds-nav a:focus-visible{outline:2px solid var(--ring);outline-offset:-2px}.ds-nav a[aria-current=page]{background:var(--sidebar-accent);color:var(--foreground);font-weight:500}.ds-nav a[aria-current=page]::after{content:'';position:absolute;inset-inline-end:12px;top:50%;margin-top:-3.5px;width:7px;height:7px;border-radius:1.5px;background:var(--seal);animation:ds-stamp 220ms cubic-bezier(.23,1,.32,1) both}@keyframes ds-stamp{from{opacity:0;transform:scale(1.9) rotate(-14deg)}to{opacity:1;transform:scale(1) rotate(-6deg)}}@media(prefers-reduced-motion:reduce){.ds-nav a[aria-current=page]::after{animation:none;transform:rotate(-6deg)}}.ds-nav-label{display:flex;align-items:center;height:32px;padding:0 8px;font:400 11px/20px 'IBM Plex Mono',monospace;letter-spacing:.01em;color:color-mix(in oklab,var(--foreground) 55%,transparent)}"
     },
     {
       "name": "Status chips",
       "kind": "chip",
       "refersTo": "status-success",
-      "description": "Icon plus text always; success is a neutral chip stamped with the seal.",
+      "description": "Filled mono capsules, icon plus text always; success is a neutral chip stamped with the seal.",
       "html": "<span class=\"ds-status ds-ok\"><i class=\"ds-seal\"></i>Active</span> <span class=\"ds-status ds-warn\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3\"/><path d=\"M12 9v4\"/><path d=\"M12 17h.01\"/></svg>Paused</span> <span class=\"ds-status ds-err\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"12\" cy=\"12\" r=\"10\"/><path d=\"M12 8v4\"/><path d=\"M12 16h.01\"/></svg>Exhausted</span>",
-      "css": ".ds-status{display:inline-flex;align-items:center;gap:6px;border-radius:2px;padding:2px 8px;font:500 12px/20px 'Geist Variable',sans-serif;box-shadow:inset 0 0 0 1px color-mix(in oklab,currentColor 15%,transparent)}.ds-status svg{width:14px;height:14px}.ds-ok{color:var(--foreground);box-shadow:inset 0 0 0 1px var(--hairline)}.ds-seal{display:inline-block;width:7px;height:7px;margin:0 3px;border-radius:1.5px;background:var(--seal);transform:rotate(-6deg)}.ds-warn{background:var(--warning-muted);color:var(--warning)}.ds-err{background:var(--error-muted);color:var(--error)}"
+      "css": ".ds-status{display:inline-flex;align-items:center;gap:6px;border-radius:9999px;padding:2px 10px 2px 8px;font:500 11px/20px 'IBM Plex Mono',monospace}.ds-status svg{width:14px;height:14px}.ds-ok{background:var(--control);color:var(--foreground)}.ds-seal{display:inline-block;width:7px;height:7px;margin:0 3px;border-radius:1.5px;background:var(--seal);transform:rotate(-6deg)}.ds-warn{background:var(--warning-muted);color:var(--warning)}.ds-err{background:var(--error-muted);color:var(--error)}"
     },
     {
       "name": "Outcome strip",
@@ -120,31 +339,80 @@
       "refersTo": "panel",
       "description": "The sign-in and setup panel: raised paper, hairline edge, warm drop shadow, a seal stamped on its corner.",
       "html": "<section class=\"ds-tegata\"><span class=\"ds-tegata-seal\"></span><h1>Sign in</h1><p>Use your workspace account.</p></section>",
-      "css": ".ds-tegata{position:relative;max-width:416px;background:var(--card);color:var(--card-foreground);border:1px solid var(--hairline);border-radius:6px;padding:40px 32px 32px;box-shadow:0 24px 60px -28px rgb(60 40 20/.28),0 1px 3px 0 rgb(60 40 20/.08);font-family:'Geist Variable',sans-serif}.ds-tegata h1{margin:0;font-size:24px;font-weight:600;letter-spacing:-.025em}.ds-tegata p{margin:12px 0 0;font-size:14px;line-height:24px;color:var(--muted-foreground)}.ds-tegata-seal{position:absolute;top:-20px;inset-inline-end:32px;width:48px;height:48px;border-radius:9px;background:var(--seal);animation:ds-stamp-lg 420ms cubic-bezier(.23,1,.32,1) 120ms both}@keyframes ds-stamp-lg{0%{opacity:0;transform:translateY(-6px) scale(1.18) rotate(-12deg);filter:blur(2px)}70%{opacity:1;transform:translateY(0) scale(.98) rotate(-5deg);filter:blur(0)}100%{opacity:1;transform:scale(1) rotate(-6deg)}}@media(prefers-reduced-motion:reduce){.ds-tegata-seal{animation:none;transform:rotate(-6deg)}}"
+      "css": ".ds-tegata{position:relative;max-width:416px;background:var(--card);color:var(--card-foreground);border:1px solid var(--hairline);border-radius:12px;padding:40px 32px 32px;box-shadow:0 24px 60px -28px rgb(60 40 20/.28),0 1px 3px 0 rgb(60 40 20/.08);font-family:'Geist Variable',sans-serif}.ds-tegata h1{margin:0;font-size:24px;font-weight:600;letter-spacing:-.025em}.ds-tegata p{margin:12px 0 0;font-size:14px;line-height:24px;color:var(--muted-foreground)}.ds-tegata-seal{position:absolute;top:-20px;inset-inline-end:32px;width:48px;height:48px;border-radius:9px;background:var(--seal);animation:ds-stamp-lg 420ms cubic-bezier(.23,1,.32,1) 120ms both}@keyframes ds-stamp-lg{0%{opacity:0;transform:translateY(-6px) scale(1.18) rotate(-12deg);filter:blur(2px)}70%{opacity:1;transform:translateY(0) scale(.98) rotate(-5deg);filter:blur(0)}100%{opacity:1;transform:scale(1) rotate(-6deg)}}@media(prefers-reduced-motion:reduce){.ds-tegata-seal{animation:none;transform:rotate(-6deg)}}"
+    },
+    {
+      "name": "Filled button (outline / secondary)",
+      "kind": "button",
+      "refersTo": "button-outline",
+      "description": "Secondary actions as a filled control tone, no border.",
+      "html": "<button class=\"ds-btn-outline\">Setup guide</button>",
+      "css": ".ds-btn-outline{background:var(--control);color:var(--foreground);border:0;border-radius:8px;height:36px;padding:0 16px;font:500 14px/20px 'Geist Variable',sans-serif;box-shadow:0 1px 0 0 rgb(255 255 255/.035) inset;transition:transform 150ms cubic-bezier(.23,1,.32,1),background-color 150ms cubic-bezier(.23,1,.32,1)}.ds-btn-outline:hover{background:var(--control-hover)}.ds-btn-outline:active{transform:scale(.97)}.ds-btn-outline:focus-visible{outline:none;box-shadow:0 0 0 2px var(--background),0 0 0 4px var(--ring)}"
+    },
+    {
+      "name": "Menu",
+      "kind": "custom",
+      "refersTo": "menu",
+      "description": "Popover menu lifted by the float shadow, growing from its trigger.",
+      "html": "<div class=\"ds-menu\" role=\"menu\"><div role=\"menuitemradio\" aria-checked=\"true\" class=\"ds-mi\" tabindex=\"0\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M20 6 9 17l-5-5\"/></svg>Dark</div><div role=\"menuitemradio\" aria-checked=\"false\" class=\"ds-mi\" tabindex=\"0\">Light</div><div role=\"menuitemradio\" aria-checked=\"false\" class=\"ds-mi\" tabindex=\"0\">System</div></div>",
+      "css": ".ds-menu{width:180px;background:var(--popover);color:var(--popover-foreground);border-radius:12px;padding:4px;box-shadow:var(--float-shadow);transform-origin:top left;animation:ds-grow 150ms cubic-bezier(.23,1,.32,1) both;font:400 14px/20px 'Geist Variable',sans-serif}.ds-mi{position:relative;display:flex;align-items:center;gap:8px;padding:6px 8px 6px 32px;border-radius:8px;cursor:pointer;outline:none}.ds-mi svg{position:absolute;left:8px;width:16px;height:16px}.ds-mi:hover,.ds-mi:focus-visible{background:var(--accent)}@keyframes ds-grow{from{opacity:0;transform:scale(.96)}to{opacity:1;transform:scale(1)}}@media(prefers-reduced-motion:reduce){.ds-menu{animation:none}}"
     }
   ],
   "narrative": {
     "northStar": "The Checkpoint Ledger",
-    "overview": "Sekisho is the checkpoint that inspects every pass. The interface is a sumi-ink ledger: warm charcoal grounds (or washi paper in the light theme), kinari off-white ink, ruled with 1px hairlines. One shu-vermilion seal ink marks approval acts and nothing else. The operator should always be able to see where they are, what passed and what was stopped; approving something feels like stamping a pass.\n\nIt is an operational interface first: dense, legible, built from adapted Shadcn Admin primitives for long sessions in dim rooms beside terminals and editors. The world is carried by material (ink, paper, hairline, seal) rather than decoration. The dark theme is the default (`defaultTheme=\"dark\"`); the light theme is a full washi-paper variant with its own tuned values, not an inversion. The implementation lives in `web/src/styles.css` and `web/src/components/`; update the tokens and this document together when an intentional design change is made. There are no marketing illustrations or decorative charts.",
+    "overview": "Sekisho is the checkpoint that inspects every pass. The interface is a sumi-ink ledger: warm charcoal grounds (or washi paper in the light theme), kinari off-white ink, ruled with 1px hairlines. One shu-vermilion seal ink marks approval acts and nothing else. The operator should always be able to see where they are, what passed and what was stopped; approving something feels like stamping a pass.\n\nIt is an operational interface first: dense, legible, built from adapted Shadcn Admin primitives for long sessions in dim rooms beside terminals and editors. The world is carried by material (ink, paper, hairline, seal) rather than decoration. Its finish is native-app calm at the level of macOS and iOS: controls are filled tones rather than outlined boxes, cards are soft 12px sheets, menus grow out of the control that opened them, and the toolbar is translucent. The ledger's data and small labels are set in IBM Plex Mono; its prose stays in Geist. The dark theme is the default (`defaultTheme=\"dark\"`); the light theme is a full washi-paper variant with its own tuned values, not an inversion. The implementation lives in `web/src/styles.css` and `web/src/components/`; update the tokens and this document together when an intentional design change is made. There are no marketing illustrations or decorative charts.",
     "keyCharacteristics": [
       "Warm sumi charcoal grounds in three steps: darkest sidebar, canvas, raised paper-dark panels.",
       "One vermilion seal ink reserved for approval acts; everything else is ink and paper.",
-      "Three hairline values (border, hairline, input) instead of shadows to structure surfaces.",
-      "Crisp small corners: 6px panels, 4px controls, 2px chips and seal marks.",
-      "Geist for the interface, Geist Mono only for numbers, IDs and keys; both self-hosted.",
-      "One authored motion, the hanko stamp; everything else is short state feedback."
+      "Hairlines (border, hairline, input) structure in-flow surfaces; only floating layers cast a shadow.",
+      "Filled controls one tone off their surface (`control`), never outlined boxes.",
+      "Soft native corners: 8px controls, 12px cards and menus, 16px dialogs; capsule status chips; 1.5px seal marks.",
+      "Geist for interface and prose; IBM Plex Mono for the ledger voice (figures, IDs, keys, timestamps, chips, column heads, labels); both self-hosted.",
+      "One authored motion, the hanko stamp; everything else is short state feedback on native curves."
     ],
     "rules": [
-      { "name": "The One Seal Rule", "body": "Vermilion is the ink of approval: primary actions, the active route, focus, the brand seal, chart ink and activity density. It never decorates, never fills a panel, and never stands in for a status colour.", "section": "colors" },
-      { "name": "The Withheld Seal Rule", "body": "A disabled primary action loses its seal: it drops to the neutral muted ground with muted text and no shadow, rather than fading the vermilion.", "section": "colors" },
-      { "name": "The Icon And Word Rule", "body": "Status colour never travels alone. Every status chip pairs an icon with text; every warning or error paragraph (`p.text-warning`, `p.text-error`) hangs a 16px triangle or circle icon in its inline-start margin through CSS, so wrapped lines keep one clean edge.", "section": "colors" },
-      { "name": "The Counted Characters Rule", "body": "Geist Mono is for strings a person copies or compares character by character (keys, IDs, codes, patterns). Ordinary numbers stay in Geist with tabular figures; tables, `time`, `output`, `kbd` and `code` set `tabular-nums` globally.", "section": "typography" },
-      { "name": "The Ruled Page Rule", "body": "Separate content with a 1px hairline before reaching for a shadow or a nested card. Cards that sit in the page flow carry a border, not a shadow.", "section": "elevation" }
+      {
+        "name": "The One Seal Rule",
+        "body": "Vermilion is the ink of approval: primary actions, the active route, focus, the brand seal, chart ink and activity density. It never decorates, never fills a panel, and never stands in for a status colour.",
+        "section": "colors"
+      },
+      {
+        "name": "The Dimmed Seal Rule",
+        "body": "A disabled primary action keeps its identity but loses its strength: vermilion at 35% with its text at 60%, and no ink-press shadow. Other disabled buttons fade to 50% opacity.",
+        "section": "colors"
+      },
+      {
+        "name": "The Icon And Word Rule",
+        "body": "Status colour never travels alone. Every status chip pairs an icon with text; every warning or error paragraph (`p.text-warning`, `p.text-error`) hangs a 16px triangle or circle icon in its inline-start margin through CSS, so wrapped lines keep one clean edge.",
+        "section": "colors"
+      },
+      {
+        "name": "The Ledger Voice Rule",
+        "body": "IBM Plex Mono is the voice of the ledger's entries and labels: figures that opt in, IDs, keys, timestamps, status chips, column heads, definition labels, field labels and sidebar group labels. Prose (titles, descriptions, sentences, buttons, menu items) is never mono. Tables, `time`, `output`, `kbd` and `code` set `tabular-nums` globally.",
+        "section": "typography"
+      },
+      {
+        "name": "The Sentence Case Rule",
+        "body": "Every label, including the mono ones, is sentence case. No uppercase labels, and no negative tracking on mono; negative tracking belongs only to Geist titles and the wordmark.",
+        "section": "typography"
+      },
+      {
+        "name": "The Ruled Page Rule",
+        "body": "Separate content with a 1px hairline before reaching for a shadow or a nested card. Cards that sit in the page flow carry a border, not a shadow.",
+        "section": "elevation"
+      },
+      {
+        "name": "The Floating Layer Rule",
+        "body": "Only what floats above the page (menus, dialogs, sheets, the tegata pass) casts a shadow, and floating layers use the float shadow's 1px ring instead of a hairline border.",
+        "section": "elevation"
+      }
     ],
     "dos": [
       "Do reuse the semantic tokens and adapted Shadcn Admin primitives; change `styles.css` and this file together.",
       "Do reserve vermilion for approval acts: primary actions, the active-route seal, focus, the brand seal, chart ink and activity density.",
-      "Do drop disabled primaries to the neutral muted ground instead of a faded vermilion.",
+      "Do dim disabled primaries to vermilion at 35% with 60% text and no shadow.",
+      "Do fill controls with the `control` tone; let focus, not a resting outline, draw the seal edge.",
+      "Do set figures that opt in, IDs, keys, timestamps, status chips, column heads, field labels and sidebar group labels in IBM Plex Mono, sentence case.",
       "Do pair every status colour with an icon and text; a success state is stamped with the seal.",
       "Do verify the dark default and the light variant, keyboard navigation, narrow layouts, right-to-left Arabic, and the supported languages (English, Japanese, Korean, Spanish, French, German, Portuguese, Russian, Arabic).",
       "Do keep the hanko stamp as the one authored motion and respect `prefers-reduced-motion`.",
@@ -153,7 +421,9 @@
     "donts": [
       "Don't use vermilion as a decorative fill, a panel background, or a substitute for a status colour.",
       "Don't add decorative colour gradients, glows, vivid dashboard fills, or arbitrary accent colours; the only patterned ground is the faint ledger ruling behind the tegata pass.",
-      "Don't load fonts from an external service; Geist and Geist Mono ship with the app.",
+      "Don't load fonts from an external service; Geist and IBM Plex Mono ship with the app.",
+      "Don't set prose in mono, uppercase a label, or apply negative tracking to mono text.",
+      "Don't draw outlined boxes around buttons or fields, or give in-flow cards a shadow.",
       "Don't alter the seal geometry, recolour it outside the vermilion pair, or use the framed seal below 24px.",
       "Don't display fake business records or performance claims.",
       "Don't rely on color, hover, or icons alone for essential information.",

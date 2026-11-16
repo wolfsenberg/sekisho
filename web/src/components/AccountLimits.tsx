@@ -98,10 +98,7 @@ export function AccountLimits({
         </DialogHeader>
         <form className="space-y-5" onSubmit={submit} noValidate>
           <div className="space-y-2">
-            <label
-              htmlFor="account-concurrency"
-              className="text-sm font-medium"
-            >
+            <label htmlFor="account-concurrency" className="field-label">
               {t('accountConcurrencyLimit')}
             </label>
             <Input

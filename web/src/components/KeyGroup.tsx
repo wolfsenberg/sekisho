@@ -134,7 +134,7 @@ function BindingForm({
       </DialogHeader>
       {!restore && (
         <div className="space-y-2">
-          <p id="binding-group-label" className="text-sm font-medium">
+          <p id="binding-group-label" className="field-label">
             {t('keyGroup')}
           </p>
           {choices.isPending ? (

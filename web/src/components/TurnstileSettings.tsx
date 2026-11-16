@@ -81,7 +81,7 @@ export function TurnstileSettings({ userID }: { userID: number }) {
             {t('turnstileEnabled')}
           </label>
           <div className="space-y-2">
-            <label htmlFor="turnstile-site-key" className="text-sm font-medium">
+            <label htmlFor="turnstile-site-key" className="field-label">
               {t('turnstileSiteKey')}
             </label>
             <Input
@@ -95,10 +95,7 @@ export function TurnstileSettings({ userID }: { userID: number }) {
             />
           </div>
           <div className="space-y-2">
-            <label
-              htmlFor="turnstile-secret-key"
-              className="text-sm font-medium"
-            >
+            <label htmlFor="turnstile-secret-key" className="field-label">
               {t('turnstileSecretKey')}
             </label>
             <Input

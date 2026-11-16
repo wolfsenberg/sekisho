@@ -254,7 +254,7 @@ export function ProxyCard({
               <div className="flex items-baseline gap-1">
                 <span
                   className={cn(
-                    'text-2xl font-semibold leading-none tabular-nums',
+                    'font-mono text-2xl font-medium leading-none tabular-nums',
                     toneText[tier.tone],
                   )}
                 >

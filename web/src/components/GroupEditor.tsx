@@ -173,7 +173,7 @@ function GroupForm({
       </DialogHeader>
       <form className="space-y-5" onSubmit={submit} noValidate>
         <div className="space-y-2">
-          <label htmlFor="group-name" className="text-sm font-medium">
+          <label htmlFor="group-name" className="field-label">
             {t('groupName')}
           </label>
           <Input
@@ -420,7 +420,7 @@ function GroupForm({
           </label>
           {restricted ? (
             <div className="space-y-2">
-              <label htmlFor="group-models" className="text-sm font-medium">
+              <label htmlFor="group-models" className="field-label">
                 {t('groupAllowedModels')}
               </label>
               <Textarea

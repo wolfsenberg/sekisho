@@ -101,7 +101,7 @@ export function Invite() {
             ] as const
           ).map(([name, label, autoComplete, hint]) => (
             <div className="space-y-2" key={name}>
-              <label htmlFor={`invite-${name}`} className="text-sm font-medium">
+              <label htmlFor={`invite-${name}`} className="field-label">
                 {t(label)}
               </label>
               <Input

@@ -218,7 +218,7 @@ function ImportForm({
           </DropdownMenu>
         </div>
         <div className="space-y-2">
-          <label htmlFor="cc-switch-name" className="text-sm font-medium">
+          <label htmlFor="cc-switch-name" className="field-label">
             {t('ccSwitchName')}
           </label>
           <Input

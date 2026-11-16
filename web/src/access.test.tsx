@@ -77,7 +77,8 @@ it('gives members their own workspace without management navigation or requests'
         url === '/api/auth/state' ||
         url === '/api/workspaces' ||
         url === '/api/connection' ||
-        url === '/api/me/security',
+        // The member's own usage, limits and allowances are not management data.
+        url.startsWith('/api/me/'),
     ),
   ).toBe(true)
 })
@@ -145,7 +146,7 @@ it.each([
           (url) =>
             !['/api/auth/state', '/api/workspaces', '/api/connection'].includes(
               url,
-            ),
+            ) && !url.startsWith('/api/me/'),
         ),
     ).toEqual([])
   },

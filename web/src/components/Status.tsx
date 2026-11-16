@@ -15,7 +15,7 @@ function Seal({ className }: { className?: string }) {
 
 const variants = {
   // The seal alone carries approval, so the stamped chip itself stays neutral ink.
-  success: { icon: Seal, color: 'text-foreground ring-hairline!' },
+  success: { icon: Seal, color: 'bg-control text-foreground' },
   warning: { icon: TriangleAlert, color: 'bg-warning-muted text-warning' },
   error: { icon: CircleAlert, color: 'bg-error-muted text-error' },
   info: { icon: Info, color: 'bg-info-muted text-info' },
@@ -33,7 +33,7 @@ export function Status({
   return (
     <span
       className={cn(
-        'inline-flex w-fit items-center gap-1.5 whitespace-nowrap rounded-sm px-2 py-0.5 text-xs leading-5 font-medium ring-1 ring-current/15 ring-inset',
+        'inline-flex w-fit items-center gap-1.5 whitespace-nowrap rounded-full py-0.5 ps-2 pe-2.5 font-mono text-[0.6875rem] leading-5 font-medium',
         color,
       )}
     >

@@ -453,7 +453,7 @@ function SchemeFields({
           </h3>
           <div className="grid gap-4 sm:grid-cols-2">
             <div className="space-y-2">
-              <label htmlFor="scheme-name" className="text-sm font-medium">
+              <label htmlFor="scheme-name" className="field-label">
                 {t('allocationName')}
               </label>
               <Input
@@ -465,7 +465,7 @@ function SchemeFields({
               />
             </div>
             <div className="space-y-2">
-              <label htmlFor="scheme-pool" className="text-sm font-medium">
+              <label htmlFor="scheme-pool" className="field-label">
                 {t('keyGroup')}
               </label>
               <SchemeChoice
@@ -576,10 +576,7 @@ function SchemeFields({
           <div className="grid max-w-2xl gap-4 sm:grid-cols-2">
             {shareMode && !durationMode && (
               <div className="space-y-2">
-                <label
-                  htmlFor="scheme-token-total"
-                  className="text-sm font-medium"
-                >
+                <label htmlFor="scheme-token-total" className="field-label">
                   {t('allocationTotalBudget')}
                 </label>
                 <div className="flex items-center gap-2">
@@ -746,7 +743,7 @@ function SchemeFields({
             )}
             {mode !== 'windows' && (
               <div className="space-y-2">
-                <label htmlFor="scheme-period" className="text-sm font-medium">
+                <label htmlFor="scheme-period" className="field-label">
                   {t('allocationPeriod')}
                 </label>
                 <SchemeChoice
@@ -775,10 +772,7 @@ function SchemeFields({
             )}
             {period === 'month' && (
               <div className="space-y-2">
-                <label
-                  htmlFor="scheme-reset-day"
-                  className="text-sm font-medium"
-                >
+                <label htmlFor="scheme-reset-day" className="field-label">
                   {t('allocationResetDay')}
                 </label>
                 <Input
@@ -796,10 +790,7 @@ function SchemeFields({
             )}
             {period !== 'durations' && (
               <div className="space-y-2">
-                <label
-                  htmlFor="scheme-reset-time"
-                  className="text-sm font-medium"
-                >
+                <label htmlFor="scheme-reset-time" className="field-label">
                   {t('allocationResetTime')}
                 </label>
                 <Input

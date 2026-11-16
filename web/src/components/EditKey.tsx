@@ -102,7 +102,7 @@ function KeyEditor({
       </DialogHeader>
       <form onSubmit={submit} noValidate className="space-y-5">
         <div className="space-y-2">
-          <label htmlFor="edit-key-name" className="text-sm font-medium">
+          <label htmlFor="edit-key-name" className="field-label">
             {t('keyName')}
           </label>
           <Input

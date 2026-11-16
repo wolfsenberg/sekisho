@@ -260,7 +260,8 @@ function DailyChart({
               x={left - 10}
               y={y(tick) + 4}
               textAnchor="end"
-              fontSize={12}
+              fontSize={11}
+              fontFamily="var(--font-mono)"
               fill="var(--muted-foreground)"
             >
               {compact.format(tick)}
@@ -311,7 +312,8 @@ function DailyChart({
                     ? 'end'
                     : 'middle'
               }
-              fontSize={12}
+              fontSize={11}
+              fontFamily="var(--font-mono)"
               fill="var(--muted-foreground)"
             >
               {dates.format(Number(row.id) * 1000)}

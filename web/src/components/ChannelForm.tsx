@@ -116,7 +116,7 @@ export function ChannelForm({
     <form onSubmit={submit} noValidate className="space-y-5">
       <div className="grid gap-4 sm:grid-cols-2">
         <div className="space-y-2">
-          <label htmlFor="channel-platform" className="text-sm font-medium">
+          <label htmlFor="channel-platform" className="field-label">
             {t('channelPlatform')}
           </label>
           <SearchPicker<ChannelPlatform>
@@ -144,7 +144,7 @@ export function ChannelForm({
           />
         </div>
         <div className="space-y-2">
-          <label htmlFor="channel-protocol" className="text-sm font-medium">
+          <label htmlFor="channel-protocol" className="field-label">
             {t('channelProtocol')}
           </label>
           <SearchPicker<ChannelProtocol>
@@ -173,7 +173,7 @@ export function ChannelForm({
         </p>
       )}
       <div className="space-y-2">
-        <label htmlFor="channel-name" className="text-sm font-medium">
+        <label htmlFor="channel-name" className="field-label">
           {t('channelName')}
         </label>
         <Input
@@ -186,7 +186,7 @@ export function ChannelForm({
         />
       </div>
       <div className="space-y-2">
-        <label htmlFor="channel-base-url" className="text-sm font-medium">
+        <label htmlFor="channel-base-url" className="field-label">
           {t('upstreamBaseURL')}
         </label>
         <Input
@@ -209,7 +209,7 @@ export function ChannelForm({
         </p>
       </div>
       <div className="space-y-2">
-        <label htmlFor="channel-key" className="text-sm font-medium">
+        <label htmlFor="channel-key" className="field-label">
           {t('upstreamAPIKey')}
         </label>
         <Input

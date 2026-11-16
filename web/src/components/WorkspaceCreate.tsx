@@ -80,7 +80,7 @@ export function WorkspaceCreate({
           </SheetHeader>
           <form onSubmit={submit} className="space-y-5 px-4 pb-6" noValidate>
             <div className="space-y-2">
-              <label htmlFor="workspace-name" className="text-sm font-medium">
+              <label htmlFor="workspace-name" className="field-label">
                 {t('workspaceName')}
               </label>
               <Input

@@ -183,10 +183,7 @@ function VersionForm({
       </dl>
       <form onSubmit={submit} noValidate className="space-y-5">
         <div className="max-w-sm space-y-2">
-          <label
-            htmlFor={`${provider}-manual-version`}
-            className="text-sm font-medium"
-          >
+          <label htmlFor={`${provider}-manual-version`} className="field-label">
             {t('clientVersionManual')}
           </label>
           <Input

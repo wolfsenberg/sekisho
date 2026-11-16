@@ -318,10 +318,7 @@ function ResetForm({
             )}
             {config.frequency === 'once' && (
               <div className="space-y-2">
-                <label
-                  htmlFor={`${prefix}-date`}
-                  className="text-sm font-medium"
-                >
+                <label htmlFor={`${prefix}-date`} className="field-label">
                   {t('resetDate')}
                 </label>
                 <Input
@@ -333,7 +330,7 @@ function ResetForm({
               </div>
             )}
             <div className="space-y-2">
-              <label htmlFor={`${prefix}-time`} className="text-sm font-medium">
+              <label htmlFor={`${prefix}-time`} className="field-label">
                 {t('resetTime')}
               </label>
               <Input
@@ -363,7 +360,7 @@ function ResetForm({
           </p>
         </div>
         <div className="space-y-2 border-t border-border pt-4">
-          <label htmlFor={`${prefix}-limit`} className="text-sm font-medium">
+          <label htmlFor={`${prefix}-limit`} className="field-label">
             {t('resetDailyLimit')}
           </label>
           <Input

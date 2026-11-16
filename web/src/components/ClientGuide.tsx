@@ -197,7 +197,7 @@ function GuideContent({
         </p>
       ) : null}
       <div className="space-y-2">
-        <label htmlFor="client-protocol" className="text-sm font-medium">
+        <label htmlFor="client-protocol" className="field-label">
           {t('clientProtocol')}
         </label>
         <DropdownMenu>
@@ -245,7 +245,7 @@ function GuideContent({
       )}
       <div className="grid gap-4 sm:grid-cols-2">
         <div className="space-y-2">
-          <label htmlFor="client-endpoint" className="text-sm font-medium">
+          <label htmlFor="client-endpoint" className="field-label">
             {t('clientEndpoint')}
           </label>
           <Input
@@ -281,7 +281,7 @@ function GuideContent({
           </div>
         ) : (
           <div className="space-y-2">
-            <label htmlFor="client-model" className="text-sm font-medium">
+            <label htmlFor="client-model" className="field-label">
               {t('clientModel')}
             </label>
             <Input

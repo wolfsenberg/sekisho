@@ -93,7 +93,7 @@ export function MemberLimits({
         ) : (
           <form noValidate onSubmit={submit} className="space-y-5">
             <div className="space-y-2">
-              <label htmlFor="member-rpm" className="text-sm font-medium">
+              <label htmlFor="member-rpm" className="field-label">
                 {t('requestsPerMinute')}
               </label>
               <Input
@@ -109,10 +109,7 @@ export function MemberLimits({
               />
             </div>
             <div className="space-y-2">
-              <label
-                htmlFor="member-concurrency"
-                className="text-sm font-medium"
-              >
+              <label htmlFor="member-concurrency" className="field-label">
                 {t('memberConcurrency')}
               </label>
               <Input

@@ -276,7 +276,7 @@ export function Layout({ children }: { children?: ReactNode }) {
         <SidebarInset
           className={cn('min-w-0 bg-background', tablePage && 'h-dvh')}
         >
-          <header className="flex min-h-14 shrink-0 items-center justify-between gap-3 border-b border-border px-4 md:px-6">
+          <header className="sticky top-0 z-20 flex min-h-13 shrink-0 items-center justify-between gap-3 border-b border-border/70 bg-background/80 px-4 backdrop-blur-xl backdrop-saturate-150 md:px-6">
             <div className="flex items-center gap-3">
               <SidebarTrigger className="size-7 text-muted-foreground [@media(pointer:coarse)]:size-11" />
               <Link

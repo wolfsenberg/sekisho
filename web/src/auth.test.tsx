@@ -459,7 +459,9 @@ it('revokes access on logout and fetches fresh private data on a new login', asy
             incidents: [],
           }),
         )
-      reads++
+      // Only instance status reads advance the version; personal widgets on the
+      // overview may fetch too, depending on how quickly lazy routes settle.
+      if (url === '/api/system') reads++
       return Promise.resolve(
         response({ ...system, version: 'synthetic-' + reads }),
       )
@@ -482,8 +484,8 @@ it('revokes access on logout and fetches fresh private data on a new login', asy
   )
   await user.click(screen.getByRole('button', { name: 'Sign in' }))
   await user.click(await screen.findByRole('link', { name: 'Instance status' }))
-  await waitFor(() => expect(screen.getByText(/synthetic-\d/)).toBeTruthy())
-  expect(screen.getByText('synthetic-2')).toBeTruthy()
+  expect(await screen.findByText('synthetic-2')).toBeTruthy()
+  expect(screen.queryByText('synthetic-1')).toBeNull()
   expect(trace).not.toContain('/api/system:false')
 })
 
@@ -528,9 +530,12 @@ it('keeps the workspace and lets the account menu retry a failed sign-out', asyn
   await screen.findByRole('heading', { name: 'Workspace overview' })
   await user.click(screen.getByRole('button', { name: 'Account menu' }))
   await user.click(await screen.findByRole('menuitem', { name: 'Sign out' }))
-  expect((await screen.findByRole('alert')).textContent).toBe(
-    'Could not sign out. Please try again.',
-  )
+  // Widgets on the overview can raise their own alerts, so find this one by its text.
+  expect(
+    (
+      await screen.findByText('Could not sign out. Please try again.')
+    ).getAttribute('role'),
+  ).toBe('alert')
   expect(
     screen.getByRole('heading', { name: 'Workspace overview' }),
   ).toBeTruthy()

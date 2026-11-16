@@ -34,7 +34,7 @@ function SheetOverlay({
     <SheetPrimitive.Overlay
       data-slot="sheet-overlay"
       className={cn(
-        'fixed inset-0 z-50 bg-black/60 data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:animate-in data-[state=open]:fade-in-0',
+        'fixed inset-0 z-50 bg-black/55 backdrop-blur-[2px] duration-300 ease-(--ease-drawer) data-[state=closed]:animate-out data-[state=closed]:duration-200 data-[state=closed]:fade-out-0 data-[state=open]:animate-in data-[state=open]:fade-in-0',
         className,
       )}
       {...props}
@@ -59,7 +59,7 @@ function SheetContent({
       <SheetPrimitive.Content
         data-slot="sheet-content"
         className={cn(
-          'fixed z-50 flex flex-col gap-4 bg-card shadow-[0_0_48px_-12px_rgb(0_0_0/0.6)] ease-(--ease-out) data-[state=closed]:animate-out data-[state=closed]:duration-200 data-[state=open]:animate-in data-[state=open]:duration-300',
+          'fixed z-50 flex flex-col gap-4 bg-popover shadow-(--float-shadow) ease-(--ease-drawer) data-[state=closed]:animate-out data-[state=closed]:duration-200 data-[state=open]:animate-in data-[state=open]:duration-300',
           side === 'right' &&
             'inset-y-0 inset-e-0 h-full w-3/4 border-s data-[state=closed]:slide-out-to-end data-[state=open]:slide-in-from-end sm:max-w-sm',
           side === 'left' &&
@@ -75,7 +75,7 @@ function SheetContent({
         {children}
         <SheetPrimitive.Close
           disabled={closeDisabled}
-          className="absolute inset-e-4 top-4 inline-flex size-8 items-center justify-center rounded-md opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:ring-2 focus:ring-ring focus:ring-offset-2 focus:outline-hidden disabled:pointer-events-none disabled:opacity-50 data-[state=open]:bg-secondary [@media(pointer:coarse)]:size-11"
+          className="absolute inset-e-4 top-4 inline-flex size-8 items-center justify-center rounded-lg opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus:outline-hidden disabled:pointer-events-none disabled:opacity-50 data-[state=open]:bg-secondary [@media(pointer:coarse)]:size-11"
         >
           <XIcon className="size-4" />
           <span className="sr-only">{t('close')}</span>

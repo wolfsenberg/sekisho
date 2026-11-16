@@ -168,7 +168,7 @@ function KeyForm({
       ) : (
         <form onSubmit={submit} noValidate className="space-y-5">
           <div className="space-y-2">
-            <label htmlFor="key-name" className="text-sm font-medium">
+            <label htmlFor="key-name" className="field-label">
               {t('keyName')}
             </label>
             <Input
@@ -192,7 +192,7 @@ function KeyForm({
             )}
           </div>
           <div className="space-y-2">
-            <p className="text-sm font-medium" id="key-group-label">
+            <p className="field-label" id="key-group-label">
               {t('keyGroup')}
             </p>
             {groups.isPending ? (

@@ -145,10 +145,7 @@ function BackupForm({
         </div>
         <div className="grid max-w-lg gap-4 sm:grid-cols-2">
           <div className="space-y-2">
-            <label
-              htmlFor="backup-export-password"
-              className="text-sm font-medium"
-            >
+            <label htmlFor="backup-export-password" className="field-label">
               {t('backupExportPassword')}
             </label>
             <Input
@@ -163,10 +160,7 @@ function BackupForm({
             />
           </div>
           <div className="space-y-2">
-            <label
-              htmlFor="backup-confirm-password"
-              className="text-sm font-medium"
-            >
+            <label htmlFor="backup-confirm-password" className="field-label">
               {t('backupConfirmPassword')}
             </label>
             <Input
@@ -223,7 +217,7 @@ function BackupForm({
           </p>
         </div>
         <div className="space-y-2">
-          <label htmlFor="backup-file" className="text-sm font-medium">
+          <label htmlFor="backup-file" className="field-label">
             {t('backupFile')}
           </label>
           <Input
@@ -245,10 +239,7 @@ function BackupForm({
           </p>
         </div>
         <div className="max-w-lg space-y-2">
-          <label
-            htmlFor="backup-restore-password"
-            className="text-sm font-medium"
-          >
+          <label htmlFor="backup-restore-password" className="field-label">
             {t('backupPassword')}
           </label>
           <Input

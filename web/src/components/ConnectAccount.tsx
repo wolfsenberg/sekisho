@@ -238,7 +238,7 @@ export function ConnectAccount({
         </DialogHeader>
         <form onSubmit={submit} noValidate className="space-y-5">
           <div className="space-y-2">
-            <p id="provider-label" className="text-sm font-medium">
+            <p id="provider-label" className="field-label">
               {t('serviceProvider')}
             </p>
             <div
@@ -280,7 +280,7 @@ export function ConnectAccount({
             </div>
           </div>
           <div className="space-y-2">
-            <label htmlFor="account-name" className="text-sm font-medium">
+            <label htmlFor="account-name" className="field-label">
               {t('accountName')}
             </label>
             <Input
@@ -374,7 +374,7 @@ export function ConnectAccount({
                 {t('chooseAuthFile')}
               </Button>
               <div className="space-y-2">
-                <label htmlFor="auth-json" className="text-sm font-medium">
+                <label htmlFor="auth-json" className="field-label">
                   {t('authJSONContents')}
                 </label>
                 <Textarea
@@ -428,10 +428,7 @@ export function ConnectAccount({
                 />
               ) : (
                 <div className="space-y-2">
-                  <label
-                    htmlFor="oauth-callback"
-                    className="text-sm font-medium"
-                  >
+                  <label htmlFor="oauth-callback" className="field-label">
                     {t('callbackURL')}
                   </label>
                   <Textarea

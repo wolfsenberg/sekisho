@@ -131,10 +131,7 @@ export function PasswordDialog({
         <form noValidate onSubmit={submit} className="space-y-4">
           {fields.map((field) => (
             <div key={field.name} className="space-y-2">
-              <label
-                className="text-sm font-medium"
-                htmlFor={'password-' + field.name}
-              >
+              <label className="field-label" htmlFor={'password-' + field.name}>
                 {t(field.label)}
               </label>
               <Input

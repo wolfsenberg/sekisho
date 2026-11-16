@@ -100,11 +100,13 @@ export function Overview() {
             <dl className="space-y-5 p-6 text-sm">
               <div className="flex flex-wrap items-baseline justify-between gap-2">
                 <dt className="text-muted-foreground">{t('version')}</dt>
-                <dd className="break-all font-medium">{data.version}</dd>
+                <dd className="break-all font-mono font-medium">
+                  {data.version}
+                </dd>
               </div>
               <div className="flex flex-wrap items-baseline justify-between gap-2">
                 <dt className="text-muted-foreground">{t('uptime')}</dt>
-                <dd className="font-medium tabular-nums">
+                <dd className="font-mono font-medium tabular-nums">
                   {formatDuration(data.uptime_seconds, locale)}
                 </dd>
               </div>

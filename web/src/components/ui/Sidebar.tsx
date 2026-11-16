@@ -216,7 +216,7 @@ function Sidebar({
       <div
         data-slot="sidebar-gap"
         className={cn(
-          'relative w-(--sidebar-width) bg-transparent transition-[width] duration-200 ease-linear',
+          'relative w-(--sidebar-width) bg-transparent transition-[width] duration-250 ease-(--ease-drawer)',
           'group-data-[collapsible=offcanvas]:w-0',
           'group-data-[side=right]:rotate-180',
           variant === 'floating' || variant === 'inset'
@@ -227,7 +227,7 @@ function Sidebar({
       <div
         data-slot="sidebar-container"
         className={cn(
-          'fixed inset-y-0 z-10 hidden h-svh w-(--sidebar-width) transition-[inset-inline,width] duration-200 ease-linear md:flex',
+          'fixed inset-y-0 z-10 hidden h-svh w-(--sidebar-width) transition-[inset-inline,width] duration-250 ease-(--ease-drawer) md:flex',
           side === 'left'
             ? 'inset-s-0 group-data-[collapsible=offcanvas]:-inset-s-[calc(var(--sidebar-width))]'
             : 'inset-e-0 group-data-[collapsible=offcanvas]:-inset-e-[calc(var(--sidebar-width))]',
@@ -410,7 +410,7 @@ function SidebarGroupLabel({
       data-slot="sidebar-group-label"
       data-sidebar="group-label"
       className={cn(
-        'flex h-8 shrink-0 items-center rounded-md px-2 text-xs font-medium text-sidebar-foreground/50 ring-sidebar-ring outline-hidden transition-[margin,opacity] duration-200 ease-linear focus-visible:ring-2 [&>svg]:size-4 [&>svg]:shrink-0',
+        'flex h-8 shrink-0 items-center rounded-md px-2 font-mono text-[0.6875rem] tracking-[0.01em] text-sidebar-foreground/55 ring-sidebar-ring outline-hidden transition-[margin,opacity] duration-250 ease-(--ease-drawer) focus-visible:ring-2 [&>svg]:size-4 [&>svg]:shrink-0',
         'group-data-[collapsible=icon]:-mt-8 group-data-[collapsible=icon]:opacity-0',
         className,
       )}
@@ -479,7 +479,7 @@ function SidebarMenuItem({ className, ...props }: React.ComponentProps<'li'>) {
 }
 
 const sidebarMenuButtonVariants = cva(
-  'peer/menu-button relative flex w-full items-center gap-2.5 overflow-hidden rounded-md p-2 text-start text-sm text-sidebar-foreground/72 outline-hidden ring-sidebar-ring transition-[width,height,padding,background-color,color] duration-150 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground focus-visible:ring-2 active:bg-sidebar-accent active:text-sidebar-accent-foreground disabled:pointer-events-none disabled:opacity-50 group-has-data-[sidebar=menu-action]/menu-item:pe-8 aria-disabled:pointer-events-none aria-disabled:opacity-50 data-[active=true]:bg-sidebar-accent data-[active=true]:pe-7 data-[active=true]:font-medium data-[active=true]:text-sidebar-accent-foreground data-[active=true]:after:pointer-events-none data-[active=true]:after:absolute data-[active=true]:after:inset-e-3 data-[active=true]:after:top-1/2 data-[active=true]:after:-mt-[3.5px] data-[active=true]:after:size-[7px] data-[active=true]:after:rounded-[1.5px] data-[active=true]:after:bg-seal data-[active=true]:after:content-[""] data-[active=true]:after:animate-[seal-stamp_220ms_var(--ease-out)_both] data-[state=open]:hover:bg-sidebar-accent data-[state=open]:hover:text-sidebar-accent-foreground group-data-[collapsible=icon]:size-8! group-data-[collapsible=icon]:p-2! [&>span:last-child]:truncate [&>svg]:size-4 [&>svg]:shrink-0',
+  'peer/menu-button relative flex w-full items-center gap-2.5 overflow-hidden rounded-lg p-2 text-start text-sm text-sidebar-foreground/72 outline-hidden ring-sidebar-ring transition-[width,height,padding,background-color,color] duration-150 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground focus-visible:ring-2 active:bg-sidebar-accent active:text-sidebar-accent-foreground disabled:pointer-events-none disabled:opacity-50 group-has-data-[sidebar=menu-action]/menu-item:pe-8 aria-disabled:pointer-events-none aria-disabled:opacity-50 data-[active=true]:bg-sidebar-accent data-[active=true]:pe-7 data-[active=true]:font-medium data-[active=true]:text-sidebar-accent-foreground data-[active=true]:after:pointer-events-none data-[active=true]:after:absolute data-[active=true]:after:inset-e-3 data-[active=true]:after:top-1/2 data-[active=true]:after:-mt-[3.5px] data-[active=true]:after:size-[7px] data-[active=true]:after:rounded-[1.5px] data-[active=true]:after:bg-seal data-[active=true]:after:content-[""] data-[active=true]:after:animate-[seal-stamp_220ms_var(--ease-out)_both] data-[state=open]:hover:bg-sidebar-accent data-[state=open]:hover:text-sidebar-accent-foreground group-data-[collapsible=icon]:size-8! group-data-[collapsible=icon]:p-2! [&>span:last-child]:truncate [&>svg]:size-4 [&>svg]:shrink-0',
   {
     variants: {
       variant: {

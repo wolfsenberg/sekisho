@@ -18,21 +18,21 @@ export function DemoNotice() {
   return (
     <aside
       aria-label={t('demoTitle')}
-      className="flex items-start gap-3 border-b border-border bg-card px-5 py-3 md:px-8"
+      className="flex items-center gap-2.5 border-b border-border/70 bg-card/60 px-4 py-2 text-[0.8125rem] leading-5 md:px-6"
     >
       <FlaskConical
         aria-hidden="true"
-        className="mt-0.5 size-4 shrink-0 text-muted-foreground"
+        className="size-3.5 shrink-0 text-muted-foreground"
       />
-      <div className="min-w-0 space-y-1 text-sm">
-        <p className="font-medium">{t('demoTitle')}</p>
-        <p
+      <p className="min-w-0">
+        <span className="font-medium">{t('demoTitle')}</span>{' '}
+        <span
           role={blocked ? 'alert' : undefined}
-          className="leading-6 text-muted-foreground"
+          className="text-muted-foreground"
         >
           {t(blocked ? 'demoReadOnly' : 'demoDescription')}
-        </p>
-      </div>
+        </span>
+      </p>
     </aside>
   )
 }

@@ -74,10 +74,7 @@ export function MembershipEditor({
         </SheetHeader>
         <form onSubmit={submit} className="space-y-5 px-4 pb-6" noValidate>
           <div className="space-y-2">
-            <label
-              htmlFor="existing-member-name"
-              className="text-sm font-medium"
-            >
+            <label htmlFor="existing-member-name" className="field-label">
               {t('username')}
             </label>
             <Input

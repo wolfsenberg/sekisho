@@ -551,7 +551,7 @@ function RuleEditor({
     >
       <div className="grid gap-4 sm:grid-cols-2">
         <div className="space-y-2">
-          <label htmlFor={`${id}-name`} className="text-sm font-medium">
+          <label htmlFor={`${id}-name`} className="field-label">
             {t('contentRuleName')}
           </label>
           <Input
@@ -578,7 +578,7 @@ function RuleEditor({
         </div>
       </div>
       <div className="space-y-2">
-        <label htmlFor={`${id}-pattern`} className="text-sm font-medium">
+        <label htmlFor={`${id}-pattern`} className="field-label">
           {t('contentPattern')}
         </label>
         {rule.kind === 'regex' ? (
@@ -634,7 +634,7 @@ function RuleEditor({
           {t('contentTestTitle')}
         </summary>
         <div className="mt-3 space-y-3">
-          <label htmlFor={`${id}-sample`} className="block text-sm font-medium">
+          <label htmlFor={`${id}-sample`} className="field-label block">
             {t('contentSample')}
           </label>
           <textarea

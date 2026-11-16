@@ -11,6 +11,8 @@ colors:
   popover: "#FCFBF8"
   sidebar: "#EFECE5"
   sidebar-accent: "#E4DFD4"
+  control: "#EBE7DF"
+  control-hover: "#E2DDD2"
   secondary: "#ECE8E0"
   accent: "#EBE6DC"
   muted: "#EEEAE2"
@@ -39,6 +41,8 @@ colors:
   dark-sidebar: "#0D0C0B"
   dark-sidebar-accent: "#1F1D1B"
   dark-sidebar-border: "#24221F"
+  dark-control: "#22201D"
+  dark-control-hover: "#2A2825"
   dark-secondary: "#24221F"
   dark-accent: "#24221F"
   dark-muted: "#1F1E1B"
@@ -61,10 +65,10 @@ colors:
 typography:
   title:
     fontFamily: "Geist Variable, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
-    fontSize: "22px"
+    fontSize: "26px"
     fontWeight: 600
-    lineHeight: 1.4545
-    letterSpacing: "-0.025em"
+    lineHeight: 1.3846
+    letterSpacing: "-0.03em"
   auth-title:
     fontFamily: "Geist Variable, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
     fontSize: "24px"
@@ -88,14 +92,26 @@ typography:
     fontWeight: 600
     letterSpacing: "-0.02em"
   mono:
-    fontFamily: "Geist Mono Variable, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace"
+    fontFamily: "IBM Plex Mono, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace"
     fontSize: "14px"
     fontWeight: 400
+  mono-label:
+    fontFamily: "IBM Plex Mono, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace"
+    fontSize: "12px"
+    fontWeight: 400
+    lineHeight: 1.6667
+  mono-chip:
+    fontFamily: "IBM Plex Mono, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace"
+    fontSize: "11px"
+    fontWeight: 500
+    lineHeight: 1.8182
 rounded:
-  sm: "2px"
-  md: "4px"
-  lg: "6px"
-  xl: "6px"
+  sm: "4px"
+  md: "6px"
+  lg: "8px"
+  xl: "12px"
+  2xl: "16px"
+  full: "9999px"
 spacing:
   xs: "4px"
   sm: "8px"
@@ -109,52 +125,69 @@ components:
   button-primary:
     backgroundColor: "{colors.primary}"
     textColor: "{colors.primary-foreground}"
-    rounded: "{rounded.md}"
+    rounded: "{rounded.lg}"
     padding: "8px 16px"
     height: "36px"
-  button-primary-disabled:
-    backgroundColor: "{colors.muted}"
-    textColor: "{colors.muted-foreground}"
-    rounded: "{rounded.md}"
-    height: "36px"
   button-outline:
-    backgroundColor: "{colors.surface}"
+    backgroundColor: "{colors.control}"
     textColor: "{colors.foreground}"
-    rounded: "{rounded.md}"
+    rounded: "{rounded.lg}"
+    padding: "8px 16px"
+    height: "36px"
+  button-outline-hover:
+    backgroundColor: "{colors.control-hover}"
+  button-secondary:
+    backgroundColor: "{colors.control}"
+    textColor: "{colors.foreground}"
+    rounded: "{rounded.lg}"
     height: "36px"
   input:
-    backgroundColor: "{colors.surface}"
+    backgroundColor: "{colors.control}"
     textColor: "{colors.foreground}"
-    rounded: "{rounded.md}"
+    rounded: "{rounded.lg}"
     padding: "4px 12px"
     height: "36px"
+  input-hover:
+    backgroundColor: "{colors.control-hover}"
   nav-item-active:
     backgroundColor: "{colors.sidebar-accent}"
     textColor: "{colors.foreground}"
-    rounded: "{rounded.md}"
+    rounded: "{rounded.lg}"
     height: "36px"
   status-success:
+    backgroundColor: "{colors.control}"
     textColor: "{colors.foreground}"
-    rounded: "{rounded.sm}"
-    padding: "2px 8px"
+    typography: "{typography.mono-chip}"
+    rounded: "{rounded.full}"
+    padding: "2px 10px 2px 8px"
   status-warning:
     backgroundColor: "{colors.warning-muted}"
     textColor: "{colors.warning}"
-    rounded: "{rounded.sm}"
-    padding: "2px 8px"
+    typography: "{typography.mono-chip}"
+    rounded: "{rounded.full}"
+    padding: "2px 10px 2px 8px"
   status-error:
     backgroundColor: "{colors.error-muted}"
     textColor: "{colors.error}"
-    rounded: "{rounded.sm}"
-    padding: "2px 8px"
+    typography: "{typography.mono-chip}"
+    rounded: "{rounded.full}"
+    padding: "2px 10px 2px 8px"
   tooltip:
     backgroundColor: "{colors.foreground}"
     textColor: "{colors.background}"
-    rounded: "{rounded.md}"
+    rounded: "{rounded.lg}"
     padding: "6px 10px"
+  menu:
+    backgroundColor: "{colors.popover}"
+    rounded: "{rounded.xl}"
+    padding: "4px"
   panel:
     backgroundColor: "{colors.surface}"
     rounded: "{rounded.xl}"
+    padding: "24px"
+  dialog:
+    backgroundColor: "{colors.popover}"
+    rounded: "{rounded.2xl}"
     padding: "24px"
 ---
 
@@ -166,22 +199,23 @@ components:
 
 Sekisho is the checkpoint that inspects every pass. The interface is a sumi-ink ledger: warm charcoal grounds (or washi paper in the light theme), kinari off-white ink, ruled with 1px hairlines. One shu-vermilion seal ink marks approval acts and nothing else. The operator should always be able to see where they are, what passed and what was stopped; approving something feels like stamping a pass.
 
-It is an operational interface first: dense, legible, built from adapted Shadcn Admin primitives for long sessions in dim rooms beside terminals and editors. The world is carried by material (ink, paper, hairline, seal) rather than decoration. The dark theme is the default (`defaultTheme="dark"`); the light theme is a full washi-paper variant with its own tuned values, not an inversion. The implementation lives in `web/src/styles.css` and `web/src/components/`; update the tokens and this document together when an intentional design change is made. There are no marketing illustrations or decorative charts.
+It is an operational interface first: dense, legible, built from adapted Shadcn Admin primitives for long sessions in dim rooms beside terminals and editors. The world is carried by material (ink, paper, hairline, seal) rather than decoration. Its finish is native-app calm at the level of macOS and iOS: controls are filled tones rather than outlined boxes, cards are soft 12px sheets, menus grow out of the control that opened them, and the toolbar is translucent. The ledger's data and small labels are set in IBM Plex Mono; its prose stays in Geist. The dark theme is the default (`defaultTheme="dark"`); the light theme is a full washi-paper variant with its own tuned values, not an inversion. The implementation lives in `web/src/styles.css` and `web/src/components/`; update the tokens and this document together when an intentional design change is made. There are no marketing illustrations or decorative charts.
 
 **Key Characteristics:**
 - Warm sumi charcoal grounds in three steps: darkest sidebar, canvas, raised paper-dark panels.
 - One vermilion seal ink reserved for approval acts; everything else is ink and paper.
-- Three hairline values (border, hairline, input) instead of shadows to structure surfaces.
-- Crisp small corners: 6px panels, 4px controls, 2px chips and seal marks.
-- Geist for the interface, Geist Mono only for numbers, IDs and keys; both self-hosted.
-- One authored motion, the hanko stamp; everything else is short state feedback.
+- Hairlines (border, hairline, input) structure in-flow surfaces; only floating layers cast a shadow.
+- Filled controls one tone off their surface (`control`), never outlined boxes.
+- Soft native corners: 8px controls, 12px cards and menus, 16px dialogs; capsule status chips; 1.5px seal marks.
+- Geist for interface and prose; IBM Plex Mono for the ledger voice (figures, IDs, keys, timestamps, chips, column heads, labels); both self-hosted.
+- One authored motion, the hanko stamp; everything else is short state feedback on native curves.
 
 ## Colors
 
 A warm, low-chroma sumi/kinari neutral world with a single shu-vermilion ink and four retuned semantic hues (moss, yamabuki, carmine-pink, ai-blue). Light values are the plain keys above; dark values carry the `dark-` prefix.
 
 ### Primary
-- **Shu Seal Vermilion** (`primary` / `seal` / `ring`): primary action buttons, the active-route seal marker, the focus ring and caret, text selection (32% mix), checkbox and radio accent, completed setup-step squares, the brand seal in the app, the usage chart line and the activity heatmap ink. In dark mode the button fill (`dark-primary`) is slightly deeper than the seal ink (`dark-seal`) so the brighter seal reads as ink on charcoal while white button text keeps contrast.
+- **Shu Seal Vermilion** (`primary` / `seal` / `ring`): primary action buttons, the active-route seal marker, the focus ring and caret, text selection (32% mix), checkbox and radio accent, the on state of toggle switches, completed setup-step squares, the brand seal in the app, the usage chart line and the activity heatmap ink. In dark mode the button fill (`dark-primary`) is slightly deeper than the seal ink (`dark-seal`) so the brighter seal reads as ink on charcoal while white button text keeps contrast.
 - **Brand Seal Vermilion** (`brand-seal`): the exported brand assets only (README lockups, favicon set, `docs/assets/logo.svg`). Dark-ground exports use the same value as `dark-seal`.
 
 ### Neutral
@@ -189,48 +223,54 @@ A warm, low-chroma sumi/kinari neutral world with a single shu-vermilion ink and
 - **Raised Paper** (`surface`, `popover`; dark `dark-surface`, `dark-popover`): cards, panels, dialogs, menus; popovers sit one step above cards in dark mode.
 - **Sidebar Sumi** (`sidebar`, `dark-sidebar`): the navigation rail, the darkest ground in dark mode; `sidebar-accent` is the hover and active-row surface.
 - **Kinari Ink / Sumi Ink** (`foreground`, `dark-foreground`) and **Faded Ink** (`muted-foreground`): body text and secondary metadata.
-- **Secondary, Accent, Muted** grounds: quiet fills for secondary buttons, hovers and empty heatmap cells.
-- **Three hairlines**: `border` (structural dividers and card edges), `hairline` (a slightly stronger rule for outline buttons, dialogs, menus, the tegata panel and the success chip ring), `input` (control boundaries, the 3:1 interactive edge).
+- **Control Tone** (`control`, `control-hover`; dark `dark-control`, `dark-control-hover`): the fill of every pop-up button, outline and secondary button, input, textarea and the success chip. It sits one tone off its surface so a control reads as a filled object, not a box; hover steps one tone further.
+- **Secondary, Accent, Muted** grounds: menu-item focus (`accent`), neutral chips and empty heatmap cells (`muted`).
+- **Three hairlines**: `border` (structural dividers, in-flow card edges, the header and demo-banner rules at 70%), `hairline` (a slightly stronger rule for the tegata panel), `input` (the ruled fields on the tegata pass, the neutral outcome-strip segment).
 
 ### Semantic
 - **Moss** (`success`), **Yamabuki** (`warning`), **Carmine-Pink** (`error`), **Ai-Blue** (`info`), each with a `-muted` ground. `destructive` is reserved for destructive controls; error text and badges use `error`, which has a lighter dark-theme foreground. Paused or unconfigured states remain neutral.
 
 Quota bars and remaining percentages use success at 20% or more, warning below 20%, and error below 5%. Unknown quota stays neutral and has no bar. Numeric labels remain visible.
 
-Keep text contrast at least 4.5:1 and visible control boundaries and focus indicators at least 3:1 against adjacent colors. Subtle structural dividers are not interactive control boundaries.
+Keep text contrast at least 4.5:1 and focus indicators at least 3:1 against adjacent colors. Filled controls are identified by their tone, label and position rather than a 3:1 edge; their focus state supplies the 3:1 seal edge. Subtle structural dividers are not interactive control boundaries.
 
 ### Named Rules
 **The One Seal Rule.** Vermilion is the ink of approval: primary actions, the active route, focus, the brand seal, chart ink and activity density. It never decorates, never fills a panel, and never stands in for a status colour.
 
-**The Withheld Seal Rule.** A disabled primary action loses its seal: it drops to the neutral muted ground with muted text and no shadow, rather than fading the vermilion.
+**The Dimmed Seal Rule.** A disabled primary action keeps its identity but loses its strength: vermilion at 35% with its text at 60%, and no ink-press shadow. Other disabled buttons fade to 50% opacity.
 
 **The Icon And Word Rule.** Status colour never travels alone. Every status chip pairs an icon with text; every warning or error paragraph (`p.text-warning`, `p.text-error`) hangs a 16px triangle or circle icon in its inline-start margin through CSS, so wrapped lines keep one clean edge.
 
 ## Typography
 
 **Body Font:** Geist Variable (with -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif)
-**Mono Font:** Geist Mono Variable (with ui-monospace, SFMono-Regular, Menlo, Consolas, monospace)
+**Mono Font:** IBM Plex Mono 400/500/600 (with ui-monospace, SFMono-Regular, Menlo, Consolas, monospace)
 
-**Character:** a clean, slightly technical grotesque that matches the wordmark, with stylistic sets `ss01` and `cv11` enabled; the mono face appears only where characters must be counted.
+**Character:** a clean, slightly technical grotesque that matches the wordmark, with stylistic sets `ss01` and `cv11` enabled, against IBM Plex Mono as the ledger's old-tech accent: the voice of entries, figures and labels, never of sentences.
 
-Both faces are self-hosted through `@fontsource-variable/geist` and `@fontsource-variable/geist-mono`, bundled with the app. No external font service is used.
+Both faces are self-hosted through `@fontsource-variable/geist` and `@fontsource/ibm-plex-mono`, bundled with the app. No external font service is used.
 
 ### Hierarchy
-- **Title** (600, 22px, 32px line height, -0.025em, balanced wrap): page titles.
+- **Title** (600, 26px, 36px line height, -0.03em, balanced wrap): page titles.
 - **Auth title** (600, 24px, -0.025em, balanced wrap): setup and sign-in headings on the pass.
+- **Dialog title** (600, 18px, tight leading).
 - **Section heading**: body size, medium weight.
 - **Body** (400, 14px, 20px line height): descriptions and most controls. Page descriptions use a 24px line height and a 72ch measure.
-- **Label** (500, 12px): status chips, group labels, secondary metadata; avoid reducing reading text below 12px.
-- **Mono** (Geist Mono): API keys, request IDs, device codes, regex and configuration text.
+- **Label** (500, 12px): secondary metadata in Geist.
+- **Mono label** (IBM Plex Mono 400, 12px, 20px line height, muted ink): column heads (`th`), definition labels (`dt`) and field labels (`.field-label`), applied globally.
+- **Mono chip** (IBM Plex Mono 500, 11px, 20px line height): status chips and sidebar group labels (group labels at 55% ink with +0.01em tracking).
+- **Mono** (IBM Plex Mono): API keys, request IDs, device codes, regex and configuration text, timestamps (every `time` element), and metric figures that opt in with `font-mono`.
 
 ### Named Rules
-**The Counted Characters Rule.** Geist Mono is for strings a person copies or compares character by character (keys, IDs, codes, patterns). Ordinary numbers stay in Geist with tabular figures; tables, `time`, `output`, `kbd` and `code` set `tabular-nums` globally.
+**The Ledger Voice Rule.** IBM Plex Mono is the voice of the ledger's entries and labels: figures that opt in, IDs, keys, timestamps, status chips, column heads, definition labels, field labels and sidebar group labels. Prose (titles, descriptions, sentences, buttons, menu items) is never mono. Tables, `time`, `output`, `kbd` and `code` set `tabular-nums` globally.
+
+**The Sentence Case Rule.** Every label, including the mono ones, is sentence case. No uppercase labels, and no negative tracking on mono; negative tracking belongs only to Geist titles and the wordmark.
 
 Keep all visible UI copy and accessibility labels in the translation dictionaries. Supported languages are English, Japanese, Korean, Spanish, French, German, Portuguese, Russian and Arabic. Allow translations to wrap naturally, including longer European-language phrases; do not truncate important status or recovery information. In right-to-left layouts, code and preformatted text stay left-to-right and headings drop negative tracking.
 
 ## Layout
 
-The desktop shell follows the Shadcn Admin layout: a 272px sidebar (darkest sumi) with the seal and wordmark top-left above the workspace selector, a 56px minimum-height header with a hairline bottom rule, and a fluid main area capped at 1152px. Main content uses 32px horizontal padding on larger screens, 20px on small screens, and 28px vertical padding. The sidebar ends with a compact account trigger containing initials, username, and actual account role, and its scrolling navigation fades out over the last 24px. Always show real instance data.
+The desktop shell follows the Shadcn Admin layout: a 272px sidebar (darkest sumi) with the seal and wordmark top-left above the workspace selector, a sticky, translucent toolbar header (52px minimum height, canvas at 80% under a strong backdrop blur and saturation boost, a 70%-strength border rule beneath, 16px side padding, 24px from 768px), and a fluid main area capped at 1152px. When the instance runs in demo mode, a one-line demo banner sits directly under the header: 13px text on card at 60% with a flask icon, a medium-weight title and muted explanation, and a 70%-strength bottom rule. Main content uses 32px horizontal padding on larger screens, 20px on small screens, and 28px vertical padding. The sidebar ends with a compact account trigger containing initials, username, and actual account role, and its scrolling navigation fades out over the last 24px. Always show real instance data.
 
 Request history, audit records, members, API keys and model prices use the full available main width. Reuse `TableViewport` for a viewport-bounded scrolling area with a sticky header and `Pagination` outside it, so horizontal scrolling remains accessible with long result pages. Show the filtered total, visible record range, current and total pages, 10/25/50/100-row choices, bounded page numbers and direct page entry. Use the existing custom dropdown pattern for page size. On narrow screens, retain the total, page size, previous/next controls and direct page entry while hiding the numbered strip; model prices retain their existing stacked rows. Filters and page-size changes return to page one; deleted or expired records clamp to the last valid page. Page changes reset vertical table scrolling while preserving the horizontal position. On short screens or with expanded filters, allow the main area to scroll rather than clipping controls or collapsing the table.
 
@@ -242,18 +282,20 @@ Use spacing to group related information. The home page leads with personal usag
 
 System settings uses a collapsible sidebar branch with **Workspace alerts**, **Time zone**, a single platform-owner **Client versions** entry at `/admin/settings/clients`, and **Backup and restore**. Use the existing submenu primitives, an expansion chevron, and a subtle indentation guide. Highlight the active child with the same seal marker as top-level routes; keep the parent as a keyboard-operable disclosure button with `aria-expanded` and `aria-controls`. Selecting a child closes mobile navigation. A direct child URL opens its branch. The original system-settings URL and saved Codex, Grok, and Claude settings URLs redirect to Client versions. That page stacks all three providers using `ClientVersion` with provider-specific copy, independent form state, and separate save/check actions. Keep its flat divided sections, neutral effective/latest-version summaries, labeled manual-version fields, automatic-check checkboxes, wrapping actions, and secondary check metadata. The summaries use two columns on wide screens and stack on narrow screens; preserve localized loading, validation, success, failure, and disabled-action feedback.
 
-Coarse-pointer targets (buttons, selects, menu buttons, menu items) expand to at least 44px, and inputs use 16px text on touch devices.
+Coarse-pointer targets (buttons, selects, menu buttons, menu items) expand to at least 44px, and inputs use 16px text below 768px and on touch devices. Table rows answer a fine pointer with a quiet 2.5% ink tint over 120ms; touch never sees a stuck hover.
 
 ## Elevation & Depth
 
-Surfaces are flat at rest and structured by tonal steps and hairlines: sidebar, canvas and raised paper-dark panels in dark mode; washi canvas, lighter card paper and a deeper sidebar in light mode. Shadows appear only where something genuinely sits above the page: the primary button's ink-press (a faint inset top highlight over a 1px drop), menus, dialogs, sheets and the tegata pass. Modal layers dim the page with 60% black. Shadow values are carried in `.impeccable/design.json`.
+Surfaces are flat at rest and structured by tonal steps and hairlines: sidebar, canvas and raised paper-dark panels in dark mode; washi canvas, lighter card paper and a deeper sidebar in light mode. Shadows appear only where something genuinely sits above the page. Menus, submenus, dialogs and sheets share one float shadow (`--float-shadow`): a 1px ring at 6% in place of a drawn border, a long soft drop and a short contact shadow, tuned separately per theme. The tegata pass keeps its own warm drop shadow, and the primary button carries a faint ink-press (inset top highlight over a 1px drop). Modal layers dim the page with 55% black and a light 2px backdrop blur. The header is the one translucent layer: content scrolls under it blurred. Shadow values are carried in `.impeccable/design.json`.
 
 ### Named Rules
 **The Ruled Page Rule.** Separate content with a 1px hairline before reaching for a shadow or a nested card. Cards that sit in the page flow carry a border, not a shadow.
 
+**The Floating Layer Rule.** Only what floats above the page (menus, dialogs, sheets, the tegata pass) casts a shadow, and floating layers use the float shadow's 1px ring instead of a hairline border.
+
 ## Shapes
 
-Crisp, small corners built from a 6px base radius: panels, cards, dialogs, menus and the tegata pass use 6px; buttons, inputs, nav rows and tooltips use 4px; status chips use 2px; seal markers are 7–8px squares with 1.5–2px corners set 6 degrees off true. The seal itself is a square hanko; square forms with slight rotation are the system's one recurring silhouette. Scrollbar thumbs are fully rounded. Keep icons from Lucide with consistent stroke treatment; do not use emoji as interface icons.
+Soft, native corners built from an 8px base radius (`--radius`): buttons, inputs, textareas, nav rows, menu items and tooltips use 8px; cards, panels, menus and the tegata pass use 12px; dialogs use 16px; status chips and toggle switches are full capsules; small close and icon affordances keep 6px. Seal markers are 7–8px squares with 1.5–2px corners set 6 degrees off true; heatmap cells keep 2px and outcome bars 1px. The seal itself is a square hanko; square forms with slight rotation are the system's one recurring silhouette. Scrollbar thumbs are fully rounded. Keep icons from Lucide with consistent stroke treatment; do not use emoji as interface icons.
 
 ## Components
 
@@ -271,23 +313,32 @@ The hanko stamp is the product's one authored motion: a square seal presses down
 - **Active-route stamp** (220ms): the 7px nav seal marker stamps in from 1.9x scale and -14 degrees.
 - **Sign-in stamp** (420ms after a 120ms delay): the 48px seal on the tegata pass drops 6px from 1.18x scale with a brief 2px blur, slightly overshoots to 0.98x, and settles.
 
-Other motion is state feedback only: buttons press to 0.97 scale over 150ms with the same ease-out; inputs ease border and ring over 150ms; menus and tooltips fade and zoom from 95% over 150ms; dialogs over 200ms; sheets open in 300ms and close in 200ms; the sidebar collapses over 200ms. `prefers-reduced-motion` collapses all animation and transition durations to near zero. There are no looping decorative effects.
+Other motion is state feedback only, on two curves: the ease-out above and the iOS drawer curve `cubic-bezier(0.32, 0.72, 0, 1)` (`--ease-drawer`).
+- **Buttons** press to 0.97 scale over 150ms ease-out; inputs ease border, ring and fill over 150ms.
+- **Menus** grow from their trigger (Radix transform origin): fade plus scale from 0.96 over 150ms on open, fade plus scale to 0.97 over 100ms on close.
+- **Tooltips** appear in 125ms from 0.97 and leave in 100ms.
+- **Dialogs** fade and scale from 0.96 over 200ms (close 150ms) over the blurred scrim.
+- **Sheets** slide on the drawer curve, 300ms in and 200ms out.
+- **Sidebar** width and group-label fades take 250ms on the drawer curve; toggle-switch thumbs travel over 200ms on the drawer curve.
+
+A global `prefers-reduced-motion` rule collapses all animation and transition durations to 0.01ms. There are no looping decorative effects.
 
 ### Buttons and selectors
 
-Use `Button` for primary, outline, secondary, ghost, destructive and link actions. Buttons are 36px tall (32px small, 40px large) with 4px corners and 14px medium text.
-- **Primary:** vermilion seal ink with white text and the faint ink-press shadow; hover lightens to 88%. Disabled primaries go neutral (muted ground, muted text, no shadow) rather than fading.
-- **Outline:** raised-paper fill with a hairline border; hover strengthens the border to the input value and fills with accent.
-- **Ghost:** transparent, accent fill on hover; used for header icon controls.
+Use `Button` for primary, outline, secondary, ghost, destructive and link actions. Buttons are 36px tall (32px small, 40px large, 36px square icon) with 8px corners and 14px medium Geist text.
+- **Primary:** vermilion seal ink with white text and the faint ink-press shadow; hover lightens to 90%. Disabled primaries dim to vermilion at 35% with 60% text and no shadow (The Dimmed Seal Rule).
+- **Outline and secondary:** the same filled look, the `control` tone with no border, stepping to `control-hover` on hover; outline adds a barely visible inset top highlight. The variant names survive from Shadcn but neither draws an outline.
+- **Ghost:** transparent, `control` fill on hover; used for header icon controls.
+- **Destructive:** destructive fill, white text, hover at 90%.
 - **Focus:** a 2px ring in the seal colour, offset 2px from the canvas.
 
-Language and theme choices use the adapted Shadcn Admin `DropdownMenu` with radio semantics, a checkmark on the selected item, neutral hover/focus backgrounds, and theme-aware popover surfaces with a hairline edge. Do not use browser-native select popups. Text triggers retain a 16px Lucide chevron and a clear gap after the selected label; header triggers show only the language or current-theme icon. Preserve keyboard navigation, Escape dismissal, and return focus to the trigger.
+Language and theme choices use the adapted Shadcn Admin `DropdownMenu` with radio semantics, a checkmark on the selected item, neutral `accent` focus backgrounds on 8px item corners, and theme-aware 12px popover surfaces lifted by the float shadow. Do not use browser-native select popups. Text triggers retain a 16px Lucide chevron and a clear gap after the selected label; header triggers show only the language or current-theme icon. Preserve keyboard navigation, Escape dismissal, and return focus to the trigger.
 
 Desktop controls are compact. Preserve loading and disabled states, and never show an enabled action that cannot perform useful work.
 
 ### Inputs / Fields
 
-Inputs and textareas are 36px tall with 4px corners, an `input`-value hairline, and a raised-paper fill (the canvas background in dark mode, retaining contrast against the input border). Focus turns the border to the seal and adds a 3px seal ring at 25%. Invalid fields use the destructive border and ring. Inside the tegata pass, fields become ruled lines (see Authentication).
+Inputs are 36px tall and textareas grow with content; both have 8px corners, the filled `control` tone with a transparent border, and step to `control-hover` on hover. Focus keeps the fill, turns the border to the seal and adds a 3px seal halo at 25%. Invalid fields use the destructive border and ring; disabled fields fade to 50%. Field labels sit above in the mono label voice (`.field-label`). Inside the tegata pass, fields become ruled lines (see Authentication).
 
 ### Navigation
 
@@ -295,11 +346,11 @@ Workspace content rules live at `/admin/content` in the Administration navigatio
 
 Navigation follows persisted roles. The upper **General** group contains the shared overview with personal usage, personal API keys, personal request history, and Model prices (`/pricing`), available to both administrators and members; the lower **Administration** group contains subscription accounts, API channels, resource groups, all request records, team usage, instance status, and member management and is hidden entirely for members. The overview shows a personal workspace for members and a compact gateway prompt for administrators when needed. The former personal usage URL redirects to the overview. API key management is common to both roles and shows only the current user’s records. Revoked keys are hidden by default; a labeled Show revoked switch stays available in loading, empty, and failed views. Paused and expired keys remain visible. Filtering happens before server pagination, and changing the filter or revoking a key returns to the first page. The filtered empty state offers creation or viewing past keys; successful revocation has persistent inline feedback. Client configuration is opened on demand from a secondary Setup guide button beside Create key, using a right-side sheet with a fixed header and scrollable content. The closed guide takes no space below the key list and does not poll connection state; creation displays the full secret in a one-time dialog, and revocation requires confirmation. Both roles retain personal preferences in the header, including a password-change action. Password dialogs explain that all browser sessions will end while gateway keys remain valid. Member request limits and password reset use an overflow menu beside the existing row actions; dialogs restore focus to that trigger. Direct access to an administrator route shows a localized access-denied page before management content mounts. Member management uses a paginated table and a focused creation sheet; status changes show clear pending and error feedback.
 
-Reuse `SidebarProvider`, `Sidebar`, `SidebarMenuButton`, and `SidebarTrigger`. Nav rows are 36px with 4px corners, 16px Lucide icons and ink at 72% opacity; group labels are 12px medium at 50% ink, sentence case. The active route takes the sidebar-accent surface, medium weight, full ink, `aria-current`, and a 7px square vermilion seal at the row's inline end that stamps in over 220ms. Close the mobile sheet after navigation and retain keyboard focus handling from Radix. The account trigger opens a Shadcn Admin-style menu beside the desktop sidebar or above the trigger on mobile. Show the real username, account role, and a sign-out action; keep pending and failed sign-out feedback visible in the sidebar.
+Reuse `SidebarProvider`, `Sidebar`, `SidebarMenuButton`, and `SidebarTrigger`. Nav rows are 36px with 8px corners, 16px Lucide icons and ink at 72% opacity; group labels are IBM Plex Mono 11px at 55% ink, sentence case. The active route takes the sidebar-accent surface, medium weight, full ink, `aria-current`, and a 7px square vermilion seal at the row's inline end that stamps in over 220ms. Close the mobile sheet after navigation and retain keyboard focus handling from Radix. The account trigger opens a Shadcn Admin-style menu beside the desktop sidebar or above the trigger on mobile. Show the real username, account role, and a sign-out action; keep pending and failed sign-out feedback visible in the sidebar.
 
 ### Authentication: the tegata pass
 
-Sign-in and setup present a travel pass (tegata): a centred raised-paper panel up to 416px wide with a hairline edge, 6px corners and a soft, warm-tinted drop shadow. The 48px vermilion seal sits over the panel's top inline-end corner and stamps once on arrival. Fields on the pass are ruled lines rather than boxes: a single bottom hairline, transparent ground, no inline padding; focus turns the rule to the seal with a 1px seal underline, and invalid fields turn it to the error colour. The page ground carries faint horizontal ledger ruling (hairline every 44px at 30% opacity) masked to an ellipse so it fades out above and below the pass. Setup progress shows two small square seals, filled vermilion for completed steps and a hairline outline for the pending one.
+Sign-in and setup present a travel pass (tegata): a centred raised-paper panel up to 416px wide with a hairline edge, 12px corners and a soft, warm-tinted drop shadow. The 48px vermilion seal sits over the panel's top inline-end corner and stamps once on arrival. Fields on the pass are ruled lines rather than boxes: a single bottom hairline, transparent ground, no inline padding; focus turns the rule to the seal with a 1px seal underline, and invalid fields turn it to the error colour. The page ground carries faint horizontal ledger ruling (hairline every 44px at 30% opacity) masked to an ellipse so it fades out above and below the pass. Setup progress shows two small square seals, filled vermilion for completed steps and a hairline outline for the pending one.
 
 Optional Turnstile verification appears before the sign-in button and uses the active theme, flexible desktop width and compact mobile layout. Password and passkey controls wait for a valid challenge token; failed submissions refresh it, and widget loading failures offer an inline retry. The platform-owner Turnstile page under System settings uses the existing flat form layout, a verification checkbox, Site Key and masked Secret Key fields, persistent save feedback, and an empty secret field after saving. Explain that leaving the secret blank preserves it and that the login hostname must be configured in Cloudflare.
 
@@ -309,7 +360,7 @@ Setup and login share the workspace's compact icon controls, custom dropdown men
 
 ### Status
 
-Use the shared `Status` component for success, warning, error, information, or neutral badges: 12px medium text, 2px corners, a 1px inset ring at 15% of the text colour, and an icon before the text. Warning, error and info use their muted ground and semantic ink with a triangle, circle-alert or info icon; neutral uses the muted ground with a pause icon. Success is a stamped pass: a neutral ink chip with a hairline ring and a 7px vermilion seal (rotated -6 degrees) in place of an icon. A temporary loading state uses a labeled spinner and respects reduced motion.
+Use the shared `Status` component for success, warning, error, information, or neutral badges: filled capsules (full radius, no ring) with IBM Plex Mono 11px medium text and a 14px icon before the text. Warning, error and info use their muted ground and semantic ink with a triangle, circle-alert or info icon; neutral uses the muted ground with a pause icon. Success is a stamped pass: a neutral ink chip on the `control` tone with a 7px vermilion seal (rotated -6 degrees) in place of an icon. A temporary loading state uses a labeled spinner and respects reduced motion.
 
 ### Outcome strip
 
@@ -329,7 +380,7 @@ Account pools use a compact list with names, enablement, account/member counts, 
 
 Pool access is granted directly to members; ordinary sharing needs no allowance. The member list includes the workspace owner, administrators, and ordinary members. The owner remains protected from status and role changes. Joining an existing login uses its username and an explicit workspace role. Changing a role must preserve the membership's enabled state; creating a new member or joining an existing one offers an immediate pool-grant action. Personal key creation requires an explicit pool choice, shows each pool's account count, and warns when a selected pool is empty. The overview marks key setup ready only when an active key can reach a ready account through its current pool and allowance binding.
 
-Optional resource allowances use dedicated pools and present percentage shares, direct internal USD amounts, direct token limits, and configurable time-window USD limits as mutually exclusive choices. Share mode chooses a Token/internal USD unit and either a calendar total or up to eight elapsed-window totals before assigning common member percentages. Time-window mode accepts up to eight whole-hour or whole-day conditions with shared USD defaults for selected members and per-condition personal overrides; each member is metered independently, and an empty limit is unlimited. Daily/monthly rules choose a reset clock or date and clock in the instance time zone; duration windows begin at activation and renew independently by elapsed time. Pool and reset-period selectors reuse the custom `DropdownMenu` radio pattern with an outline trigger, selected checkmark, and chevron. Keep fixed pool choices visible but disabled when editing. Group rule details, allowance fields, member selection, and activation into flat sections with dividers; keep the incumbent background. Put name and pool side by side on wide screens, arrange mode choices in two columns, align member inputs, and provide a select-all checkbox for each mode. Show M, USD, or % beside inputs and allocated/unallocated percentages below share inputs. For priced rules, snapshot prices from models supported by the selected pool without asking for prices in the allowance form. Keep internal budgets distinct from upstream capacity and cash balances.
+Optional resource allowances use dedicated pools and present percentage shares, direct internal USD amounts, direct token limits, and configurable time-window USD limits as mutually exclusive choices. Share mode chooses a Token/internal USD unit and either a calendar total or up to eight elapsed-window totals before assigning common member percentages. Time-window mode accepts up to eight whole-hour or whole-day conditions with shared USD defaults for selected members and per-condition personal overrides; each member is metered independently, and an empty limit is unlimited. Daily/monthly rules choose a reset clock or date and clock in the instance time zone; duration windows begin at activation and renew independently by elapsed time. Pool and reset-period selectors reuse the custom `DropdownMenu` radio pattern with a filled trigger, selected checkmark, and chevron. Keep fixed pool choices visible but disabled when editing. Group rule details, allowance fields, member selection, and activation into flat sections with dividers; keep the incumbent background. Put name and pool side by side on wide screens, arrange mode choices in two columns, align member inputs, and provide a select-all checkbox for each mode. Show M, USD, or % beside inputs and allocated/unallocated percentages below share inputs. For priced rules, snapshot prices from models supported by the selected pool without asking for prices in the allowance form. Keep internal budgets distinct from upstream capacity and cash balances.
 
 Allocation balances use divided rows with tabular allowance, used, and remaining values. Show reset timestamps in the configured instance time zone independently of status. Time-window balances group every configured condition under one member, identify which condition blocks admission, show an unlimited condition without a zero remaining amount, and derive the member status from the most restrictive limited condition. Ratio balances use the selected amount or token unit after multiplying the total by the member's percentage. Use the shared `Status` component: unavailable is neutral, new-request risk pauses are warning, exhausted is error even when reconciliation is pending, and active is success. Current-window active/pending counts, provisional reservations, and admission headroom explain a risk pause without presenting reserved capacity as spent usage; pending entries outside a window do not change that window's status. Current scheme details remain distinct from a secondary next-cycle mode/effective-date notice. The current-member editor retains usage and captured reservations and exposes only member inputs. Ordinary budget/price changes stay scheduled without restarting intervals; structural changes require explicit new-period confirmation. Access enablement stays a separate control. Forms retain reviewed version conditions through background refresh and offer explicit refresh/review after conflicts.
 
@@ -359,7 +410,7 @@ Model rows show upstream-reported capabilities in a compact definition list belo
 
 ### Overlays
 
-Dialogs and menus are raised paper (popover one step above card in dark mode) with a hairline edge and 6px corners; dialogs use 24px padding. Sheets slide from the edge on the card ground. Tooltips invert to ink on canvas with 4px corners and 12px text.
+Menus and dialogs are raised paper (popover, one step above card in dark mode) lifted by the float shadow with no drawn border: menus have 12px corners and 4px inner padding; dialogs have 16px corners and 24px padding over a 55% black scrim with a 2px blur. Sheets slide from the edge on the popover ground with a hairline on their inner edge and the float shadow. Tooltips invert to ink on canvas with 8px corners, 12px text and a small rounded arrow.
 
 ### Backup and restore
 
@@ -392,7 +443,9 @@ Keep pending cancellation and postponement inline with the existing allowance ro
 ### Do:
 - **Do** reuse the semantic tokens and adapted Shadcn Admin primitives; change `styles.css` and this file together.
 - **Do** reserve vermilion for approval acts: primary actions, the active-route seal, focus, the brand seal, chart ink and activity density.
-- **Do** drop disabled primaries to the neutral muted ground instead of a faded vermilion.
+- **Do** dim disabled primaries to vermilion at 35% with 60% text and no shadow.
+- **Do** fill controls with the `control` tone; let focus, not a resting outline, draw the seal edge.
+- **Do** set figures that opt in, IDs, keys, timestamps, status chips, column heads, field labels and sidebar group labels in IBM Plex Mono, sentence case.
 - **Do** pair every status colour with an icon and text; a success state is stamped with the seal.
 - **Do** verify the dark default and the light variant, keyboard navigation, narrow layouts, right-to-left Arabic, and the supported languages (English, Japanese, Korean, Spanish, French, German, Portuguese, Russian, Arabic).
 - **Do** keep the hanko stamp as the one authored motion and respect `prefers-reduced-motion`.
@@ -401,7 +454,9 @@ Keep pending cancellation and postponement inline with the existing allowance ro
 ### Don't:
 - **Don't** use vermilion as a decorative fill, a panel background, or a substitute for a status colour.
 - **Don't** add decorative colour gradients, glows, vivid dashboard fills, or arbitrary accent colours; the only patterned ground is the faint ledger ruling behind the tegata pass.
-- **Don't** load fonts from an external service; Geist and Geist Mono ship with the app.
+- **Don't** load fonts from an external service; Geist and IBM Plex Mono ship with the app.
+- **Don't** set prose in mono, uppercase a label, or apply negative tracking to mono text.
+- **Don't** draw outlined boxes around buttons or fields, or give in-flow cards a shadow.
 - **Don't** alter the seal geometry, recolour it outside the vermilion pair, or use the framed seal below 24px.
 - **Don't** display fake business records or performance claims.
 - **Don't** rely on color, hover, or icons alone for essential information.

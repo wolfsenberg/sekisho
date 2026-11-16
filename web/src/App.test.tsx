@@ -1,4 +1,4 @@
-import { render, screen, waitFor } from '@testing-library/react'
+import { render, screen, waitFor, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { createMemoryHistory } from '@tanstack/react-router'
 import { expect, it, vi } from 'vitest'
@@ -161,6 +161,8 @@ it('shows a failed connection and allows recovery', async () => {
           }),
         ),
       )
+    if (url !== '/api/system')
+      return Promise.resolve(new Response(JSON.stringify(system)))
     systemCalls++
     return Promise.resolve(
       systemCalls === 1
@@ -175,8 +177,11 @@ it('shows a failed connection and allows recovery', async () => {
       router={createAppRouter(createMemoryHistory({ initialEntries: ['/'] }))}
     />,
   )
-  expect(await screen.findByRole('alert')).toBeTruthy()
-  await user.click(screen.getByRole('button', { name: 'Reconnect' }))
+  // Other overview widgets may show their own Reconnect; use the connection alert's.
+  const failure = (await screen.findByText('Unable to connect')).closest(
+    '[role="alert"]',
+  ) as HTMLElement
+  await user.click(within(failure).getByRole('button', { name: 'Reconnect' }))
   expect(
     await screen.findByRole('heading', { name: 'Gateway setup' }),
   ).toBeTruthy()
