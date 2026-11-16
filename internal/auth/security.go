@@ -15,11 +15,11 @@ import (
 	"strings"
 	"time"
 
+	"github.com/pquerna/otp"
+	"github.com/pquerna/otp/totp"
 	"github.com/wolfsenberg/sekisho/internal/audit"
 	"github.com/wolfsenberg/sekisho/internal/storage/db"
 	"github.com/wolfsenberg/sekisho/internal/vault"
-	"github.com/pquerna/otp"
-	"github.com/pquerna/otp/totp"
 )
 
 var (

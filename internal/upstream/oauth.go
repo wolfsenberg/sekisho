@@ -10,8 +10,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/wolfsenberg/sekisho/internal/accounts"
 	sdkauth "github.com/router-for-me/CLIProxyAPI/v8/sdk/auth"
+	"github.com/wolfsenberg/sekisho/internal/accounts"
 )
 
 // Public installed-app OAuth parameters match the pinned SDK's MIT-licensed provider adapters.

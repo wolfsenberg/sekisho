@@ -12,10 +12,10 @@ import (
 	"strings"
 	"unicode"
 
-	"github.com/wolfsenberg/sekisho/internal/accounts"
 	core "github.com/router-for-me/CLIProxyAPI/v8/sdk/cliproxy/auth"
 	exec "github.com/router-for-me/CLIProxyAPI/v8/sdk/cliproxy/executor"
 	"github.com/router-for-me/CLIProxyAPI/v8/sdk/translator"
+	"github.com/wolfsenberg/sekisho/internal/accounts"
 )
 
 func channelExecutor(credential accounts.Credential) string {

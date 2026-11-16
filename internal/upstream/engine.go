@@ -19,7 +19,6 @@ import (
 	"time"
 
 	"github.com/gin-gonic/gin"
-	"github.com/wolfsenberg/sekisho/internal/accounts"
 	sdkapi "github.com/router-for-me/CLIProxyAPI/v8/sdk/api"
 	"github.com/router-for-me/CLIProxyAPI/v8/sdk/cliproxy"
 	core "github.com/router-for-me/CLIProxyAPI/v8/sdk/cliproxy/auth"
@@ -27,6 +26,7 @@ import (
 	sdkconfig "github.com/router-for-me/CLIProxyAPI/v8/sdk/config"
 	"github.com/router-for-me/CLIProxyAPI/v8/sdk/translator"
 	"github.com/sirupsen/logrus"
+	"github.com/wolfsenberg/sekisho/internal/accounts"
 )
 
 type sdkRuntime struct {

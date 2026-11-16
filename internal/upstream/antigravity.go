@@ -9,8 +9,8 @@ import (
 	"sync"
 	"time"
 
-	"github.com/wolfsenberg/sekisho/internal/accounts"
 	sdkauth "github.com/router-for-me/CLIProxyAPI/v8/sdk/auth"
+	"github.com/wolfsenberg/sekisho/internal/accounts"
 )
 
 func (c *Client) antigravityTokens(ctx context.Context, code string, old accounts.Credential) (accounts.Credential, error) {

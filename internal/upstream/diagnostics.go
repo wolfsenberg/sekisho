@@ -10,8 +10,8 @@ import (
 	"regexp"
 	"syscall"
 
-	"github.com/wolfsenberg/sekisho/internal/logging"
 	exec "github.com/router-for-me/CLIProxyAPI/v8/sdk/cliproxy/executor"
+	"github.com/wolfsenberg/sekisho/internal/logging"
 )
 
 var diagnosticRequestID = regexp.MustCompile(`^(req_[a-zA-Z0-9_-]{1,124}|[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12})$`)

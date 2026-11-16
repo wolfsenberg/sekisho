@@ -8,9 +8,9 @@ import (
 	"testing"
 	"time"
 
+	"github.com/pquerna/otp/totp"
 	"github.com/wolfsenberg/sekisho/internal/audit"
 	"github.com/wolfsenberg/sekisho/internal/vault"
-	"github.com/pquerna/otp/totp"
 )
 
 func securityFixture(t *testing.T) (*Service, Session) {

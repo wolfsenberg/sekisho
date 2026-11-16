@@ -9,8 +9,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/wolfsenberg/sekisho/internal/accounts"
 	core "github.com/router-for-me/CLIProxyAPI/v8/sdk/cliproxy/auth"
+	"github.com/wolfsenberg/sekisho/internal/accounts"
 )
 
 // CatalogSource invalidates cached discovery when its request contract changes.

@@ -7,10 +7,10 @@ import (
 	"testing"
 	"time"
 
+	"github.com/pquerna/otp/totp"
 	"github.com/wolfsenberg/sekisho/internal/auth"
 	"github.com/wolfsenberg/sekisho/internal/storage"
 	"github.com/wolfsenberg/sekisho/internal/vault"
-	"github.com/pquerna/otp/totp"
 )
 
 func TestBackupVerifiesTOTPSecrets(t *testing.T) {

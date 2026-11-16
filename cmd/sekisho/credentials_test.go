@@ -8,12 +8,12 @@ import (
 	"testing"
 	"time"
 
+	"github.com/pquerna/otp/totp"
 	"github.com/wolfsenberg/sekisho/internal/alerts"
 	"github.com/wolfsenberg/sekisho/internal/apikey"
 	"github.com/wolfsenberg/sekisho/internal/auth"
 	"github.com/wolfsenberg/sekisho/internal/storage"
 	"github.com/wolfsenberg/sekisho/internal/vault"
-	"github.com/pquerna/otp/totp"
 )
 
 func TestVaultReopensInitializedWorkspace(t *testing.T) {

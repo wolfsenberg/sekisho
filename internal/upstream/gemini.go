@@ -8,9 +8,9 @@ import (
 	"net/http"
 	"strings"
 
-	"github.com/wolfsenberg/sekisho/internal/accounts"
 	exec "github.com/router-for-me/CLIProxyAPI/v8/sdk/cliproxy/executor"
 	"github.com/router-for-me/CLIProxyAPI/v8/sdk/translator"
+	"github.com/wolfsenberg/sekisho/internal/accounts"
 )
 
 func GeminiRequest(raw []byte, model string, maxRequestBody ...int64) ([]byte, error) {
