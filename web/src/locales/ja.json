@@ -1594,5 +1594,11 @@
   "ipReportLookupNamed": "{{name}} の IP 純度を確認",
   "ipReportLookupHint": "確認すると、この出口 IP が ip.net.coffee に送信されます。",
   "allocationImageInputM": "うち画像入力 · M",
-  "allocationImageInputHint": "画像モデルのリクエスト用：入力トークンのうち画像の分で、画像入力料金で課金されます。それ以外は空欄のままにしてください。"
+  "allocationImageInputHint": "画像モデルのリクエスト用：入力トークンのうち画像の分で、画像入力料金で課金されます。それ以外は空欄のままにしてください。",
+  "mascotTitle": "キツネのセキ",
+  "mascotDescription": "ダッシュボードの下を歩き回るピクセルのキツネです。ドラッグで好きな場所へ動かせて、クリックするとあいさつします。",
+  "mascotShow": "セキを表示",
+  "mascotLabel": "キツネのセキ。ドラッグで移動、クリックであいさつ。",
+  "mascotHello": "こんにちは、ぼくはセキ！",
+  "mascotWake": "ふわぁ…あ、こんにちは！"
 }

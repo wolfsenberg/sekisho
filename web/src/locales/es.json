@@ -1599,5 +1599,11 @@
   "ipReportLookupNamed": "Comprobar la pureza de IP de {{name}}",
   "ipReportLookupHint": "Al comprobarla, esta IP de salida se envía a ip.net.coffee.",
   "allocationImageInputM": "Entrada de imagen · M",
-  "allocationImageInputHint": "Para solicitudes de modelos de imagen: la parte de imagen de los tokens de entrada, cobrada a la tarifa de entrada de imagen. Déjalo vacío en otro caso."
+  "allocationImageInputHint": "Para solicitudes de modelos de imagen: la parte de imagen de los tokens de entrada, cobrada a la tarifa de entrada de imagen. Déjalo vacío en otro caso.",
+  "mascotTitle": "Seki, el zorro",
+  "mascotDescription": "Un zorro pixelado que pasea por la parte inferior del panel. Arrástralo a cualquier lugar o haz clic para saludarlo.",
+  "mascotShow": "Mostrar a Seki",
+  "mascotLabel": "Seki, el zorro. Arrastra para moverlo, haz clic para saludar.",
+  "mascotHello": "¡Hola, me llamo Seki!",
+  "mascotWake": "*bostezo*… ¡ah, hola!"
 }

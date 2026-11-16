@@ -1,6 +1,6 @@
 # Sekisho brand materials
 
-A complete digital asset set based on the Sekisho seal: a square vermilion hanko with a framed, seal-script S cut through it, like the stamp a checkpoint pressed onto a travel pass. The seal geometry is preserved exactly across the set.
+A complete digital asset set based on the Sekisho seal: a square red hanko with a framed, seal-script S cut through it, like the stamp a checkpoint pressed onto a travel pass. The seal geometry is preserved exactly across the set.
 
 Open `preview.html` locally to browse and filter the artwork. Use `overview.png` for a quick view of the system.
 
@@ -73,7 +73,7 @@ Copy the desired icon files into the application's public directory before addin
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 ```
 
-Browser icons use the frameless vermilion seal, which reads on both light and dark browser chrome. Opaque square app icons are supplied for platform masking; the rounded app artwork is a separate presentation asset.
+Browser icons use the frameless red seal, which reads on both light and dark browser chrome. Opaque square app icons are supplied for platform masking; the rounded app artwork is a separate presentation asset.
 
 ## GitHub social preview
 

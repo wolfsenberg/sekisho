@@ -6,6 +6,7 @@ import { Security } from '@/components/Security'
 import { PasswordDialog } from '@/components/PasswordDialog'
 import { Button } from '@/components/ui/Button'
 import { LanguageSelect, ThemeSelect } from '@/components/Preferences'
+import { MascotSetting } from '@/components/Mascot'
 
 export function Settings() {
   const { t } = useTranslation()
@@ -27,6 +28,15 @@ export function Settings() {
             <h2 className="font-medium">{t('language')}</h2>
           </div>
           <LanguageSelect />
+        </section>
+        <section className="flex flex-wrap items-center justify-between gap-4 py-6">
+          <div>
+            <h2 className="font-medium">{t('mascotTitle')}</h2>
+            <p className="mt-2 max-w-md text-sm text-muted-foreground">
+              {t('mascotDescription')}
+            </p>
+          </div>
+          <MascotSetting />
         </section>
         <section className="flex flex-wrap items-center justify-between gap-4 py-6">
           <div>

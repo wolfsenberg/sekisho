@@ -1992,4 +1992,11 @@ export const en = {
   allocationImageInputM: 'Image input · M',
   allocationImageInputHint:
     'For image model requests: the image share of input tokens, charged at the image input rate. Leave empty otherwise.',
+  mascotTitle: 'Seki the fox',
+  mascotDescription:
+    'A pixel fox that wanders the bottom of the dashboard. Drag it anywhere, or click it to say hello.',
+  mascotShow: 'Show Seki',
+  mascotLabel: 'Seki the fox. Drag to move, click to say hello.',
+  mascotHello: 'Hi, my name is Seki!',
+  mascotWake: '*yawn*… oh, hi!',
 } satisfies Record<string, string>

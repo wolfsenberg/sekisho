@@ -1594,5 +1594,11 @@
   "ipReportLookupNamed": "{{name}}의 IP 청정도 확인",
   "ipReportLookupHint": "확인하면 이 출구 IP가 ip.net.coffee로 전송됩니다.",
   "allocationImageInputM": "이미지 입력 · M",
-  "allocationImageInputHint": "이미지 모델 요청 전용: 입력 토큰 중 이미지 부분이며 이미지 입력 요금으로 청구됩니다. 그 외에는 비워 두세요."
+  "allocationImageInputHint": "이미지 모델 요청 전용: 입력 토큰 중 이미지 부분이며 이미지 입력 요금으로 청구됩니다. 그 외에는 비워 두세요.",
+  "mascotTitle": "여우 세키",
+  "mascotDescription": "대시보드 아래를 돌아다니는 픽셀 여우입니다. 원하는 곳으로 끌어 옮기거나 클릭해서 인사해 보세요.",
+  "mascotShow": "세키 표시",
+  "mascotLabel": "여우 세키. 끌어서 옮기고, 클릭하면 인사합니다.",
+  "mascotHello": "안녕, 내 이름은 세키야!",
+  "mascotWake": "하암… 아, 안녕!"
 }

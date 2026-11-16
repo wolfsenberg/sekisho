@@ -23,12 +23,12 @@ const fonts = new Map()
 const assets = []
 const drawings = new Map()
 let textBounds = []
-// Sumi ink, kinari paper and one shu-vermilion seal ink.
+// After Dark: near-black ink, cool white paper and one hot red seal ink.
 const colors = {
-  ink: '#1A1916', paper: '#F7F5F0', canvas: '#EFECE5', night: '#100F0E',
-  surface: '#1A1917', gray: '#6B665C', silver: '#A39E93', line: '#DDD8CE',
-  seal: '#D9442A', sealDark: '#E5573B',
-  success: '#2F7D4A', warning: '#8A5A0B', error: '#B4233A', info: '#2A5DA8',
+  ink: '#111113', paper: '#F6F6F7', canvas: '#EFEFF1', night: '#0A0A0A',
+  surface: '#131313', gray: '#5D5D64', silver: '#A1A1A6', line: '#E3E3E7',
+  seal: '#D4170F', sealDark: '#FF3B30',
+  success: '#16794A', warning: '#8A5300', error: '#B4155A', info: '#1F5FC4',
 }
 const esc = (s) => String(s).replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('"', '&quot;')
 const num = (n) => Number(n.toFixed(4))
@@ -75,7 +75,7 @@ function mark(x, y, size, fill = colors.seal, compact = size < 24) {
   return '<g fill="' + fill + '" transform="translate(' + num(x) + ' ' + num(y) + ') scale(' + num(size / 256) + ')">' + (compact ? smallPaths : markPaths) + '</g>'
 }
 
-// The seal keeps its vermilion on every ground; only the wordmark follows the theme.
+// The seal keeps its red on every ground; only the wordmark follows the theme.
 function lockup(x, y, size, fill = colors.ink) {
   const seal = fill === colors.ink ? colors.seal : colors.sealDark
   return mark(x, y, size, seal) + text('Sekisho', x + size * 1.22, y + size * 0.76, size * 0.74, 620, fill, 'left', -0.03)
@@ -228,7 +228,7 @@ board += text('Sekisho', 1840, 825, 106, 650, colors.ink, 'left', -0.025)
 board += text('Geist 620 · Outlined for portability', 1840, 1019, 21, 450, colors.gray)
 board += rect(40, 1098, 1510, 300, colors.paper) + inset('banners/readme-light', 64, 1120, 1462, 250)
 board += rect(1570, 1098, 790, 300, colors.night)
-board += text('Sumi, kinari, one seal ink.', 1614, 1160, 32, 550, colors.paper)
+board += text('Black, cool white, one red seal.', 1614, 1160, 32, 550, colors.paper)
 board += text('Vermilion marks approval and action.', 1614, 1210, 25, 450, colors.silver)
 for (const [i, value] of [colors.paper, colors.silver, colors.surface, colors.sealDark].entries()) board += rect(1614 + i * 175, 1252, 151, 62, value, 4)
 for (const [i, [label, fill]] of [['Success', '#8CC69B'], ['Warning', '#E7B95E'], ['Error', '#F1899A'], ['Info', '#94B6EA']].entries()) {

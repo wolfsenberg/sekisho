@@ -1594,5 +1594,11 @@
   "ipReportLookupNamed": "IP-Reinheit für {{name}} prüfen",
   "ipReportLookupHint": "Beim Prüfen wird diese Ausgangs-IP an ip.net.coffee gesendet.",
   "allocationImageInputM": "Bildeingabe · M",
-  "allocationImageInputHint": "Für Anfragen an Bildmodelle: der Bildanteil der Eingabetokens, abgerechnet zum Bildeingabepreis. Sonst leer lassen."
+  "allocationImageInputHint": "Für Anfragen an Bildmodelle: der Bildanteil der Eingabetokens, abgerechnet zum Bildeingabepreis. Sonst leer lassen.",
+  "mascotTitle": "Seki, der Fuchs",
+  "mascotDescription": "Ein Pixel-Fuchs, der am unteren Rand des Dashboards umherläuft. Zieh ihn an eine beliebige Stelle oder klicke ihn an, um ihn zu begrüßen.",
+  "mascotShow": "Seki anzeigen",
+  "mascotLabel": "Seki, der Fuchs. Zum Verschieben ziehen, zum Begrüßen klicken.",
+  "mascotHello": "Hallo, ich heiße Seki!",
+  "mascotWake": "*gähn*… oh, hallo!"
 }

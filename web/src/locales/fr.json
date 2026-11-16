@@ -1599,5 +1599,11 @@
   "ipReportLookupNamed": "Vérifier la pureté IP de {{name}}",
   "ipReportLookupHint": "La vérification envoie cette IP de sortie à ip.net.coffee.",
   "allocationImageInputM": "Entrée image · M",
-  "allocationImageInputHint": "Pour les requêtes de modèles d’image : la part image des jetons d’entrée, facturée au tarif d’entrée image. Sinon, laissez vide."
+  "allocationImageInputHint": "Pour les requêtes de modèles d’image : la part image des jetons d’entrée, facturée au tarif d’entrée image. Sinon, laissez vide.",
+  "mascotTitle": "Seki le renard",
+  "mascotDescription": "Un renard en pixels qui se promène en bas du tableau de bord. Faites-le glisser où vous voulez ou cliquez dessus pour le saluer.",
+  "mascotShow": "Afficher Seki",
+  "mascotLabel": "Seki le renard. Faites glisser pour le déplacer, cliquez pour le saluer.",
+  "mascotHello": "Salut, je m’appelle Seki !",
+  "mascotWake": "*bâille*… oh, salut !"
 }

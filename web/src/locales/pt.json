@@ -1599,5 +1599,11 @@
   "ipReportLookupNamed": "Verificar a pureza do IP de {{name}}",
   "ipReportLookupHint": "A verificação envia este IP de saída para ip.net.coffee.",
   "allocationImageInputM": "Entrada de imagem · M",
-  "allocationImageInputHint": "Para solicitações de modelos de imagem: a parte de imagem dos tokens de entrada, cobrada pela tarifa de entrada de imagem. Caso contrário, deixe vazio."
+  "allocationImageInputHint": "Para solicitações de modelos de imagem: a parte de imagem dos tokens de entrada, cobrada pela tarifa de entrada de imagem. Caso contrário, deixe vazio.",
+  "mascotTitle": "Seki, a raposa",
+  "mascotDescription": "Uma raposa em pixels que passeia pela parte inferior do painel. Arraste-a para qualquer lugar ou clique para dizer olá.",
+  "mascotShow": "Mostrar Seki",
+  "mascotLabel": "Seki, a raposa. Arraste para mover, clique para dizer olá.",
+  "mascotHello": "Oi, meu nome é Seki!",
+  "mascotWake": "*bocejo*… ah, oi!"
 }

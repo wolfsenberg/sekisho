@@ -31,7 +31,7 @@ Sekisho brings AI subscriptions into one gateway with isolated workspaces for di
 - **Usage controls:** Per-member request rate and concurrency limits, plus optional token or internal USD allowances, including percentage shares across multiple time-window budgets.
 - **Content rules:** Optional workspace terms and regular expressions, with observe/block modes, encrypted matching content and checks before model dispatch across HTTP and WebSocket.
 - **Operations:** Personal and workspace usage charts, activity heatmaps, request diagnostics, management audit logs, backup creation, verification and restore, and client version settings.
-- **Dashboard:** Embedded web interface in 9 languages (English, Japanese, Korean, Spanish, French, German, Portuguese, Russian and Arabic), dark by default with a light theme.
+- **Dashboard:** Embedded web interface in 9 languages (English, Japanese, Korean, Spanish, French, German, Portuguese, Russian and Arabic), dark by default with a light theme, plus Seki, an optional pixel fox that wanders the screen (turn it off in Preferences).
 
 ## Screenshots
 
@@ -39,7 +39,7 @@ Captured from the local read-only demo with sample data. Click a preview to open
 
 | Sign in | Workspace overview |
 | --- | --- |
-| [<img src="docs/assets/screenshots/sign-in.png" alt="Sign-in page with the read-only demo entry" width="400">](docs/assets/screenshots/sign-in.png) | [<img src="docs/assets/screenshots/overview.png" alt="Workspace overview with guided setup, request statistics and outcome strip" width="400">](docs/assets/screenshots/overview.png) |
+| [<img src="docs/assets/screenshots/sign-in.png" alt="Sign-in page with the read-only demo entry" width="400">](docs/assets/screenshots/sign-in.png) | [<img src="docs/assets/screenshots/overview.png" alt="Workspace overview with guided setup, request statistics, outcome strip and Seki the pixel fox saying hello" width="400">](docs/assets/screenshots/overview.png) |
 | **Subscription accounts** | **Team usage** |
 | [<img src="docs/assets/screenshots/accounts.png" alt="Subscription accounts with usage limits, verification status and concurrency" width="400">](docs/assets/screenshots/accounts.png) | [<img src="docs/assets/screenshots/usage.png" alt="Team usage with request totals, outcomes and a daily request chart" width="400">](docs/assets/screenshots/usage.png) |
 

@@ -11,14 +11,14 @@ This directory keeps the assets used by repository documentation, color values, 
 | `source/Geist.ttf`, `source/OFL.txt` | The wordmark font and its license for reproducible exports |
 | `tokens.json` | Brand colors, typography, and spacing rules |
 
-The canonical symbol is the Sekisho seal, [`docs/assets/logo.svg`](../docs/assets/logo.svg): a square vermilion hanko with a framed, seal-script S cut through it, drawn as one even-odd path. [`logo-dark.svg`](../docs/assets/logo-dark.svg) uses the brighter dark-ground vermilion, and [`logo-small.svg`](../docs/assets/logo-small.svg) is the frameless version for sizes below 24px. Keep the geometry unchanged. The sole maintained generator lives in `tools/brand/`.
+The canonical symbol is the Sekisho seal, [`docs/assets/logo.svg`](../docs/assets/logo.svg): a square red hanko with a framed, seal-script S cut through it, drawn as one even-odd path. [`logo-dark.svg`](../docs/assets/logo-dark.svg) uses the brighter dark-ground red, and [`logo-small.svg`](../docs/assets/logo-small.svg) is the frameless version for sizes below 24px. Keep the geometry unchanged. The sole maintained generator lives in `tools/brand/`.
 
 ## Usage
 
 - Use the black lockup on light backgrounds and the white lockup on dark backgrounds.
 - Preserve proportions and keep at least one quarter of the mark canvas clear in ordinary layouts.
 - Use the framed seal at 24px or larger; below that, use the frameless seal. The favicon files already do.
-- The seal stays vermilion (`#D9442A` on light grounds, `#E5573B` on dark). Monochrome seal exports exist for single-colour printing.
+- The seal stays red (`#D4170F` on light grounds, `#FF3B30` on dark). Monochrome seal exports exist for single-colour printing.
 - The wordmark uses outlined Geist 620 with -0.03em tracking, matching the application typeface.
 
 Sekisho assets follow the repository's [AGPL-3.0-only license](../LICENSE). The included Geist font retains its separate [SIL OFL 1.1 license](source/OFL.txt).

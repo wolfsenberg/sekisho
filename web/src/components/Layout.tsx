@@ -1,4 +1,5 @@
 import { DemoNotice } from './DemoNotice'
+import { Mascot } from './Mascot'
 import { useId, useState, type ReactNode } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import { Link, Outlet, useRouterState } from '@tanstack/react-router'
@@ -321,6 +322,7 @@ export function Layout({ children }: { children?: ReactNode }) {
             {children ?? <Outlet />}
           </main>
         </SidebarInset>
+        <Mascot />
       </SidebarProvider>
     </TourProvider>
   )

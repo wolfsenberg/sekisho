@@ -1,46 +1,28 @@
-import { CircleAlert, CirclePause, Info, TriangleAlert } from 'lucide-react'
 import { cn } from '@/lib/cn'
 
-// A passed check is stamped: the success badge carries a small vermilion seal.
-function Seal({ className }: { className?: string }) {
-  return (
-    <span
-      className={cn(
-        'inline-block size-[7px] shrink-0 -rotate-6 rounded-[1.5px] bg-seal',
-        className,
-      )}
-    />
-  )
-}
-
-const variants = {
-  // The seal alone carries approval, so the stamped chip itself stays neutral ink.
-  success: { icon: Seal, color: 'bg-control text-foreground' },
-  warning: { icon: TriangleAlert, color: 'bg-warning-muted text-warning' },
-  error: { icon: CircleAlert, color: 'bg-error-muted text-error' },
-  info: { icon: Info, color: 'bg-info-muted text-info' },
-  neutral: { icon: CirclePause, color: 'bg-muted text-muted-foreground' },
+// The word carries the state; colour only marks states that need attention.
+const tones = {
+  success: 'text-foreground',
+  warning: 'text-warning',
+  error: 'text-error',
+  info: 'text-info',
+  neutral: 'text-muted-foreground',
 }
 
 export function Status({
   kind,
   children,
 }: {
-  kind: keyof typeof variants
+  kind: keyof typeof tones
   children: React.ReactNode
 }) {
-  const { icon: Icon, color } = variants[kind]
   return (
     <span
       className={cn(
-        'inline-flex w-fit items-center gap-1.5 whitespace-nowrap rounded-full py-0.5 ps-2 pe-2.5 font-mono text-[0.6875rem] leading-5 font-medium',
-        color,
+        'inline-flex w-fit items-center whitespace-nowrap font-mono text-xs leading-5 font-medium',
+        tones[kind],
       )}
     >
-      <Icon
-        className={kind === 'success' ? 'mx-[3px]' : 'size-3.5'}
-        aria-hidden="true"
-      />
       {children}
     </span>
   )

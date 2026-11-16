@@ -7,10 +7,11 @@
 @custom-variant dark (&:is(.dark *));
 
 /*
- * Sekisho: a sumi-ink ledger where approval is a vermilion seal.
- * Grounds are warm charcoal (dark) or washi paper (light); ink is kinari off-white
- * or sumi. One shu-vermilion ink marks approval acts: primary actions, the active
- * route, focus and the brand seal. Status colours keep their semantic jobs.
+ * Sekisho After Dark: a black ledger where approval is a red seal.
+ * Grounds are true black (dark) or cool white (light); ink is cool white or near
+ * black with one slight grey for secondary text. One hot red marks approval acts:
+ * primary actions, the active route, focus and the brand seal. Errors use magenta
+ * so a failure never looks like a button. Every text colour clears 4.5:1.
  *
  * Finish: native-app calm. Controls are filled, not outlined; cards are soft 12px
  * sheets; the ledger's data and small labels are set in IBM Plex Mono.
@@ -20,92 +21,95 @@
   --radius: 0.5rem;
   --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
   --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
-  --background: #f6f4ef;
-  --foreground: #1a1916;
-  --card: #fcfbf8;
-  --card-foreground: #1a1916;
-  --popover: #fcfbf8;
-  --popover-foreground: #1a1916;
-  --primary: #c2361c;
+  --background: #f6f6f7;
+  --foreground: #111113;
+  --card: #ffffff;
+  --card-foreground: #111113;
+  --popover: #ffffff;
+  --popover-foreground: #111113;
+  --primary: #d4170f;
   --primary-foreground: #ffffff;
-  --secondary: #ece8e0;
-  --secondary-foreground: #1a1916;
-  --muted: #eeeae2;
-  --muted-foreground: #5f5a50;
-  --accent: #ebe6dc;
-  --accent-foreground: #1a1916;
-  --destructive: #a8283a;
-  --border: #e2ddd3;
-  --input: #8c867b;
-  --ring: #c2361c;
-  --seal: #c2361c;
-  --hairline: #d6d0c4;
-  --success: #2a7343;
-  --success-muted: #e8f3eb;
-  --warning: #8a5a0b;
-  --warning-muted: #fbf1de;
-  --error: #b4233a;
-  --error-muted: #fbe8eb;
-  --info: #2a5da8;
-  --info-muted: #e6eef9;
-  --sidebar: #efece5;
+  --secondary: #ebebee;
+  --secondary-foreground: #111113;
+  --muted: #ededf0;
+  --muted-foreground: #5d5d64;
+  --accent: #e8e8ec;
+  --accent-foreground: #111113;
+  --destructive: #b4155a;
+  --border: #e3e3e7;
+  --input: #8b8b93;
+  --ring: #d4170f;
+  --seal: #d4170f;
+  --hairline: #d7d7dc;
+  --success: #16794a;
+  --success-muted: #e6f4ec;
+  --warning: #8a5300;
+  --warning-muted: #fbf2e1;
+  --error: #b4155a;
+  --error-muted: #fbe7ef;
+  --info: #1f5fc4;
+  --info-muted: #e7effc;
+  --sidebar: #efeff1;
   --sidebar-foreground: var(--foreground);
   --sidebar-primary: var(--primary);
   --sidebar-primary-foreground: var(--primary-foreground);
-  --sidebar-accent: #e4dfd4;
+  --sidebar-accent: #e2e2e7;
   --sidebar-accent-foreground: var(--foreground);
   --sidebar-border: var(--border);
   --sidebar-ring: var(--ring);
-  --scrollbar: #cfc9bd;
-  --scrollbar-hover: #b3ac9e;
+  --scrollbar: #cbcbd1;
+  --scrollbar-hover: #a9a9b1;
   /* Filled controls (pop-up buttons, fields) sit one tone off their surface. */
-  --control: #ebe7df;
-  --control-hover: #e2ddd2;
+  --control: #ebebee;
+  --control-hover: #e1e1e6;
+  /* Seki's white chest needs a little tone to show on cool-white grounds. */
+  --mascot-chest: #d9d9de;
   --float-shadow:
-    0 0 0 1px rgb(26 25 22 / 0.06), 0 12px 32px -8px rgb(26 25 22 / 0.18),
-    0 2px 6px -2px rgb(26 25 22 / 0.08);
+    0 0 0 1px rgb(17 17 19 / 0.06), 0 12px 32px -8px rgb(17 17 19 / 0.16),
+    0 2px 6px -2px rgb(17 17 19 / 0.08);
 }
 
 .dark {
   color-scheme: dark;
-  --background: #121110;
-  --foreground: #ece8df;
-  --card: #181715;
-  --card-foreground: #ece8df;
-  --popover: #1c1b19;
-  --popover-foreground: #ece8df;
-  --primary: #c9432a;
-  --primary-foreground: #fbf8f2;
-  --secondary: #24221f;
-  --secondary-foreground: #ece8df;
-  --muted: #1f1e1b;
-  --muted-foreground: #a39e93;
-  --accent: #24221f;
-  --accent-foreground: #ece8df;
-  --destructive: #a8283a;
-  --border: #2b2925;
-  --input: #67625a;
-  --ring: #e5573b;
-  --seal: #e5573b;
-  --hairline: #34322d;
-  --success: #8cc69b;
-  --success-muted: #15241a;
-  --warning: #e7b95e;
-  --warning-muted: #2a2214;
-  --error: #f1899a;
-  --error-muted: #2e171c;
-  --info: #94b6ea;
-  --info-muted: #16202f;
-  --sidebar: #0d0c0b;
-  --sidebar-accent: #1f1d1b;
-  --sidebar-border: #24221f;
-  --scrollbar: #2f2d29;
-  --scrollbar-hover: #46433c;
-  --control: #22201d;
-  --control-hover: #2a2825;
+  --background: #0a0a0a;
+  --foreground: #f2f2f3;
+  --card: #131313;
+  --card-foreground: #f2f2f3;
+  --popover: #171717;
+  --popover-foreground: #f2f2f3;
+  --primary: #d91e18;
+  --primary-foreground: #ffffff;
+  --secondary: #1c1c1c;
+  --secondary-foreground: #f2f2f3;
+  --muted: #181818;
+  --muted-foreground: #a1a1a6;
+  --accent: #1f1f1f;
+  --accent-foreground: #f2f2f3;
+  --destructive: #c2185b;
+  --border: #232323;
+  --input: #5c5c62;
+  --ring: #ff3b30;
+  --seal: #ff3b30;
+  --hairline: #2c2c2e;
+  --success: #6fd09a;
+  --success-muted: #10231a;
+  --warning: #f0b94e;
+  --warning-muted: #261d0c;
+  --error: #ff6b9e;
+  --error-muted: #2a121c;
+  --info: #8cb4ff;
+  --info-muted: #111b2c;
+  --sidebar: #060606;
+  --sidebar-accent: #1b1b1b;
+  --sidebar-border: #1c1c1c;
+  --scrollbar: #2e2e30;
+  --scrollbar-hover: #48484c;
+  --control: #1c1c1c;
+  --control-hover: #252525;
+  --mascot-chest: #ffffff;
   --float-shadow:
-    0 0 0 1px rgb(255 255 255 / 0.06), 0 16px 40px -12px rgb(0 0 0 / 0.6),
-    0 2px 8px -2px rgb(0 0 0 / 0.4);
+    0 0 0 1px rgb(255 255 255 / 0.07), 0 16px 40px -12px rgb(0 0 0 / 0.7),
+    0 2px 8px -2px rgb(0 0 0 / 0.5);
 }
 
 @theme inline {
@@ -295,6 +299,68 @@
   }
 }
 
+/* Seki the fox: a heart that rises when greeted, a "z" that drifts while asleep. */
+.mascot-heart {
+  transform: translateX(-50%);
+  animation: mascot-heart 1.1s var(--ease-out) both;
+}
+.mascot-z {
+  animation: mascot-z 2.4s ease-in-out infinite;
+}
+/* Breathing while asleep and the speech pop use the scale property, so they
+   combine with the sprite's flip and the bubble's centring transforms. */
+.mascot-breathe {
+  transform-origin: 50% 100%;
+  animation: mascot-breathe 2.6s ease-in-out infinite;
+}
+.mascot-speech {
+  transform-origin: 50% 100%;
+  animation: mascot-speech 220ms var(--ease-out) both;
+}
+@keyframes mascot-breathe {
+  0%,
+  100% {
+    scale: 1 1;
+  }
+  50% {
+    scale: 1.03 1.07;
+  }
+}
+@keyframes mascot-speech {
+  from {
+    opacity: 0;
+    scale: 0.9;
+  }
+  to {
+    opacity: 1;
+    scale: 1;
+  }
+}
+@keyframes mascot-heart {
+  from {
+    opacity: 0;
+    transform: translate(-50%, 6px);
+  }
+  25% {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+    transform: translate(-50%, -12px);
+  }
+}
+@keyframes mascot-z {
+  0%,
+  100% {
+    opacity: 0.4;
+    transform: translateY(2px);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(-4px);
+  }
+}
+
 @media (pointer: coarse) {
   button,
   select,
@@ -315,6 +381,15 @@
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mascot-heart,
+  .mascot-z,
+  .mascot-breathe,
+  .mascot-speech {
+    animation: none !important;
   }
 }
 
