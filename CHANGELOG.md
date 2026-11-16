@@ -2,6 +2,17 @@
 
 All notable changes are documented here in [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) format.
 
+## [0.21.0] - 2026-11-16
+
+### Added
+
+- Redesign the dashboard around the hanko seal: dark-first theme, new logo, favicon and brand kit
+
+### Fixed
+
+- Make the repository build, run and restart cleanly on Windows, Linux and macOS
+- Upgrade dependencies with known vulnerabilities
+
 ## [0.20.0] - 2026-11-11
 
 ### Added
@@ -371,6 +382,7 @@ All notable changes are documented here in [Keep a Changelog](https://keepachang
 - Distinguish remaining quota with status colors
 - Restore version-gated model discovery
 
+[0.21.0]: https://github.com/wolfsenberg/sekisho/releases/tag/v0.21.0
 [0.20.0]: https://github.com/wolfsenberg/sekisho/compare/v0.19.2...v0.20.0
 [0.19.2]: https://github.com/wolfsenberg/sekisho/compare/v0.19.1...v0.19.2
 [0.19.1]: https://github.com/wolfsenberg/sekisho/compare/v0.19.0...v0.19.1
