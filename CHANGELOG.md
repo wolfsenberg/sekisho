@@ -2,6 +2,19 @@
 
 All notable changes are documented here in [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) format.
 
+## [0.23.0] - 2026-11-17
+
+### Added
+
+- Seki, an optional 8-bit pixel fox that walks, runs, jumps, sleeps, wakes up and says hi; drag it anywhere or turn it off in Preferences
+
+### Changed
+
+- Switch to an After Dark palette: true black and cool white grounds, cool white and grey text, a hotter red for actions and magenta errors, with every text colour at 4.5:1 or better
+- Show statuses as plain words instead of badges with icons and seal marks
+- Remove the ruled background and card shadow from the sign-in and setup screens
+- Regenerate the logo, favicons and brand kit in the new reds
+
 ## [0.22.1] - 2026-11-17
 
 ### Changed
@@ -400,6 +413,7 @@ All notable changes are documented here in [Keep a Changelog](https://keepachang
 - Distinguish remaining quota with status colors
 - Restore version-gated model discovery
 
+[0.23.0]: https://github.com/wolfsenberg/sekisho/compare/v0.22.1...v0.23.0
 [0.22.1]: https://github.com/wolfsenberg/sekisho/compare/v0.22.0...v0.22.1
 [0.22.0]: https://github.com/wolfsenberg/sekisho/compare/v0.21.0...v0.22.0
 [0.21.0]: https://github.com/wolfsenberg/sekisho/releases/tag/v0.21.0
