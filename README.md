@@ -45,14 +45,46 @@ Captured from the local read-only demo with sample data. Click a preview to open
 
 ## Getting started
 
-### Requirements
+The quickest way to try Sekisho is the published Docker image. It runs on Windows, macOS (Intel and Apple Silicon) and Linux; all you need is [Docker Desktop](https://www.docker.com/products/docker-desktop/), or Docker Engine with Compose on Linux.
+
+### Quick start with Docker
+
+Download [`docker.compose.yaml`](https://github.com/wolfsenberg/sekisho/releases/latest/download/docker.compose.yaml) from the latest release, then start it from the same folder:
+
+```sh
+docker compose -f docker.compose.yaml up -d
+```
+
+Open http://127.0.0.1:8080, create the administrator, name your first workspace, then follow the guided setup to connect a subscription, add it to an account pool and create a personal key. Data is kept in the `sekisho-data` Docker volume, so it survives restarts and upgrades.
+
+To explore with sample data instead, start a read-only demo:
+
+```sh
+SEKISHO_DEMO=true docker compose -f docker.compose.yaml up -d
+```
+
+Then choose **Explore demo** on the login page, or sign in as `demo` / `sekisho-demo`. Changes, credential actions and live API calls are disabled, and the data resets when the demo restarts. In PowerShell, set the variable first with `$env:SEKISHO_DEMO="true"`.
+
+Stop Sekisho with `docker compose -f docker.compose.yaml down`. Add `-v` to also delete its data.
+
+### Guided installer (Linux)
+
+On a Linux server, the installer sets up Docker Compose or the native binary, with optional Caddy or Nginx in front:
+
+```sh
+curl -fsSL https://raw.githubusercontent.com/wolfsenberg/sekisho/main/scripts/install.sh | bash
+```
+
+Binary mode needs a working systemd user manager. Add `--enable-updates` to let the platform owner install new releases from **System settings → Software updates**; this sets up a separate systemd user worker that performs the update outside the web process. Run `bash install.sh --help` for every option.
+
+### Run from source
+
+Requirements:
 
 - Go 1.26 or newer
 - Node.js 24 (see `.node-version`) and pnpm 9.12.2 (`corepack enable` picks it up from `web/package.json`)
 - GNU Make
 - On Windows: run the commands from Git Bash, with Make installed (for example `choco install make`)
-
-### Run from source
 
 ```sh
 git clone https://github.com/wolfsenberg/sekisho.git
@@ -61,42 +93,13 @@ make setup
 make dev
 ```
 
-Open http://127.0.0.1:5173. Create the administrator, name your first workspace, then follow the guided setup to connect a subscription, add it to an account pool and create a personal key.
+Open http://127.0.0.1:5173. `make dev` runs the Go backend on `127.0.0.1:8080` under Air, which rebuilds it when Go code changes, and the Vite dev server with hot reload for the dashboard. The first start compiles everything and can take a couple of minutes. Use `SEKISHO_DEMO=true make dev` for the demo, or `SEKISHO_ADDR=127.0.0.1:9090 make dev` to move the backend to another port.
 
-`make dev` runs the Go backend on `127.0.0.1:8080` under Air, which rebuilds it when Go code changes, and the Vite dev server with hot reload for the dashboard. The first start compiles everything and can take a couple of minutes. To use another backend port, run `SEKISHO_ADDR=127.0.0.1:9090 make dev`.
-
-### Try the demo locally
-
-```sh
-SEKISHO_DEMO=true make dev
-```
-
-Choose **Explore demo** on the login page, or sign in as `demo` / `sekisho-demo`. The demo seeds sample accounts, pools and usage in a disposable, read-only instance; changes, credential actions and live API calls are disabled.
-
-### Production build
-
-```sh
-make build
-./bin/sekisho
-```
-
-This builds the dashboard and embeds it in a single binary. Settings come from environment variables; [.env.example](.env.example) lists the common ones, and [docker.compose.yaml](docker.compose.yaml) shows every option with its default.
-
-### Docker
-
-Build and run the image from source:
-
-```sh
-docker compose -f docker.compose.yaml -f docker.compose.build.yaml up --build -d
-```
-
-The dashboard listens on http://127.0.0.1:8080 and data is kept in the `sekisho-data` volume.
-
-> No release has been published yet. The guided installer (`scripts/install.sh`) and the prebuilt `ghcr.io/wolfsenberg/sekisho` image start working once the first version is tagged; see [CONTRIBUTING.md](CONTRIBUTING.md#publishing-a-version).
+To build a production binary, run `make build` and start `./bin/sekisho`. To build the Docker image from your checkout, run `docker compose -f docker.compose.yaml -f docker.compose.build.yaml up --build -d`. Settings come from environment variables; [.env.example](.env.example) lists the common ones, and [docker.compose.yaml](docker.compose.yaml) shows every option with its default.
 
 ### Software updates
 
-On a Linux installation made with `scripts/install.sh`, add `--enable-updates` to let the platform owner install new releases from **System settings → Software updates**. The flag sets up a separate systemd user worker on the host, which performs the update outside the web process.
+Pull a newer image with `docker compose -f docker.compose.yaml pull` followed by `up -d`. Installations made with the guided installer update with `bash install.sh --update --dir ./sekisho`. Export and verify a backup from **System settings** before updating.
 
 ## Development
 
