@@ -45,27 +45,52 @@ Captured from the local read-only demo with sample data. Click a preview to open
 
 ## Getting started
 
-The quickest way to try Sekisho is the published Docker image. It runs on Windows, macOS (Intel and Apple Silicon) and Linux; all you need is [Docker Desktop](https://www.docker.com/products/docker-desktop/), or Docker Engine with Compose on Linux.
+There are four ways to run Sekisho. Pick the first one that fits:
 
-### Quick start with Docker
+| Way | Best for | You need |
+| --- | --- | --- |
+| [One command](#try-it-in-one-command) | Trying it out in a minute | Docker |
+| [Docker Compose](#docker-compose) | Keeping an instance running | Docker with Compose |
+| [Guided installer](#guided-installer-linux) | A Linux server, optionally behind Caddy or Nginx | Linux with curl |
+| [From source](#run-from-source) | Changing the code | Go, Node.js, pnpm, Make |
 
-Download [`docker.compose.yaml`](https://github.com/wolfsenberg/sekisho/releases/latest/download/docker.compose.yaml) from the latest release, then start it from the same folder:
+Docker runs on Windows, macOS (Intel and Apple Silicon) and Linux; install [Docker Desktop](https://www.docker.com/products/docker-desktop/), or Docker Engine on Linux. The commands below work the same in PowerShell, Git Bash, macOS Terminal and Linux shells unless a note says otherwise.
+
+### Try it in one command
+
+Start a read-only demo with sample data:
+
+```sh
+docker run -d --rm --name sekisho -p 127.0.0.1:8080:8080 -e SEKISHO_DEMO=true ghcr.io/wolfsenberg/sekisho:latest
+```
+
+Open http://127.0.0.1:8080 and choose **Explore demo**, or sign in as `demo` / `sekisho-demo`. Changes, credential actions and live API calls are disabled. Stop it with `docker stop sekisho`; nothing is saved, so every demo starts fresh.
+
+To run a real instance that keeps its data in a Docker volume:
+
+```sh
+docker run -d --name sekisho -p 127.0.0.1:8080:8080 -v sekisho-data:/data ghcr.io/wolfsenberg/sekisho:latest
+```
+
+Open http://127.0.0.1:8080, create the administrator, name your first workspace, then follow the guided setup to connect a subscription, add it to an account pool and create a personal key.
+
+| To | Run |
+| --- | --- |
+| Stop it | `docker stop sekisho` |
+| Start it again | `docker start sekisho` |
+| Remove it and delete its data | `docker rm -f sekisho` then `docker volume rm sekisho-data` |
+
+If port 8080 is taken, change the first number, for example `-p 127.0.0.1:9000:8080`, and open http://127.0.0.1:9000.
+
+### Docker Compose
+
+Compose adds the hardened defaults used in production: a read-only container, dropped capabilities, log rotation, restart on failure and every setting in one file. Download [`docker.compose.yaml`](https://github.com/wolfsenberg/sekisho/releases/latest/download/docker.compose.yaml) from the latest release, then start it from the same folder:
 
 ```sh
 docker compose -f docker.compose.yaml up -d
 ```
 
-Open http://127.0.0.1:8080, create the administrator, name your first workspace, then follow the guided setup to connect a subscription, add it to an account pool and create a personal key. Data is kept in the `sekisho-data` Docker volume, so it survives restarts and upgrades.
-
-To explore with sample data instead, start a read-only demo:
-
-```sh
-SEKISHO_DEMO=true docker compose -f docker.compose.yaml up -d
-```
-
-Then choose **Explore demo** on the login page, or sign in as `demo` / `sekisho-demo`. Changes, credential actions and live API calls are disabled, and the data resets when the demo restarts. In PowerShell, set the variable first with `$env:SEKISHO_DEMO="true"`.
-
-Stop Sekisho with `docker compose -f docker.compose.yaml down`. Add `-v` to also delete its data.
+For the demo, run `SEKISHO_DEMO=true docker compose -f docker.compose.yaml up -d` instead (in PowerShell, run `$env:SEKISHO_DEMO="true"` first). Data is kept in the `sekisho-data` volume. Stop Sekisho with `docker compose -f docker.compose.yaml down`; add `-v` to also delete its data.
 
 ### Guided installer (Linux)
 
@@ -93,13 +118,18 @@ make setup
 make dev
 ```
 
-Open http://127.0.0.1:5173. `make dev` runs the Go backend on `127.0.0.1:8080` under Air, which rebuilds it when Go code changes, and the Vite dev server with hot reload for the dashboard. The first start compiles everything and can take a couple of minutes. Use `SEKISHO_DEMO=true make dev` for the demo, or `SEKISHO_ADDR=127.0.0.1:9090 make dev` to move the backend to another port.
+Open http://127.0.0.1:5173. `make dev` runs the Go backend on `127.0.0.1:8080` under Air, which rebuilds it when Go code changes, and the Vite dev server with hot reload for the dashboard. The first start compiles everything and can take a couple of minutes. Use `SEKISHO_DEMO=true make dev` for the demo, or `SEKISHO_ADDR=127.0.0.1:9090 make dev` to move the backend to another port. Press Ctrl+C to stop.
 
 To build a production binary, run `make build` and start `./bin/sekisho`. To build the Docker image from your checkout, run `docker compose -f docker.compose.yaml -f docker.compose.build.yaml up --build -d`. Settings come from environment variables; [.env.example](.env.example) lists the common ones, and [docker.compose.yaml](docker.compose.yaml) shows every option with its default.
 
 ### Software updates
 
-Pull a newer image with `docker compose -f docker.compose.yaml pull` followed by `up -d`. Installations made with the guided installer update with `bash install.sh --update --dir ./sekisho`. Export and verify a backup from **System settings** before updating.
+Export and verify a backup from **System settings** before updating.
+
+- **One command:** `docker pull ghcr.io/wolfsenberg/sekisho:latest`, then `docker rm -f sekisho` and run the same `docker run` command again. The `sekisho-data` volume keeps your data.
+- **Docker Compose:** `docker compose -f docker.compose.yaml pull`, then `docker compose -f docker.compose.yaml up -d`.
+- **Guided installer:** `bash install.sh --update --dir ./sekisho`.
+- **From source:** `git pull`, then `make setup` and `make dev` again.
 
 ## Development
 
